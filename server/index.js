@@ -10,6 +10,7 @@ const massive = require("massive")
 const doctorController = require("./controllers/doctorController")
 const userController = require("./controllers/userController")
 const reviewController = require("./controllers/reviewController")
+const adminController = require("./controllers/adminController")
 
 const strategy = require("./strategy")
 
@@ -66,7 +67,9 @@ app.get("/profile", isUser, (req, res) => {
   res.status(200).send(req.user)
 })
 
-//ADD ADMIN REQUIREMENTS FOR SOME OF THESE
+//ADMIN
+app.post("/api/doctor", adminController.addDoctor)
+
 app.get("/api/doctors", doctorController.getDoctors) //done
 app.get("/api/doctor/:id", doctorController.getDoctor) //done
 app.get("/api/specialties/:id", doctorController.getSpecialties) //done

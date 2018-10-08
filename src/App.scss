@@ -12,13 +12,15 @@
 .nav {
   $navColor: #b49fcc;
 
-  background: $navColor;
-  height: 8vh;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0px 10px;
+  .top-nav {
+    background: $navColor;
+    height: 8vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+  }
 
   .left {
     img {
@@ -33,11 +35,40 @@
   }
 }
 
+.menu {
+  background: lightpink;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 20px;
+}
+
 .search-view {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.admin-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-doctor-submit {
+  width: 90%;
+
+  .input-with-title {
+    display: flex;
+    flex-direction: column;
+    margin: 3px 5px;
+  }
+  button {
+    float: right;
+  }
 }
 
 .doctor-card {

@@ -1,26 +1,38 @@
 module.exports = {
   getDoctors(req, res) {
     const db = req.app.get("db")
-    return db.getDoctors().then((user) => {
-      res.status(200).json(user)
-    })
+    return db
+      .getDoctors()
+      .then((user) => {
+        res.status(200).json(user)
+      })
+      .catch(console.log)
   },
   getDoctor(req, res) {
     const db = req.app.get("db")
-    return db.doctors.find({ doctor_id: req.params.id }).then((user) => {
-      res.status(200).json(user)
-    })
+    return db.doctors
+      .find({ doctor_id: req.params.id })
+      .then((user) => {
+        res.status(200).json(user)
+      })
+      .catch(console.log)
   },
   getSpecialties(req, res) {
     const db = req.app.get("db")
-    return db.getSpecialties([req.params.id]).then((specialties) => {
-      res.status(200).json(specialties)
-    })
+    return db
+      .getSpecialties([req.params.id])
+      .then((specialties) => {
+        res.status(200).json(specialties)
+      })
+      .catch(console.log)
   },
   getDemographics(req, res) {
     const db = req.app.get("db")
-    return db.getDemographics([req.params.id]).then((demos) => {
-      res.status(200).json(demos)
-    })
+    return db
+      .getDemographics([req.params.id])
+      .then((demos) => {
+        res.status(200).json(demos)
+      })
+      .catch(console.log)
   }
 }

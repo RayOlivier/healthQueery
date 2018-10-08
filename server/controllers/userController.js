@@ -1,9 +1,12 @@
 module.exports = {
   getUser(req, res) {
     const db = req.app.get("db")
-    return db.users.find({ user_id: req.params.id }).then((user) => {
-      res.status(200).json(user)
-    })
+    return db.users
+      .find({ user_id: req.params.id })
+      .then((user) => {
+        res.status(200).json(user)
+      })
+      .catch(console.log)
   },
   createUser(req, res) {
     const db = req.app.get("db")
@@ -13,9 +16,12 @@ module.exports = {
   },
   getFavorites(req, res) {
     const db = req.app.get("db")
-    db.favorites.find({ user_id: req.params.user_id }).then((favs) => {
-      res.status(200).json(favs)
-    })
+    db.favorites
+      .find({ user_id: req.params.user_id })
+      .then((favs) => {
+        res.status(200).json(favs)
+      })
+      .catch(console.log)
   },
   addFavorite(req, res) {
     const db = req.app.get("db")
@@ -29,8 +35,10 @@ module.exports = {
   },
   deleteFavorite(req, res) {
     const db = req.app.get("db")
-    db.deleteFavorite([req.params.doc_id, req.body.user_id]).then(() => {
-      res.sendStatus(200)
-    })
+    db.deleteFavorite([req.params.doc_id, req.body.user_id])
+      .then(() => {
+        res.sendStatus(200)
+      })
+      .catch(console.log)
   }
 }
