@@ -69,6 +69,8 @@ app.get("/profile", isUser, (req, res) => {
 //ADD ADMIN REQUIREMENTS FOR SOME OF THESE
 app.get("/api/doctors", doctorController.getDoctors) //done
 app.get("/api/doctor/:id", doctorController.getDoctor) //done
+app.get("/api/specialties/:id", doctorController.getSpecialties) //done
+app.get("/api/demographics/:id", doctorController.getDemographics) //done
 
 app.get("/api/user/:id", userController.getUser) //done
 app.post("/api/user", userController.createUser)

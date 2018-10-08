@@ -26,12 +26,34 @@
     }
   }
 
-  .middle {
-  }
-
   .right {
     img {
       height: 30px;
     }
+  }
+}
+
+.search-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.doctor-card {
+  border: black dotted 2px;
+  margin: 10px;
+  width: 90%;
+  display: flex;
+
+  .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  img {
+    height: 100px;
+    margin: 10px;
   }
 }
