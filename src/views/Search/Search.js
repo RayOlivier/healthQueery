@@ -7,8 +7,14 @@ class Search extends Component {
     super()
 
     this.state = {
-      doctors: []
+      doctors: [],
+      openSearchBar: false
     }
+    this.toggleSearchBar = this.toggleSearchBar.bind(this)
+  }
+
+  toggleSearchBar() {
+    this.setState({ openSearchBar: !this.state.openSearchBar })
   }
 
   componentDidMount() {
@@ -19,6 +25,7 @@ class Search extends Component {
     })
   }
   render() {
+    console.log("this.state", this.state)
     let list = this.state.doctors.map((e, i, arr) => {
       return (
         <DoctorCard
@@ -44,6 +51,7 @@ class Search extends Component {
 
     return (
       <div className="search-view">
+        <button onClick={this.toggleSearchBar}>Search Options</button>
         <h1>Search</h1>
         {list}
       </div>

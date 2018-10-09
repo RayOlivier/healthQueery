@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
+import transHQ from "../../images/transHQ.png"
 
 class Nav extends Component {
   constructor() {
@@ -46,7 +47,7 @@ class Nav extends Component {
           </div>
           <div className="middle">
             <Link to="/">
-              <span>HQ</span>
+              <img src={transHQ} alt="Health Queery Logo" />
             </Link>
           </div>
           <div className="right">
@@ -60,27 +61,35 @@ class Nav extends Component {
           </div>
         </div>
         <div className={visibility} id="the-menu">
-          <div>Menu</div>
-          <Link to="/" onClick={this.toggleMenu}>
-            Home
-          </Link>
-          <Link to="/about" onClick={this.toggleMenu}>
-            About
-          </Link>
-          <Link to="/contact" onClick={this.toggleMenu}>
-            Contact
-          </Link>
-          <Link to="/faq" onClick={this.toggleMenu}>
-            FAQ
-          </Link>
-
-          <a href="http://localhost:3001/api/login">Login</a>
-          <Link to="/favorites" onClick={this.toggleMenu}>
-            Favorites
-          </Link>
-          <Link to="/logout" onClick={this.toggleMenu}>
+          <div className="top">
+            <img
+              src="https://www.shoepalace.com/rotator/images/circle-arrow-white.svg"
+              alt=""
+              onClick={this.toggleMenu}
+            />
+            <h1>Menu</h1>
+          </div>
+          <div className="links">
+            <Link to="/" onClick={this.toggleMenu}>
+              Home
+            </Link>
+            <Link to="/about" onClick={this.toggleMenu}>
+              About
+            </Link>
+            <Link to="/contact" onClick={this.toggleMenu}>
+              Contact
+            </Link>
+            <Link to="/faq" onClick={this.toggleMenu}>
+              FAQ
+            </Link>
+            <a href="http://localhost:3001/login">Login</a>
+            <Link to="/favorites" onClick={this.toggleMenu}>
+              Favorites
+            </Link>
+            {/* <Link to="/logout" onClick={this.toggleMenu}> */}
             Logout
-          </Link>
+            {/* </Link> */}
+          </div>
         </div>
       </div>
     )

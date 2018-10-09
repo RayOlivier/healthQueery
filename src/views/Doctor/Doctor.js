@@ -78,7 +78,7 @@ class Doctor extends Component {
       )
     })
     return (
-      <div>
+      <div className="doctor-page">
         <h1>{doctor.doctor_name}</h1>
         <img src={doctor.img_url} alt="doctor portrait" />
 

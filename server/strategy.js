@@ -5,8 +5,8 @@ module.exports = new Auth0Strategy(
     domain: process.env.DOMAIN,
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "/profile",
-    scope: "openid profile email"
+    callbackURL: "/login",
+    scope: "openid email profile"
   },
   (accessToken, refreshToken, extraParams, profile, done) => {
     return done(null, profile)

@@ -7,7 +7,9 @@ class Home extends Component {
         <div className="welcome-img">
           <h1>Welcome to HealthQueery</h1>
         </div>
-        {/* <img src={prideFlagSky} /> */}
+        <div className="get-started">
+          <p />
+        </div>
       </div>
     )
   }
