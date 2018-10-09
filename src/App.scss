@@ -1,12 +1,40 @@
 @import url("https://meyerweb.com/eric/tools/css/reset/reset.css");
-@import url("https://fonts.googleapis.com/css?family=Roboto");
 
+@import url("https://fonts.googleapis.com/css?family=Laila:700|Quando|Roboto");
 * {
   box-sizing: border-box;
 }
 
 .App {
   font-family: "Roboto", sans-serif;
+  min-height: 92vh;
+  width: 100vw;
+}
+
+.homepage {
+  width: 100vw;
+
+  h1 {
+    text-align: center;
+    font-size: 40px;
+    font-family: "Quando";
+    // font-family: "Laila";
+    color: white;
+    text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+      -1px 1px 0 #000, 1px 1px 0 #000;
+  }
+  .welcome-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("./images/rainbowKid.jpg");
+    // background-image: url("./images/giantFlag.jpg");
+    height: 60vh;
+    width: 100vw;
+    background-size: 100vh;
+    background-position: center;
+    filter: opacity(90%);
+  }
 }
 
 .nav {
@@ -35,7 +63,7 @@
   }
 }
 
-.menu {
+#the-menu {
   background: lightpink;
   height: 40vh;
   display: flex;
@@ -43,6 +71,24 @@
   align-items: center;
   justify-content: space-evenly;
   font-size: 20px;
+  height: 92vh;
+
+  position: fixed;
+  left: 0;
+  top: 8vh;
+  transition: transform 1s;
+  overflow: scroll;
+  z-index: 1;
+
+  width: 100vw;
+}
+
+#the-menu.hide {
+  transform: translate3d(0, -100vh, 0);
+}
+#the-menu.show {
+  transform: translate3d(0, 0vh, 0);
+  overflow: hidden;
 }
 
 .search-view {
@@ -86,5 +132,28 @@
   img {
     height: 100px;
     margin: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .homepage {
+    width: 100vw;
+
+    h1 {
+      font-size: 52px;
+    }
+    .welcome-img {
+      height: 75vh;
+
+      background-size: cover;
+    }
+  }
+}
+
+@media (min-width: 1300px) {
+  .homepage {
+    h1 {
+      font-size: 72px;
+    }
   }
 }

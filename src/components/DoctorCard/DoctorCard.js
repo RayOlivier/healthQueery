@@ -20,6 +20,8 @@ class DoctorCard extends Component {
         img:
           "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"
       })
+    } else {
+      this.setState({ img: this.props.img })
     }
 
     axios.get(`/api/specialties/${this.props.id}`).then((res) => {
@@ -38,8 +40,6 @@ class DoctorCard extends Component {
   }
 
   render() {
-    console.log(this.state)
-
     return (
       <div className="doctor-card">
         <img src={this.state.img} alt="doctor portrait" />
@@ -51,7 +51,7 @@ class DoctorCard extends Component {
           <ul>{this.state.specialties}</ul>
 
           <ul>{this.state.demographics}</ul>
-          <Link exact to={`/doctor/${this.props.id}`}>
+          <Link to={`/doctor/${this.props.id}`}>
             <button>More info ></button>
           </Link>
         </div>

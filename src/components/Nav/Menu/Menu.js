@@ -5,7 +5,7 @@ export default function Menu(props) {
   return (
     <div className="menu">
       <div>Menu</div>
-      <Link to="/" onClick={props.toggleMenu} onClick={props.toggleMenu}>
+      <Link to="/" onClick={props.toggleMenu}>
         Home
       </Link>
       <Link to="/about" onClick={props.toggleMenu}>
@@ -17,9 +17,10 @@ export default function Menu(props) {
       <Link to="/faq" onClick={props.toggleMenu}>
         FAQ
       </Link>
-      <Link to="/login" onClick={props.toggleMenu}>
+      {/* <Link to="/login" onClick={props.loginRedirect}>
         Login
-      </Link>
+      </Link> */}
+      <a href="http://localhost:3001/api/login">Login</a>
       <Link to="/favorites" onClick={props.toggleMenu}>
         Favorites
       </Link>

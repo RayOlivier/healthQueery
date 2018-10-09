@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
-import Menu from "./Menu/Menu"
+import axios from "axios"
 
 class Nav extends Component {
   constructor() {
@@ -10,24 +10,30 @@ class Nav extends Component {
       menuOpen: false
     }
     this.toggleMenu = this.toggleMenu.bind(this)
-    this.renderMenu = this.renderMenu.bind(this)
-    // this.clickMenuLink = this.clickMenuLink.bind(this)
+    this.loginRedirect = this.loginRedirect.bind(this)
   }
 
   toggleMenu() {
     this.setState({ menuOpen: !this.state.menuOpen })
   }
 
-  // clickMenuLink(){}
-
-  renderMenu() {
-    if (this.state.menuOpen === true) {
-      return <Menu toggleMenu={this.toggleMenu} />
-    }
+  loginRedirect() {
+    axios.get("/api/login").then((res) => {
+      console.log(res)
+    })
   }
 
   render() {
     console.log("this.state", this.state)
+
+    var visibility = "hide"
+
+    if (this.state.menuOpen) {
+      visibility = "show"
+    }
+
+    console.log("visibility", visibility)
+
     return (
       <div className="nav">
         <div className="top-nav">
@@ -53,7 +59,29 @@ class Nav extends Component {
             </Link>
           </div>
         </div>
-        <div className="under-nav">{this.renderMenu()}</div>
+        <div className={visibility} id="the-menu">
+          <div>Menu</div>
+          <Link to="/" onClick={this.toggleMenu}>
+            Home
+          </Link>
+          <Link to="/about" onClick={this.toggleMenu}>
+            About
+          </Link>
+          <Link to="/contact" onClick={this.toggleMenu}>
+            Contact
+          </Link>
+          <Link to="/faq" onClick={this.toggleMenu}>
+            FAQ
+          </Link>
+
+          <a href="http://localhost:3001/api/login">Login</a>
+          <Link to="/favorites" onClick={this.toggleMenu}>
+            Favorites
+          </Link>
+          <Link to="/logout" onClick={this.toggleMenu}>
+            Logout
+          </Link>
+        </div>
       </div>
     )
   }

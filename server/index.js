@@ -4,6 +4,7 @@ const express = require("express")
 const session = require("express-session")
 const passport = require("passport")
 const { json } = require("body-parser")
+var cors = require("cors")
 
 const massive = require("massive")
 
@@ -15,6 +16,12 @@ const adminController = require("./controllers/adminController")
 const strategy = require("./strategy")
 
 const app = express()
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true
+  })
+)
 
 app.use(json())
 
@@ -39,15 +46,17 @@ passport.use(strategy)
 
 passport.serializeUser((user, done) => {
   //this creates the user object
+  console.log(user)
   done(null, user)
 })
 passport.deserializeUser((user, done) => {
-  //this attaches (exposes) the user object to req object
+  console.log(user)
   done(null, user)
 })
 
 function isUser(req, res, next) {
   if (!req.user) {
+    console.log("req.user", req.user)
     res.sendStatus(401) //if not a user, give 401 error
   } else {
     next()
@@ -55,7 +64,7 @@ function isUser(req, res, next) {
 }
 
 app.get(
-  "/login",
+  "/api/login",
   passport.authenticate("auth0", {
     successRedirect: "/profile", //MIGHT CHANGE TO HOME
     failureRedirect: "/fail"
@@ -64,6 +73,7 @@ app.get(
 
 app.get("/profile", isUser, (req, res) => {
   //this just sends you to the json file with your user info from auth0
+  console.log("req", req)
   res.status(200).send(req.user)
 })
 

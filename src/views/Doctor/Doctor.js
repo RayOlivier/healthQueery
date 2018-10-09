@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 import axios from "axios"
+import ReviewCard from "./ReviewCard/ReviewCard"
+import ReviewForm from "./ReviewForm/ReviewForm"
 
 class Doctor extends Component {
   constructor() {
@@ -8,7 +10,22 @@ class Doctor extends Component {
     this.state = {
       demographics: [],
       specialties: [],
-      doctor: {}
+      doctor: {},
+      reviews: [],
+      postingReview: false
+    }
+
+    this.togglePosting = this.togglePosting.bind(this)
+    this.renderPostingForm = this.renderPostingForm.bind(this)
+  }
+
+  togglePosting() {
+    this.setState({ postingReview: !this.state.postingReview })
+  }
+
+  renderPostingForm() {
+    if (this.state.postingReview) {
+      return <ReviewForm id={this.props.match.params.id} />
     }
   }
 
@@ -32,6 +49,10 @@ class Doctor extends Component {
       this.setState({ demographics: demoArr })
     })
 
+    axios.get(`/api/reviews/${this.props.match.params.id}`).then((res) => {
+      this.setState({ reviews: res.data })
+    })
+
     if (this.state.doctor.img_url === null) {
       this.setState({
         img:
@@ -41,7 +62,21 @@ class Doctor extends Component {
   }
   render() {
     console.log("this.state", this.state)
-    let { doctor } = this.state
+    let { doctor, reviews } = this.state
+
+    let reviewsList = reviews.map((e, i, arr) => {
+      return (
+        <ReviewCard
+          key={i}
+          title={e.title}
+          rating={e.rating}
+          editted={e.editted}
+          body={e.body}
+          timePosted={e.time_posted}
+          userId={e.user_id}
+        />
+      )
+    })
     return (
       <div>
         <h1>{doctor.doctor_name}</h1>
@@ -57,6 +92,13 @@ class Doctor extends Component {
             <li>Website: {doctor.website_url}</li>
           </ul>
         </div>
+
+        <h1>Reviews</h1>
+        <button onClick={this.togglePosting}>Post Review</button>
+
+        {this.renderPostingForm()}
+
+        <div>{reviewsList}</div>
       </div>
     )
   }
