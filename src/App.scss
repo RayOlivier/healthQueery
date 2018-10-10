@@ -1,15 +1,29 @@
 @import url("https://meyerweb.com/eric/tools/css/reset/reset.css");
 
 @import url("https://fonts.googleapis.com/css?family=Laila:700|Quando|Roboto");
+
+$bright-pink: #f99595;
+$light-pink: #ffcccc;
+$light-blue: #deeff2;
+$middle-blue: #aee3e8;
+$dark-blue: #87c8d1;
+$background-blue: #f2fdff;
+
 * {
   box-sizing: border-box;
 }
 
 .App {
   font-family: "Roboto", sans-serif;
-  min-height: 92vh;
-  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
   box-sizing: border-box;
+  background: $background-blue;
+}
+#nav-pusher {
+  height: 8vh;
 }
 
 .homepage {
@@ -39,10 +53,11 @@
 }
 
 .nav {
-  $navColor: #b49fcc;
+  // $navColor: #b49fcc;
 
   .top-nav {
-    background: $navColor;
+    position: fixed;
+    background: $middle-blue;
     box-sizing: border-box;
     height: 8vh;
     width: 100%;
@@ -76,7 +91,7 @@
 }
 
 #the-menu {
-  background: lightpink;
+  background: $light-pink;
   font-size: 20px;
   height: 100vh;
 
@@ -84,10 +99,10 @@
   left: 0;
   top: 0vh;
   transition: transform 0.8s;
-  overflow: scroll;
+  overflow: hidden;
   z-index: 1;
 
-  width: 100vw;
+  width: 100%;
 
   .top {
     display: flex;
@@ -97,7 +112,7 @@
 
     padding: 10px 20px;
     img {
-      height: 30px;
+      height: 40px;
     }
 
     h1 {
@@ -128,14 +143,47 @@
   overflow: hidden;
 }
 
+.profile {
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 20px;
+
+  .edit-on {
+    display: flex;
+    height: 80vh;
+    width: 75%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .no-profile {
+    width: 50%;
+    height: 30%;
+    text-align: center;
+    font-size: 24px;
+    border-bottom: 2px $middle-blue solid;
+  }
+
+  h1 {
+    width: 50%;
+    font-size: 24px;
+    text-align: center;
+    border-bottom: 2px $middle-blue solid;
+  }
+}
+
 .doctor-page {
   padding: 1vh 2vw;
-  height: 92vh;
+  min-height: 100%;
   width: 100%;
 
   display: flex;
   flex-direction: column;
-  // align-items: center;
 
   h1 {
     font-size: 22px;
@@ -144,15 +192,49 @@
   }
   img {
     max-width: 80%;
+    min-width: 40%;
     min-height: 40%;
 
     margin: 5px auto;
     object-fit: cover;
     overflow: hidden;
 
-    box-shadow: grey 2px 2px 15px 1px;
+    box-shadow: $dark-blue 2px 2px 15px 1px;
 
     // border: red solid 2px;
+  }
+}
+
+.doctor-card {
+  border: black dotted 2px;
+  margin: 10px 0px;
+  padding: 1vh;
+  width: 95%;
+  height: 25vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+
+  .right {
+    padding: 2px;
+
+    height: 100%;
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    // justify-content: space-between;
+    // border: pink 1px solid;
+  }
+
+  img {
+    min-height: 95%;
+    max-height: 95%;
+    min-width: 40%;
+    max-width: 40%;
+    object-fit: cover;
+    overflow: hidden;
+    box-shadow: $dark-blue 1px 1px 10px 0.1px;
   }
 }
 
@@ -161,6 +243,39 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .search-button {
+    background: $dark-blue;
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 24px;
+    border-bottom: $light-pink 2.5px solid;
+    margin: 4%;
+  }
+
+  .search-bar {
+    width: 100%;
+    padding: 2px;
+    transition: transform 0.8s;
+    // background: $light-pink;
+    background: $dark-blue;
+    overflow: hidden;
+  }
+
+  #search-bar-false {
+    overflow: hidden;
+    height: 0;
+
+    transition: height 0.5s ease-in;
+  }
+
+  #search-bar-true {
+    height: 200px;
+
+    transition: height 0.5s ease-in;
+  }
 }
 
 .admin-view {
@@ -182,25 +297,14 @@
   }
 }
 
-.doctor-card {
-  border: black dotted 2px;
-  margin: 10px;
-  width: 90%;
-  display: flex;
-
-  .right {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-  }
-
-  img {
-    height: 100px;
-    margin: 10px;
-  }
-}
-
 @media (min-width: 768px) {
+  .doctor-card {
+    img {
+      max-width: 30%;
+      min-width: 30%;
+      object-fit: cover;
+    }
+  }
   .homepage {
     width: 100vw;
 

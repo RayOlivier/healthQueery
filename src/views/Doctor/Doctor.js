@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import axios from "axios"
 import ReviewCard from "./ReviewCard/ReviewCard"
 import ReviewForm from "./ReviewForm/ReviewForm"
+import { connect } from "react-redux"
 
 class Doctor extends Component {
   constructor() {
@@ -17,15 +18,29 @@ class Doctor extends Component {
 
     this.togglePosting = this.togglePosting.bind(this)
     this.renderPostingForm = this.renderPostingForm.bind(this)
+    this.renderIfLoggedIn = this.renderIfLoggedIn.bind(this)
   }
 
   togglePosting() {
     this.setState({ postingReview: !this.state.postingReview })
   }
 
+  renderIfLoggedIn() {
+    if (this.props.loggedIn) {
+      return <button onClick={this.togglePosting}>Post Review</button>
+    } else {
+      return <h3>Log in to post a review.</h3>
+    }
+  }
+
   renderPostingForm() {
     if (this.state.postingReview) {
-      return <ReviewForm id={this.props.match.params.id} />
+      return (
+        <ReviewForm
+          id={this.props.match.params.id}
+          togglePosting={this.togglePosting}
+        />
+      )
     }
   }
 
@@ -53,7 +68,10 @@ class Doctor extends Component {
       this.setState({ reviews: res.data })
     })
 
-    if (this.state.doctor.img_url === null) {
+    if (
+      this.state.doctor.img_url === null ||
+      this.state.doctor.img_url === ""
+    ) {
       this.setState({
         img:
           "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"
@@ -94,7 +112,8 @@ class Doctor extends Component {
         </div>
 
         <h1>Reviews</h1>
-        <button onClick={this.togglePosting}>Post Review</button>
+        {this.renderIfLoggedIn()}
+        {/* <button onClick={this.togglePosting}>Post Review</button> */}
 
         {this.renderPostingForm()}
 
@@ -104,4 +123,6 @@ class Doctor extends Component {
   }
 }
 
-export default Doctor
+const MSP = (state) => state
+
+export default connect(MSP)(Doctor)

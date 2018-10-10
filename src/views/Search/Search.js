@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import axios from "axios"
 import DoctorCard from "../../components/DoctorCard/DoctorCard"
+import SearchBar from "./SearchBar/SearchBar"
 
 class Search extends Component {
   constructor() {
@@ -51,8 +52,14 @@ class Search extends Component {
 
     return (
       <div className="search-view">
-        <button onClick={this.toggleSearchBar}>Search Options</button>
-        <h1>Search</h1>
+        <div className="search-button">
+          {" "}
+          <button onClick={this.toggleSearchBar}>Search Options</button>
+        </div>
+        <div class="search-bar" id={`search-bar-${this.state.openSearchBar}`}>
+          <SearchBar />
+        </div>
+        <h1>Search Results</h1>
         {list}
       </div>
     )

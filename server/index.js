@@ -46,12 +46,26 @@ passport.use(strategy)
 
 passport.serializeUser((user, done) => {
   //this creates the user object
-  console.log("HELLO")
   console.log("USER: ", user)
-  done(null, user)
+
+  const db = app.get("db")
+  db.getUserByEmail([user.emails[0].value])
+    .then((response) => {
+      console.log("response", response)
+      if (!response[0]) {
+        console.log("no response")
+        db.addUserByEmail([user.emails[0].value])
+          .then((res) => done(null, res[0]))
+          .catch(console.log)
+      } else {
+        console.log("AFTER ELSE")
+        return done(null, response)
+      }
+    })
+    .catch(console.log)
 })
 passport.deserializeUser((user, done) => {
-  console.log(user)
+  // console.log(user)
   done(null, user)
 })
 
@@ -67,7 +81,8 @@ function isUser(req, res, next) {
 app.get(
   "/login",
   passport.authenticate("auth0", {
-    successRedirect: "/profile", //MIGHT CHANGE TO HOME
+    // successRedirect: "/profile", //MIGHT CHANGE TO HOME
+    successRedirect: "http://localhost:3000/profile", //MIGHT CHANGE TO HOME
     failureRedirect: "/fail"
   })
 )
@@ -78,6 +93,12 @@ app.get("/profile", isUser, (req, res) => {
   res.status(200).send(req.user)
 })
 
+app.get("/logout", (req, res) => {
+  req.session.destroy(() => {
+    res.redirect("http://localhost:3000/")
+  })
+})
+
 //ADMIN
 app.post("/api/doctor", adminController.addDoctor)
 
@@ -86,7 +107,8 @@ app.get("/api/doctor/:id", doctorController.getDoctor) //done
 app.get("/api/specialties/:id", doctorController.getSpecialties) //done
 app.get("/api/demographics/:id", doctorController.getDemographics) //done
 
-app.get("/api/user/:id", userController.getUser) //done
+app.get("/api/user/:id", userController.getUserById) //done
+// app.get("/api/user/:email", userController.getUserByEmail) //done
 app.post("/api/user", userController.createUser)
 app.put("/api/user/:id", userController.editUser)
 

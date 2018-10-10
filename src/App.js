@@ -14,6 +14,9 @@ class App extends Component {
         <BrowserRouter>
           <div className="App">
             <Nav />
+
+            <div id="nav-pusher" />
+            {/* all nav-pusher does is allow the nav to be fixed without covering anything... its height needs to equal nav-top height */}
             {routes}
           </div>
         </BrowserRouter>

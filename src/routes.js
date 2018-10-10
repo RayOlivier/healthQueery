@@ -21,6 +21,7 @@ export default (
     <Route path="/search" component={Search} />
     <Route path="/doctor/:id" component={Doctor} />
     <Route path="/admin" component={Admin} />
+    {/* <Route path="/unauthorized" render={() => <h1>404 Not Found</h1>} /> */}
     <Route path="*" render={() => <h1>404 Not Found</h1>} />
   </Switch>
 )

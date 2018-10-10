@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
 import transHQ from "../../images/transHQ.png"
+import { connect } from "react-redux"
 
 class Nav extends Component {
   constructor() {
@@ -12,6 +13,8 @@ class Nav extends Component {
     }
     this.toggleMenu = this.toggleMenu.bind(this)
     this.loginRedirect = this.loginRedirect.bind(this)
+    this.renderIfLoggedIn = this.renderIfLoggedIn.bind(this)
+    this.renderIfAdmin = this.renderIfAdmin.bind(this)
   }
 
   toggleMenu() {
@@ -22,6 +25,37 @@ class Nav extends Component {
     axios.get("/api/login").then((res) => {
       console.log(res)
     })
+  }
+
+  renderIfLoggedIn() {
+    if (this.props.loggedIn) {
+      return (
+        <>
+          <Link to="/profile" onClick={this.toggleMenu}>
+            Profile
+          </Link>
+          <Link to="/favorites" onClick={this.toggleMenu}>
+            Favorites
+          </Link>
+          <a href="http://localhost:3001/logout">Logout</a>
+        </>
+      )
+    } else {
+      return <a href="http://localhost:3001/login">Login</a>
+    }
+  }
+
+  renderIfAdmin() {
+    if (this.props.user.admin) {
+      return (
+        <>
+          {" "}
+          <Link to="/admin" onClick={this.toggleMenu}>
+            Admin
+          </Link>
+        </>
+      )
+    }
   }
 
   render() {
@@ -82,13 +116,8 @@ class Nav extends Component {
             <Link to="/faq" onClick={this.toggleMenu}>
               FAQ
             </Link>
-            <a href="http://localhost:3001/login">Login</a>
-            <Link to="/favorites" onClick={this.toggleMenu}>
-              Favorites
-            </Link>
-            {/* <Link to="/logout" onClick={this.toggleMenu}> */}
-            Logout
-            {/* </Link> */}
+            {this.renderIfAdmin()}
+            {this.renderIfLoggedIn()}
           </div>
         </div>
       </div>
@@ -96,4 +125,6 @@ class Nav extends Component {
   }
 }
 
-export default Nav
+const mapStateToProps = (state) => state
+
+export default connect(mapStateToProps)(Nav)

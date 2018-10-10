@@ -1,8 +1,17 @@
 module.exports = {
-  getUser(req, res) {
+  getUserById(req, res) {
     const db = req.app.get("db")
     return db.users
       .find({ user_id: req.params.id })
+      .then((user) => {
+        res.status(200).json(user)
+      })
+      .catch(console.log)
+  },
+  getUserByEmail(req, res) {
+    const db = req.app.get("db")
+    return db.users
+      .find({ email: req.params.email })
       .then((user) => {
         res.status(200).json(user)
       })

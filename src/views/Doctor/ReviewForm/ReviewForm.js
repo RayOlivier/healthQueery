@@ -1,4 +1,6 @@
 import React, { Component } from "react"
+import axios from "axios"
+import { connect } from "react-redux"
 
 class ReviewForm extends Component {
   constructor(props) {
@@ -18,7 +20,14 @@ class ReviewForm extends Component {
   }
 
   onSubmit() {
-    //axios.post(`/api/review/${this.props.id}`)
+    axios
+      .post(`/api/review/doctor/${this.props.id}`, {
+        user_id: this.props.user.user_id,
+        title: this.state.title,
+        rating: this.state.rating,
+        body: this.state.body
+      })
+      .then(this.props.togglePosting())
   }
 
   render() {
@@ -49,4 +58,6 @@ class ReviewForm extends Component {
   }
 }
 
-export default ReviewForm
+const MSP = (state) => state
+
+export default connect(MSP)(ReviewForm)
