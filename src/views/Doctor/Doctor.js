@@ -4,6 +4,9 @@ import ReviewCard from "./ReviewCard/ReviewCard"
 import ReviewForm from "./ReviewForm/ReviewForm"
 import { connect } from "react-redux"
 
+import SimpleMap from "../../components/SimpleMap/SimpleMap"
+import EmbedMap from "../../components/EmbedMap/EmbedMap"
+
 class Doctor extends Component {
   constructor() {
     super()
@@ -110,10 +113,17 @@ class Doctor extends Component {
 
         <div className="location">
           <h1> Location</h1>
-          <div>
+          {/* <SimpleMap /> */}
+          <EmbedMap
+            streetAddress={doctor.street_address}
+            city={doctor.city}
+            state={doctor.state}
+            id={this.props.match.params.id}
+          />
+          {/* <div> this is now in the embedmap component
             {doctor.street_address}
             {doctor.city}, {doctor.state}
-          </div>
+          </div> */}
         </div>
 
         <div>

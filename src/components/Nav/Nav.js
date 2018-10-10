@@ -108,14 +108,15 @@ class Nav extends Component {
               Home
             </Link>
             <Link to="/about" onClick={this.toggleMenu}>
-              About
+              About & FAQ
             </Link>
-            <Link to="/contact" onClick={this.toggleMenu}>
+            {/* Consolidating to the about page
+             <Link to="/contact" onClick={this.toggleMenu}>
               Contact
             </Link>
             <Link to="/faq" onClick={this.toggleMenu}>
               FAQ
-            </Link>
+            </Link> */}
             {this.renderIfAdmin()}
             {this.renderIfLoggedIn()}
           </div>
