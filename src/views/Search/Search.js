@@ -56,7 +56,10 @@ class Search extends Component {
           {" "}
           <button onClick={this.toggleSearchBar}>Search Options</button>
         </div>
-        <div class="search-bar" id={`search-bar-${this.state.openSearchBar}`}>
+        <div
+          className="search-bar"
+          id={`search-bar-${this.state.openSearchBar}`}
+        >
           <SearchBar />
         </div>
         <h1>Search Results</h1>

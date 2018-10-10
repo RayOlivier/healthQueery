@@ -2,12 +2,12 @@
 
 @import url("https://fonts.googleapis.com/css?family=Laila:700|Quando|Roboto");
 
-$bright-pink: #f99595;
-$light-pink: #ffcccc;
-$light-blue: #deeff2;
-$middle-blue: #aee3e8;
-$dark-blue: #87c8d1;
-$background-blue: #f2fdff;
+$bright-pink: #ffcccc;
+$light-pink: #ffe0e0;
+$light-blue: #e0f1ff;
+$middle-blue: #c0e5f7;
+$dark-blue: #3e87b2;
+$background-blue: white;
 
 * {
   box-sizing: border-box;
@@ -65,6 +65,8 @@ $background-blue: #f2fdff;
     justify-content: space-between;
     align-items: center;
     padding: 0px 10px;
+
+    box-shadow: #333 0px 0.2px 5px 0.5px;
     // border: #000 solid 0px;
     .left {
       height: 90%;
@@ -203,6 +205,80 @@ $background-blue: #f2fdff;
 
     // border: red solid 2px;
   }
+
+  .not-logged-in {
+    font-size: 20px;
+    width: 100%;
+    padding: 5px 10px;
+  }
+
+  .review-list {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+
+.review-form {
+  background: $light-blue;
+  // border: $light-pink 2px solid;
+  box-shadow: $middle-blue 0.5px 1px 10px 0.5px;
+  margin: 15px 0px;
+
+  padding: 2vh 2vw;
+
+  h1 {
+    width: 70%;
+    margin: 2vw;
+    // font-size: 2px;
+
+    border-bottom: $light-pink solid 1.5px;
+  }
+
+  .stars {
+    width: 100%;
+    display: flex;
+
+    font-size: 40px;
+
+    .star-component {
+      margin-bottom: 5px;
+    }
+  }
+
+  .review-input {
+    margin: 3px 0px;
+
+    display: flex;
+    flex-direction: column;
+
+    .body {
+      height: 100px;
+    }
+  }
+}
+
+.review-card {
+  background: $middle-blue;
+  margin: 1vh 1vw;
+  // padding: 1vh;
+  .title-rating {
+    font-size: 26px;
+    padding: 1vh;
+    h4 {
+      font-size: 20px;
+      padding: 5px 3px;
+      border-bottom: $bright-pink 2px solid;
+    }
+  }
+
+  .review-info {
+    background: $light-blue;
+    width: 100%;
+    padding: 2px;
+  }
+  p {
+    padding: 5px;
+  }
 }
 
 .doctor-card {
@@ -245,13 +321,13 @@ $background-blue: #f2fdff;
   align-items: center;
 
   .search-button {
-    background: $dark-blue;
+    background: $light-pink;
     width: 100%;
   }
 
   h1 {
     font-size: 24px;
-    border-bottom: $light-pink 2.5px solid;
+    border-bottom: $dark-blue 2.5px solid;
     margin: 4%;
   }
 
@@ -260,7 +336,7 @@ $background-blue: #f2fdff;
     padding: 2px;
     transition: transform 0.8s;
     // background: $light-pink;
-    background: $dark-blue;
+    background: $light-pink;
     overflow: hidden;
   }
 
@@ -269,12 +345,14 @@ $background-blue: #f2fdff;
     height: 0;
 
     transition: height 0.5s ease-in;
+    box-shadow: $light-blue 0px 5px 5px 2px;
   }
 
   #search-bar-true {
     height: 200px;
 
     transition: height 0.5s ease-in;
+    box-shadow: $light-blue 0px 10px 10px 2px;
   }
 }
 

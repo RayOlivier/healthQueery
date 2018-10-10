@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import axios from "axios"
 import { connect } from "react-redux"
+import StarRatingComponent from "react-star-rating-component"
 
 class ReviewForm extends Component {
   constructor(props) {
@@ -30,12 +31,28 @@ class ReviewForm extends Component {
       .then(this.props.togglePosting())
   }
 
+  onStarClick(nextValue, prevValue, name) {
+    this.setState({ rating: nextValue })
+  }
+
   render() {
+    console.log("this.state", this.state)
     return (
       <div className="review-form">
         <h1>Post your review</h1>
 
-        <div>Figure out how to do rating input via star images</div>
+        <div className="stars">
+          <StarRatingComponent
+            className="star-component"
+            // renderStarIcon={() => <span>O</span>}
+            name="idkStars"
+            starCount={5}
+            value={this.state.rating}
+            onStarClick={this.onStarClick.bind(this)}
+          />
+          <div className="stars-right" />
+        </div>
+
         <div className="review-input">
           Title:{" "}
           <input
@@ -46,6 +63,7 @@ class ReviewForm extends Component {
           <div className="review-input">
             Body:{" "}
             <input
+              className="body"
               placeholder="Enter your review..."
               name="body"
               onChange={(e) => this.handleChange(e)}

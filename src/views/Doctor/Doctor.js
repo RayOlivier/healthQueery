@@ -13,7 +13,8 @@ class Doctor extends Component {
       specialties: [],
       doctor: {},
       reviews: [],
-      postingReview: false
+      postingReview: false,
+      img: ""
     }
 
     this.togglePosting = this.togglePosting.bind(this)
@@ -29,7 +30,12 @@ class Doctor extends Component {
     if (this.props.loggedIn) {
       return <button onClick={this.togglePosting}>Post Review</button>
     } else {
-      return <h3>Log in to post a review.</h3>
+      return (
+        <div className="not-logged-in">
+          {" "}
+          <a href="http://localhost:3001/login">Login</a> to post a review.
+        </div>
+      )
     }
   }
 
@@ -50,7 +56,7 @@ class Doctor extends Component {
     })
 
     axios.get(`/api/specialties/${this.props.match.params.id}`).then((res) => {
-      console.log("res.data", res.data)
+      // console.log("res.data", res.data)
       let specArr = res.data.map((e) => {
         return e.specialty + " "
       })
@@ -79,7 +85,7 @@ class Doctor extends Component {
     }
   }
   render() {
-    console.log("this.state", this.state)
+    // console.log("this.state", this.state)
     let { doctor, reviews } = this.state
 
     let reviewsList = reviews.map((e, i, arr) => {
@@ -102,6 +108,18 @@ class Doctor extends Component {
 
         <p>{doctor.description}</p>
 
+        <div className="location">
+          <h1> Location</h1>
+          <div>
+            {doctor.street_address}
+            {doctor.city}, {doctor.state}
+          </div>
+        </div>
+
+        <div>
+          <h1>Services</h1>
+        </div>
+
         <div className="contact">
           <h1>Contact</h1>
           <ul>
@@ -117,7 +135,7 @@ class Doctor extends Component {
 
         {this.renderPostingForm()}
 
-        <div>{reviewsList}</div>
+        <div className="review-list">{reviewsList}</div>
       </div>
     )
   }

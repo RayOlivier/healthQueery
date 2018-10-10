@@ -20,7 +20,7 @@ export default function Menu(props) {
       {/* <Link to="/login" onClick={props.loginRedirect}>
         Login
       </Link> */}
-      <a href="http://localhost:3001/api/login">Login</a>
+      <a href="http://localhost:3001/login">Login</a>
       <Link to="/favorites" onClick={props.toggleMenu}>
         Favorites
       </Link>
