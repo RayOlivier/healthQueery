@@ -1,0 +1,106 @@
+$bright-pink: #ffcccc;
+$light-pink: #ffe0e0;
+$light-blue: #e0f1ff;
+$middle-blue: #c0e5f7;
+$dark-blue: #3e87b2;
+$background-blue: whitesmoke;
+.nav {
+  // $navColor: #b49fcc;
+
+  z-index: 10;
+
+  .top-nav {
+    position: fixed;
+    background: $middle-blue;
+    box-sizing: border-box;
+    height: 8vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+
+    box-shadow: #333 0px 0.2px 5px 0.5px;
+    // border: #000 solid 0px;
+    .left {
+      height: 90%;
+      img {
+        height: 100%;
+      }
+    }
+    .middle {
+      height: 92%;
+
+      img {
+        height: 100%;
+      }
+    }
+
+    .right {
+      height: 90%;
+
+      img {
+        height: 100%;
+      }
+    }
+  }
+}
+
+#the-menu {
+  background: $light-pink;
+  font-size: 20px;
+  height: 100vh;
+
+  position: fixed;
+  left: 0;
+  top: 0vh;
+  transition: transform 0.8s;
+  overflow: hidden;
+  z-index: 1;
+
+  width: 100%;
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+
+    padding: 10px 20px;
+    img {
+      height: 40px;
+    }
+
+    h1 {
+      color: white;
+      text-align: center;
+      font-size: 36px;
+      font-family: "Laila";
+      border-bottom: 2px white solid;
+      // border: #000 solid 1px;
+    }
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 90%;
+    // border: black 2px solid;
+  }
+}
+
+#the-menu.hide {
+  transform: translate3d(0, -100vh, 0);
+}
+#the-menu.show {
+  transform: translate3d(0, 0vh, 0);
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .nav {
+    visibility: hidden;
+  }
+}

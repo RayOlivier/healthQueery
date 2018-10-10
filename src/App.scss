@@ -7,7 +7,7 @@ $light-pink: #ffe0e0;
 $light-blue: #e0f1ff;
 $middle-blue: #c0e5f7;
 $dark-blue: #3e87b2;
-$background-blue: white;
+$background-blue: whitesmoke;
 
 * {
   box-sizing: border-box;
@@ -24,125 +24,6 @@ $background-blue: white;
 }
 #nav-pusher {
   height: 8vh;
-}
-
-.homepage {
-  width: 100vw;
-
-  h1 {
-    text-align: center;
-    font-size: 40px;
-    font-family: "Quando";
-    // font-family: "Laila";
-    color: white;
-    text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
-      -1px 1px 0 #000, 1px 1px 0 #000;
-  }
-  .welcome-img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url("./images/rainbowKid.jpg");
-    // background-image: url("./images/giantFlag.jpg");
-    height: 60vh;
-    width: 100vw;
-    background-size: 100vh;
-    background-position: center;
-    filter: opacity(90%);
-  }
-}
-
-.nav {
-  // $navColor: #b49fcc;
-
-  .top-nav {
-    position: fixed;
-    background: $middle-blue;
-    box-sizing: border-box;
-    height: 8vh;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0px 10px;
-
-    box-shadow: #333 0px 0.2px 5px 0.5px;
-    // border: #000 solid 0px;
-    .left {
-      height: 90%;
-      img {
-        height: 100%;
-      }
-    }
-    .middle {
-      height: 92%;
-
-      img {
-        height: 100%;
-      }
-    }
-
-    .right {
-      height: 90%;
-
-      img {
-        height: 100%;
-      }
-    }
-  }
-}
-
-#the-menu {
-  background: $light-pink;
-  font-size: 20px;
-  height: 100vh;
-
-  position: fixed;
-  left: 0;
-  top: 0vh;
-  transition: transform 0.8s;
-  overflow: hidden;
-  z-index: 1;
-
-  width: 100%;
-
-  .top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100vw;
-
-    padding: 10px 20px;
-    img {
-      height: 40px;
-    }
-
-    h1 {
-      color: white;
-      text-align: center;
-      font-size: 36px;
-      font-family: "Laila";
-      border-bottom: 2px white solid;
-      // border: #000 solid 1px;
-    }
-  }
-
-  .links {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    height: 90%;
-    // border: black 2px solid;
-  }
-}
-
-#the-menu.hide {
-  transform: translate3d(0, -100vh, 0);
-}
-#the-menu.show {
-  transform: translate3d(0, 0vh, 0);
-  overflow: hidden;
 }
 
 .profile {
@@ -179,136 +60,7 @@ $background-blue: white;
   }
 }
 
-.doctor-page {
-  padding: 1vh 2vw;
-  min-height: 100%;
-  width: 100%;
-
-  display: flex;
-  flex-direction: column;
-
-  // .simple-pin {
-  //   height: 20px;
-  // }
-
-  .embed-map {
-    // height: 30vh;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    // text-align: left;
-
-    // border: black solid 2px;
-
-    .address-text {
-      width: 100%;
-      // padding: 10px;
-    }
-
-    iframe {
-      height: 30vh;
-      width: 90%;
-      margin: 10px;
-    }
-  }
-
-  h1 {
-    font-size: 22px;
-    border-bottom: black 1px solid;
-    padding: 5px;
-  }
-  img {
-    max-width: 80%;
-    min-width: 40%;
-    min-height: 40%;
-
-    margin: 5px auto;
-    object-fit: cover;
-    overflow: hidden;
-
-    //BOX SHADOW AFFECTS MAP
-    // box-shadow: $dark-blue 2px 2px 15px 1px;
-
-    // border: red solid 2px;
-  }
-
-  .not-logged-in {
-    font-size: 20px;
-    width: 100%;
-    padding: 5px 10px;
-  }
-
-  .review-list {
-    display: flex;
-    flex-direction: column-reverse;
-  }
-}
-
-.review-form {
-  background: $light-blue;
-  // border: $light-pink 2px solid;
-  box-shadow: $middle-blue 0.5px 1px 10px 0.5px;
-  margin: 15px 0px;
-
-  padding: 2vh 2vw;
-
-  h1 {
-    width: 70%;
-    margin: 2vw;
-    // font-size: 2px;
-
-    border-bottom: $light-pink solid 1.5px;
-  }
-
-  .stars {
-    width: 100%;
-    display: flex;
-
-    font-size: 40px;
-
-    .star-component {
-      margin-bottom: 5px;
-    }
-  }
-
-  .review-input {
-    margin: 3px 0px;
-
-    display: flex;
-    flex-direction: column;
-
-    .body {
-      height: 100px;
-    }
-  }
-}
-
-.review-card {
-  background: $middle-blue;
-  margin: 1vh 1vw;
-  // padding: 1vh;
-  .title-rating {
-    font-size: 26px;
-    padding: 1vh;
-    h4 {
-      font-size: 20px;
-      padding: 5px 3px;
-      border-bottom: $bright-pink 2px solid;
-    }
-  }
-
-  .review-info {
-    background: $light-blue;
-    width: 100%;
-    padding: 2px;
-  }
-  p {
-    padding: 5px;
-  }
-}
-
+//this is in the component folder
 .doctor-card {
   border: black dotted 2px;
   margin: 10px 0px;
@@ -404,6 +156,13 @@ $background-blue: white;
 }
 
 @media (min-width: 768px) {
+  .App {
+    font-size: 22px;
+    // #nav-pusher {
+    //   height: 0px;
+    // }
+  }
+
   .doctor-card {
     img {
       max-width: 30%;
@@ -411,24 +170,8 @@ $background-blue: white;
       object-fit: cover;
     }
   }
-  .homepage {
-    width: 100vw;
-
-    h1 {
-      font-size: 52px;
-    }
-    .welcome-img {
-      height: 75vh;
-
-      background-size: cover;
-    }
-  }
 }
 
 @media (min-width: 1300px) {
-  .homepage {
-    h1 {
-      font-size: 72px;
-    }
-  }
+  //
 }

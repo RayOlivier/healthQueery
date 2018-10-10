@@ -1,0 +1,48 @@
+.homepage {
+  width: 100vw;
+
+  h1 {
+    text-align: center;
+    font-size: 40px;
+    font-family: "Quando";
+    // font-family: "Laila";
+    color: white;
+    text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+      -1px 1px 0 #000, 1px 1px 0 #000;
+  }
+  .welcome-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../../images/rainbowKid.jpg");
+    // background-image: url("./images/giantFlag.jpg");
+    height: 60vh;
+    width: 100vw;
+    background-size: 100vh;
+    background-position: center;
+    filter: opacity(90%);
+  }
+}
+
+@media (min-width: 768px) {
+  .homepage {
+    width: 100vw;
+
+    h1 {
+      font-size: 52px;
+    }
+    .welcome-img {
+      height: 75vh;
+
+      background-size: cover;
+    }
+  }
+}
+
+@media (min-width: 1300px) {
+  .homepage {
+    h1 {
+      font-size: 72px;
+    }
+  }
+}

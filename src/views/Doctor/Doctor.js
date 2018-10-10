@@ -7,6 +7,8 @@ import { connect } from "react-redux"
 import SimpleMap from "../../components/SimpleMap/SimpleMap"
 import EmbedMap from "../../components/EmbedMap/EmbedMap"
 
+import "./Doctor.scss"
+
 class Doctor extends Component {
   constructor() {
     super()

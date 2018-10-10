@@ -4,6 +4,8 @@ import axios from "axios"
 import transHQ from "../../images/transHQ.png"
 import { connect } from "react-redux"
 
+import "./Nav.scss"
+
 class Nav extends Component {
   constructor() {
     super()
@@ -67,7 +69,7 @@ class Nav extends Component {
       visibility = "show"
     }
 
-    console.log("visibility", visibility)
+    // console.log("visibility", visibility)
 
     return (
       <div className="nav">
