@@ -5,6 +5,7 @@ $middle-blue: #c0e5f7;
 $dark-blue: #3e87b2;
 $background-blue: whitesmoke;
 
+//------------Doctor.js------------------
 .doctor-page {
   padding: 1vh 2vw;
   min-height: 100%;
@@ -13,63 +14,87 @@ $background-blue: whitesmoke;
   display: flex;
   flex-direction: column;
 
-  // .simple-pin {
-  //   height: 20px;
-  // }
-
-  .embed-map {
-    // height: 30vh;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    // text-align: left;
-
-    // border: black solid 2px;
-
-    .address-text {
-      width: 100%;
-      // padding: 10px;
-    }
-
-    iframe {
-      height: 30vh;
-      width: 90%;
-      margin: 10px;
-    }
-  }
+  //   margin: auto;
 
   h1 {
     font-size: 22px;
-    border-bottom: black 1px solid;
+    border-bottom: $dark-blue 1px solid;
+    margin-bottom: 5px;
     padding: 5px;
-  }
-  img {
-    max-width: 80%;
-    min-width: 40%;
-    min-height: 40%;
 
-    margin: 5px auto;
-    object-fit: cover;
-    overflow: hidden;
-
-    //BOX SHADOW AFFECTS MAP
-    // box-shadow: $dark-blue 2px 2px 15px 1px;
+    margin: 15px 0px 5px 0px;
   }
 
+  .doctor-info {
+    display: flex;
+    flex-direction: column;
+
+    //profile pic
+    img {
+      max-width: 80%;
+      min-width: 40%;
+      min-height: 40%;
+      margin: auto;
+      margin-top: 10px;
+
+      object-fit: cover;
+      overflow: hidden;
+
+      box-shadow: $dark-blue 2px 2px 10px 1px;
+    }
+
+    p {
+      padding: 10px;
+    }
+
+    //affects divs from EmbedMap.js
+    .embed-map {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .address-text {
+        width: 90%;
+      }
+
+      iframe {
+        height: 30vh;
+        width: 90%;
+        margin: 10px;
+      }
+    }
+
+    ul {
+      padding: 5px 10px;
+      li {
+        margin: 1px 0px;
+      }
+    }
+
+    .contact {
+      ul {
+        list-style-type: square;
+        // background: green;
+        padding-left: 20px;
+        margin: 8px;
+      }
+    }
+  }
   .not-logged-in {
     font-size: 20px;
     width: 100%;
     padding: 5px 10px;
   }
 
+  //div around mapped ReviewCards
   .review-list {
     display: flex;
     flex-direction: column-reverse;
+    min-height: 100px;
   }
 }
 
+//--------------ReviewForm.js-------------------------------
 .review-form {
   background: $light-blue;
   // border: $light-pink 2px solid;
@@ -108,6 +133,8 @@ $background-blue: whitesmoke;
     }
   }
 }
+
+//-----------------ReviewCard.js----------------------
 .review-card {
   background: $middle-blue;
   margin: 1vh 1vw;

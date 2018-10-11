@@ -38,7 +38,8 @@ class EmbedMap extends Component {
           <iframe
             src={`https://www.google.com/maps/embed/v1/place?key=${
               process.env.REACT_APP_MAPS_API_KEY
-            }&q=${this.state.fullAddress}`}
+            }&q=${this.state.fullAddress}&zoom=11`}
+            title="stop giving me an error"
           />
           <div className="address-text">{this.state.fullAddress}</div>
         </>

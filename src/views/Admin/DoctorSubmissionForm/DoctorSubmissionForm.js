@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import axios from "axios"
+import NumberFormat from "react-number-format"
 
 class DoctorSubmissionForm extends Component {
   constructor() {
@@ -15,7 +16,7 @@ class DoctorSubmissionForm extends Component {
       gender: "",
       img_url: "",
       nb_inclusive: false,
-      phone: 0,
+      phone: null,
       practice: "",
       street_address: "",
       website_url: ""
@@ -41,7 +42,7 @@ class DoctorSubmissionForm extends Component {
       gender: "",
       img_url: "",
       nb_inclusive: false,
-      phone: 0,
+      phone: null,
       practice: "",
       street_address: "",
       website_url: ""
@@ -158,13 +159,21 @@ class DoctorSubmissionForm extends Component {
         </div>
         <div className="input-with-title">
           Phone:
-          <input
+          {/* <input
             placeholder="Enter phone..."
             value={this.state.phone}
             name="phone"
             //   minLength="10"
             maxLength="10"
             onChange={(e) => this.changeInput(e)}
+          /> */}
+          <NumberFormat
+            format="(###) ###-####"
+            mask=""
+            name="phone"
+            placeholder="Phone Number Here"
+            onChange={(e) => this.changeInput(e)}
+            value={this.state.phone}
           />
         </div>
         <div className="input-with-title">

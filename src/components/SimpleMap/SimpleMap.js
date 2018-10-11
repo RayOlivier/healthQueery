@@ -1,7 +1,8 @@
 import React, { Component } from "react"
 
 import axios from "axios"
-import GoogleMapReact, { Marker } from "google-map-react"
+import GoogleMapReact from "google-map-react"
+//maybe import {Marker} ??
 
 const Pin = ({ text }) => {
   return (

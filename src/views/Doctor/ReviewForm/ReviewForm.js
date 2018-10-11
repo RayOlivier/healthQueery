@@ -59,6 +59,7 @@ class ReviewForm extends Component {
             placeholder="Enter title..."
             name="title"
             onChange={(e) => this.handleChange(e)}
+            maxLength="100"
           />
           <div className="review-input">
             Body:{" "}
@@ -67,6 +68,7 @@ class ReviewForm extends Component {
               placeholder="Enter your review..."
               name="body"
               onChange={(e) => this.handleChange(e)}
+              maxLength="3000"
             />
           </div>
         </div>

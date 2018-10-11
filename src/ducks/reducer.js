@@ -21,7 +21,7 @@ const initialState = {
     email: "",
     user_id: null,
     username: "",
-    isAdmin: false,
+    admin: false,
     sexual_orientation: "",
     gender: "",
     display_img: "",

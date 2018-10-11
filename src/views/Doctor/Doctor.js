@@ -4,7 +4,6 @@ import ReviewCard from "./ReviewCard/ReviewCard"
 import ReviewForm from "./ReviewForm/ReviewForm"
 import { connect } from "react-redux"
 
-import SimpleMap from "../../components/SimpleMap/SimpleMap"
 import EmbedMap from "../../components/EmbedMap/EmbedMap"
 
 import "./Doctor.scss"
@@ -25,6 +24,18 @@ class Doctor extends Component {
     this.togglePosting = this.togglePosting.bind(this)
     this.renderPostingForm = this.renderPostingForm.bind(this)
     this.renderIfLoggedIn = this.renderIfLoggedIn.bind(this)
+    this.renderIfAdmin = this.renderIfAdmin.bind(this)
+  }
+
+  renderIfAdmin() {
+    console.log("this.props", this.props)
+    if (this.props.user.admin) {
+      return (
+        <div className="admin-controls">
+          <button>Edit</button>
+        </div>
+      )
+    }
   }
 
   togglePosting() {
@@ -92,7 +103,6 @@ class Doctor extends Component {
   render() {
     // console.log("this.state", this.state)
     let { doctor, reviews } = this.state
-
     let reviewsList = reviews.map((e, i, arr) => {
       return (
         <ReviewCard
@@ -106,39 +116,58 @@ class Doctor extends Component {
         />
       )
     })
+    let specList = this.state.specialties.map((e, i, arr) => {
+      return <li key={i}>{e}</li>
+    })
+    let demList = this.state.demographics.map((e, i, arr) => {
+      return <li key={i}>{e}</li>
+    })
+
     return (
       <div className="doctor-page">
-        <h1>{doctor.doctor_name}</h1>
-        <img src={doctor.img_url} alt="doctor portrait" />
+        <div className="doctor-info">
+          {this.renderIfAdmin()}
+          <h1>{doctor.doctor_name}</h1>
+          <img src={doctor.img_url} alt="doctor portrait" />
 
-        <p>{doctor.description}</p>
+          <p>{doctor.description}</p>
 
-        <div className="location">
-          <h1> Location</h1>
-          {/* <SimpleMap /> */}
-          <EmbedMap
-            streetAddress={doctor.street_address}
-            city={doctor.city}
-            state={doctor.state}
-            id={this.props.match.params.id}
-          />
-          {/* <div> this is now in the embedmap component
-            {doctor.street_address}
-            {doctor.city}, {doctor.state}
-          </div> */}
-        </div>
+          <div className="location">
+            <h1> Location</h1>
+            <EmbedMap
+              streetAddress={doctor.street_address}
+              city={doctor.city}
+              state={doctor.state}
+              id={this.props.match.params.id}
+            />
+          </div>
 
-        <div>
-          <h1>Services</h1>
-        </div>
+          <div className="services">
+            <h1>Services</h1>
+            <ul>{specList}</ul>
+          </div>
+          <div className="demographics">
+            <h1>Demographics</h1>
+            <ul>{demList}</ul>
+          </div>
 
-        <div className="contact">
-          <h1>Contact</h1>
-          <ul>
-            <li>Phone: {doctor.phone}</li>
-            <li>Email: {doctor.email}</li>
-            <li>Website: {doctor.website_url}</li>
-          </ul>
+          <div className="contact">
+            <h1>Contact</h1>
+            <ul>
+              <li>Phone: {doctor.phone}</li>
+              <li>Email: {doctor.email}</li>
+              <li>
+                Website:{" "}
+                <a
+                  href={doctor.website_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {doctor.website_url}
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <h1>Reviews</h1>
