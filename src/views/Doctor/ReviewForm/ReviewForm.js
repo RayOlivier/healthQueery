@@ -3,6 +3,8 @@ import axios from "axios"
 import { connect } from "react-redux"
 import StarRatingComponent from "react-star-rating-component"
 
+//look into npm react-modal
+
 class ReviewForm extends Component {
   constructor(props) {
     super(props)

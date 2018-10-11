@@ -112,7 +112,6 @@ app.get("/api/demographics/:id", doctorController.getDemographics) //done
 //USER
 app.get("/api/user/:id", userController.getUserById) //done
 // app.get("/api/user/:email", userController.getUserByEmail) //done
-app.post("/api/user", userController.createUser)
 app.put("/api/user/:id", userController.editUser)
 
 //FAVORITES

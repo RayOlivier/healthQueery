@@ -1,12 +1,22 @@
 module.exports = {
   getDoctors(req, res) {
     const db = req.app.get("db")
-    return db
-      .getDoctors()
-      .then((user) => {
-        res.status(200).json(user)
-      })
-      .catch(console.log)
+
+    if (req.query.keyword) {
+      db.getDoctorsByKeyword([`%${req.query.keyword}%`])
+        .then((info) => {
+          res.status(200).json(info)
+        })
+        .catch(console.log)
+    } else {
+      //this returns all docs
+      return db
+        .getDoctors()
+        .then((user) => {
+          res.status(200).json(user)
+        })
+        .catch(console.log)
+    }
   },
   getDoctor(req, res) {
     const db = req.app.get("db")

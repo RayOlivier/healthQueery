@@ -17,9 +17,6 @@ module.exports = {
       })
       .catch(console.log)
   },
-  createUser(req, res) {
-    const db = req.app.get("db")
-  },
   editUser(req, res) {
     const db = req.app.get("db")
   },

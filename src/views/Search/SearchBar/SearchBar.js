@@ -5,8 +5,19 @@ class SearchBar extends Component {
     super()
 
     this.state = {
-      location: ""
+      location: "",
+      keyword: ""
     }
+    this.onKeywordClick = this.onKeywordClick.bind(this)
+    this.changeInput = this.changeInput.bind(this)
+  }
+
+  changeInput(e) {
+    this.setState({ [e.target.name]: e.target.value })
+  }
+
+  onKeywordClick() {
+    this.props.keywordSearch(this.state.keyword)
   }
 
   render() {
@@ -17,6 +28,20 @@ class SearchBar extends Component {
           Search by location:
           <input placeholder="Try TX or Dallas" value={this.state.location} />
         </div>
+
+        <div>
+          Search by Keyword:
+          <input
+            placeholder="Enter keyword..."
+            value={this.state.keyword}
+            name="keyword"
+            onChange={(e) => {
+              this.changeInput(e)
+            }}
+          />
+        </div>
+
+        <button onClick={this.onKeywordClick}>Keyword button</button>
       </div>
     )
   }

@@ -8,21 +8,22 @@ class DoctorCard extends Component {
     super(props)
 
     this.state = {
-      img: "",
+      doctor: {},
       specialties: [],
       demographics: []
     }
+    this.getDoctor = this.getDoctor.bind(this)
+  }
+
+  getDoctor() {
+    axios.get(`/api/doctor/${this.props.id}`).then((res) => {
+      console.log("res", res)
+      this.setState({ doctor: res.data[0] })
+    })
   }
 
   componentDidMount() {
-    if (this.props.img === null) {
-      this.setState({
-        img:
-          "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"
-      })
-    } else {
-      this.setState({ img: this.props.img })
-    }
+    this.getDoctor()
 
     axios.get(`/api/specialties/${this.props.id}`).then((res) => {
       let specArr = res.data.map((e) => {
@@ -39,14 +40,22 @@ class DoctorCard extends Component {
     })
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.id !== prevProps.id) {
+      this.getDoctor()
+    }
+  }
+
   render() {
+    console.log("this.props", this.props)
     return (
       <div className="doctor-card">
-        <img src={this.state.img} alt="doctor portrait" />
+        <img src={this.state.doctor.img_url} alt="doctor portrait" />
+
         <div className="right">
-          <div>{this.props.name} </div>
-          <span>{`${this.props.category} in ${this.props.city}, ${
-            this.props.state
+          <div>{this.state.doctor.doctor_name} </div>
+          <span>{`${this.state.doctor.category} in ${this.state.doctor.city}, ${
+            this.state.doctor.state
           }`}</span>
           <ul>{this.state.specialties}</ul>
 

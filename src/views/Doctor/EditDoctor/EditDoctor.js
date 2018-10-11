@@ -30,7 +30,7 @@ class EditDoctor extends Component {
 
   changeInput(e) {
     this.setState({ [e.target.name]: e.target.value })
-    // console.log(this.state)
+    console.log(this.state)
   }
 
   clickSubmit() {
@@ -174,7 +174,13 @@ class EditDoctor extends Component {
             <option value="False">No</option>
           </select>
         </div>
-        <button onClick={this.clickSubmit}> Submit</button>
+        <button
+          onClick={this.clickSubmit}
+          //   disabled={this.state.nb_inclusive === null}
+        >
+          {" "}
+          Submit
+        </button>
       </div>
     )
   }

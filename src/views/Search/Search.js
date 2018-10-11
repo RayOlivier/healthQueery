@@ -12,40 +12,46 @@ class Search extends Component {
       openSearchBar: false
     }
     this.toggleSearchBar = this.toggleSearchBar.bind(this)
+    this.searchByKeyword = this.searchByKeyword.bind(this)
   }
 
   toggleSearchBar() {
     this.setState({ openSearchBar: !this.state.openSearchBar })
   }
 
+  searchByKeyword(keyword) {
+    axios.get(`/api/doctors?keyword=${keyword}`).then((res) => {
+      console.log("res from keyword", res)
+
+      // let mapped = res.data.map((e,i,arr))
+      let mapped = res.data.map((e, i, arr) => {
+        return e.doctor_id
+      })
+      this.setState({ doctors: mapped })
+    })
+  }
+
   componentDidMount() {
     axios.get("/api/doctors").then((res) => {
-      console.log("res.data", res.data)
-      this.setState({ doctors: res.data })
-      console.log("this.state", this.state)
+      // console.log("res.data", res.data)
+
+      let mapped = res.data.map((e, i, arr) => {
+        return e.doctor_id
+      })
+      console.log("mapped", mapped)
+      this.setState({ doctors: mapped })
+      // console.log("this.state", this.state)
     })
   }
   render() {
     console.log("this.state", this.state)
     let list = this.state.doctors.map((e, i, arr) => {
+      console.log("e", e)
       return (
         <DoctorCard
           key={i}
-          name={e.doctor_name}
-          id={e.doctor_id}
-          img={e.img_url}
-          category={e.category}
-          practice={e.practice_name}
-          city={e.city}
-          state={e.state}
-          address={e.street_address}
-          phone={e.phone}
-          website={e.website_url}
-          email={e.email}
-          gender={e.gender}
-          nbInclusive={e.nb_inclusive}
-          description={e.description}
-          avgRating={e.avg_rating}
+          // name={e.doctor_name}
+          id={e}
         />
       )
     })
@@ -60,7 +66,7 @@ class Search extends Component {
           className="search-bar"
           id={`search-bar-${this.state.openSearchBar}`}
         >
-          <SearchBar />
+          <SearchBar keywordSearch={this.searchByKeyword} />
         </div>
         <h1>Search Results</h1>
         {list}

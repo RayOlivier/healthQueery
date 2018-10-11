@@ -34,7 +34,7 @@ class Doctor extends Component {
   }
 
   renderIfAdmin() {
-    console.log("this.props", this.props)
+    // console.log("this.props", this.props)
     if (this.props.user.admin) {
       return (
         <div className="admin-controls">
@@ -71,8 +71,18 @@ class Doctor extends Component {
   }
 
   renderIfLoggedIn() {
+    // let reviewedAlready = null
+    let reviewedAlready = this.state.reviews.find((element) => {
+      return element.user_id === this.props.user.user_id
+    })
+    console.log("reviewedAlready", reviewedAlready)
     if (this.props.loggedIn) {
-      return <button onClick={this.togglePosting}>Post Review</button>
+      //RIGHT NOW ADMINS CAN POST MULTIPLE REVIEWS FOR TESTING PURPOSES
+      if (reviewedAlready && !this.props.user.admin) {
+        return <div>You already reviewed this doctor.</div>
+      } else {
+        return <button onClick={this.togglePosting}>Post Review</button>
+      }
     } else {
       return (
         <div className="not-logged-in">
@@ -127,7 +137,7 @@ class Doctor extends Component {
     }
   }
   render() {
-    console.log("this.state", this.state)
+    console.log("this.state.reviews", this.state.reviews)
     let { doctor, reviews } = this.state
     let reviewsList = reviews.map((e, i, arr) => {
       return (
@@ -154,7 +164,7 @@ class Doctor extends Component {
         <div className="doctor-info">
           {this.renderIfAdmin()}
           <h1>{doctor.doctor_name}</h1>
-          <div style={{ "margin-left": "5px" }}>{doctor.practice_name}</div>
+          <div style={{ marginLeft: "5px" }}>{doctor.practice_name}</div>
           <img src={doctor.img_url} alt="doctor portrait" />
 
           <p>{doctor.description}</p>
@@ -176,6 +186,8 @@ class Doctor extends Component {
           <div className="demographics">
             <h1>Demographics</h1>
             <ul>{demList}</ul>
+
+            {doctor.nb_inclusive && <div> &#10004; Nonbinary inclusive </div>}
           </div>
 
           <div className="contact">
