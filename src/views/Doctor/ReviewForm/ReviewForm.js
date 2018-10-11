@@ -63,7 +63,7 @@ class ReviewForm extends Component {
           />
           <div className="review-input">
             Body:{" "}
-            <input
+            <textarea
               className="body"
               placeholder="Enter your review..."
               name="body"

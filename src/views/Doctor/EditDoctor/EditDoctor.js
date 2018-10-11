@@ -2,66 +2,51 @@ import React, { Component } from "react"
 import axios from "axios"
 import NumberFormat from "react-number-format"
 
-class DoctorSubmissionForm extends Component {
-  constructor() {
-    super()
+class EditDoctor extends Component {
+  constructor(props) {
+    super(props)
+
+    let { doctorObj } = this.props
 
     this.state = {
-      doctor_name: "",
-      category: "",
-      city: "",
-      state: "",
-      description: "",
-      email: "",
-      gender: "",
-      img_url: "",
-      nb_inclusive: false,
-      phone: null,
-      practice: "",
-      street_address: "",
-      website_url: ""
+      doctor_name: doctorObj.doctor_name,
+      category: doctorObj.category,
+      city: doctorObj.city,
+      state: doctorObj.state,
+      description: doctorObj.description,
+      email: doctorObj.email,
+      gender: doctorObj.gender,
+      img_url: doctorObj.img_url,
+      nb_inclusive: doctorObj.nb_inclusive,
+      phone: doctorObj.phone,
+      practice_name: doctorObj.practice_name,
+      street_address: doctorObj.street_address,
+      website_url: doctorObj.website_url
     }
+
     this.changeInput = this.changeInput.bind(this)
     this.clickSubmit = this.clickSubmit.bind(this)
-    this.clearInput = this.clearInput.bind(this)
   }
 
   changeInput(e) {
     this.setState({ [e.target.name]: e.target.value })
-    console.log(this.state)
-  }
-
-  clearInput() {
-    let initialState = {
-      doctor_name: "",
-      category: "",
-      city: "",
-      state: "",
-      description: "",
-      email: "",
-      gender: "",
-      img_url: "",
-      nb_inclusive: false,
-      phone: null,
-      practice: "",
-      street_address: "",
-      website_url: ""
-    }
-    this.setState(initialState)
+    // console.log(this.state)
   }
 
   clickSubmit() {
-    axios.post("/api/doctor", { data: this.state }).then((res) => {
-      console.log("hi")
-      console.log(res)
-      this.clearInput()
-    })
+    axios
+      .put(`/api/doctor/${this.props.id}`, { data: this.state })
+      .then((res) => {
+        this.props.toggleEdit()
+      })
   }
 
   render() {
+    console.log("this.props", this.props)
+    console.log("this.state", this.state)
     return (
-      <div className="admin-doctor-submit">
-        <h1> Doctor Submission </h1>
+      <div className="edit-doctor">
+        <h1>Editing Doctor</h1>
         <div className="input-with-title">
           Image URL:
           <input
@@ -96,7 +81,7 @@ class DoctorSubmissionForm extends Component {
           Name of Practice:
           <input
             placeholder="Enter name of practice..."
-            value={this.state.practice}
+            value={this.state.practice_name}
             name="practice"
             onChange={(e) => this.changeInput(e)}
           />
@@ -105,7 +90,7 @@ class DoctorSubmissionForm extends Component {
           Description:
           <textarea
             placeholder="Enter description for this doctor. Be detailed."
-            value={this.state.description}
+            value={this.state.description || ""}
             name="description"
             maxLength="1000"
             onChange={(e) => this.changeInput(e)}
@@ -124,7 +109,7 @@ class DoctorSubmissionForm extends Component {
           Street Address:
           <input
             placeholder="Enter street address..."
-            value={this.state.street_address}
+            value={this.state.street_address || ""}
             name="street_address"
             onChange={(e) => this.changeInput(e)}
           />
@@ -159,14 +144,6 @@ class DoctorSubmissionForm extends Component {
         </div>
         <div className="input-with-title">
           Phone:
-          {/* <input
-            placeholder="Enter phone..."
-            value={this.state.phone}
-            name="phone"
-            //   minLength="10"
-            maxLength="10"
-            onChange={(e) => this.changeInput(e)}
-          /> */}
           <NumberFormat
             format="(###) ###-####"
             mask=""
@@ -203,4 +180,4 @@ class DoctorSubmissionForm extends Component {
   }
 }
 
-export default DoctorSubmissionForm
+export default EditDoctor

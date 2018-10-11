@@ -4,9 +4,12 @@ import ReviewCard from "./ReviewCard/ReviewCard"
 import ReviewForm from "./ReviewForm/ReviewForm"
 import { connect } from "react-redux"
 
+import NumberFormat from "react-number-format"
+
 import EmbedMap from "../../components/EmbedMap/EmbedMap"
 
 import "./Doctor.scss"
+import EditDoctor from "./EditDoctor/EditDoctor"
 
 class Doctor extends Component {
   constructor() {
@@ -18,10 +21,13 @@ class Doctor extends Component {
       doctor: {},
       reviews: [],
       postingReview: false,
-      img: ""
+      editing: false
     }
 
+    this.getDocInfo = this.getDocInfo.bind(this)
+
     this.togglePosting = this.togglePosting.bind(this)
+    this.toggleEditing = this.toggleEditing.bind(this)
     this.renderPostingForm = this.renderPostingForm.bind(this)
     this.renderIfLoggedIn = this.renderIfLoggedIn.bind(this)
     this.renderIfAdmin = this.renderIfAdmin.bind(this)
@@ -32,14 +38,36 @@ class Doctor extends Component {
     if (this.props.user.admin) {
       return (
         <div className="admin-controls">
-          <button>Edit</button>
+          <button onClick={this.toggleEditing}>Edit</button>
+
+          {/* this works like an if statement */}
+          {this.state.editing && (
+            <EditDoctor
+              doctorObj={this.state.doctor}
+              id={this.props.match.params.id}
+              toggleEdit={this.toggleEditing}
+            />
+          )}
         </div>
       )
     }
   }
 
+  getDocInfo() {
+    axios.get(`/api/doctor/${this.props.match.params.id}`).then((res) => {
+      this.setState({ doctor: res.data[0] })
+    })
+  }
+
+  toggleEditing() {
+    this.setState({ editing: !this.state.editing })
+    this.getDocInfo()
+  }
+
   togglePosting() {
     this.setState({ postingReview: !this.state.postingReview })
+
+    this.getDocInfo()
   }
 
   renderIfLoggedIn() {
@@ -67,9 +95,7 @@ class Doctor extends Component {
   }
 
   componentDidMount() {
-    axios.get(`/api/doctor/${this.props.match.params.id}`).then((res) => {
-      this.setState({ doctor: res.data[0] })
-    })
+    this.getDocInfo()
 
     axios.get(`/api/specialties/${this.props.match.params.id}`).then((res) => {
       // console.log("res.data", res.data)
@@ -101,7 +127,7 @@ class Doctor extends Component {
     }
   }
   render() {
-    // console.log("this.state", this.state)
+    console.log("this.state", this.state)
     let { doctor, reviews } = this.state
     let reviewsList = reviews.map((e, i, arr) => {
       return (
@@ -128,6 +154,7 @@ class Doctor extends Component {
         <div className="doctor-info">
           {this.renderIfAdmin()}
           <h1>{doctor.doctor_name}</h1>
+          <div style={{ "margin-left": "5px" }}>{doctor.practice_name}</div>
           <img src={doctor.img_url} alt="doctor portrait" />
 
           <p>{doctor.description}</p>
@@ -154,7 +181,14 @@ class Doctor extends Component {
           <div className="contact">
             <h1>Contact</h1>
             <ul>
-              <li>Phone: {doctor.phone}</li>
+              <li>
+                Phone:{" "}
+                <NumberFormat
+                  value={this.state.doctor.phone}
+                  displayType={"text"}
+                  format={"(###) ###-####"}
+                />
+              </li>
               <li>Email: {doctor.email}</li>
               <li>
                 Website:{" "}

@@ -17,7 +17,7 @@ export default function ReviewCard(props) {
       <div className="review-info">
         Posted {time} <br /> by user {props.userId}
       </div>
-      <p>{props.body}</p>
+      <p style={{ "word-wrap": "break-word" }}>{props.body}</p>
     </div>
   )
 }

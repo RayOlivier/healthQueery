@@ -101,21 +101,26 @@ app.get("/logout", (req, res) => {
 
 //ADMIN
 app.post("/api/doctor", adminController.addDoctor)
+app.put("/api/doctor/:id", adminController.editDoctor)
 
+//DOCTOR
 app.get("/api/doctors", doctorController.getDoctors) //done
 app.get("/api/doctor/:id", doctorController.getDoctor) //done
 app.get("/api/specialties/:id", doctorController.getSpecialties) //done
 app.get("/api/demographics/:id", doctorController.getDemographics) //done
 
+//USER
 app.get("/api/user/:id", userController.getUserById) //done
 // app.get("/api/user/:email", userController.getUserByEmail) //done
 app.post("/api/user", userController.createUser)
 app.put("/api/user/:id", userController.editUser)
 
+//FAVORITES
 app.get("/api/favorites/:user_id", userController.getFavorites) //done
 app.post("/api/favorite/doctor/:doc_id", userController.addFavorite) //done
 app.delete("/api/favorite/doctor/:doc_id", userController.deleteFavorite) //done
 
+//REVIEWS
 app.get("/api/reviews/:doc_id", reviewController.getReviews) //done
 app.post("/api/review/doctor/:doc_id", reviewController.postReview) //done
 app.put("/api/review/:id", reviewController.editReview)

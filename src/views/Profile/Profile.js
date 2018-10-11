@@ -21,7 +21,7 @@ class Profile extends Component {
   }
 
   handleChange(e) {
-    //do some redux magics
+    //do some redux magics and put requests
   }
 
   renderProfile() {
@@ -88,6 +88,10 @@ class Profile extends Component {
           {/* <div className="profile-info">
             Date of Birth: {this.props.user.date_of_birth}
           </div> */}
+
+          <div className="my-reviews">
+            Render review cards that match the user's id
+          </div>
         </div>
       )
     }
@@ -104,27 +108,7 @@ class Profile extends Component {
   render() {
     // console.log("req.user", req.user)
     console.log("this.state", this.state)
-    return (
-      <div className="profile">{this.renderProfile()}</div>
-      // <div className="user-profile">
-      //   <h1>Profile</h1>
-      //   <button onClick={this.toggleEdit}>Edit Profile</button>
-      //   <div className="profile-input">
-      //     Username: {this.props.user.username}
-      //   </div>
-      //   <div className="profile-input">Email: {this.props.user.email}</div>
-      //   <div className="profile-input">Gender: {this.props.user.gender}</div>
-      //   <div className="profile-input">
-      //     Sexuality: {this.props.user.sexual_orientation}
-      //   </div>
-      //   <div className="profile-input">
-      //     Profile Picture URL: {this.props.user.display_img}
-      //   </div>
-      //   <div className="profile-input">
-      //     Date of Birth: {this.props.user.date_of_birth}
-      //   </div>
-      // </div>
-    )
+    return <div className="profile">{this.renderProfile()}</div>
   }
 }
 
