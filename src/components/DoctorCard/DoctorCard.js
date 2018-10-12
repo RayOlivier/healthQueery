@@ -26,17 +26,11 @@ class DoctorCard extends Component {
     this.getDoctor()
 
     axios.get(`/api/specialties/${this.props.id}`).then((res) => {
-      let specArr = res.data.map((e) => {
-        return e.specialty + " "
-      })
-      this.setState({ specialties: specArr })
+      this.setState({ specialties: res.data[0].array })
     })
 
     axios.get(`/api/demographics/${this.props.id}`).then((res) => {
-      let demoArr = res.data.map((e) => {
-        return e.demographic + " "
-      })
-      this.setState({ demographics: demoArr })
+      this.setState({ demographics: res.data[0].array })
     })
   }
 
@@ -48,6 +42,18 @@ class DoctorCard extends Component {
 
   render() {
     console.log("this.props", this.props)
+
+    let specList = this.state.specialties.map((e, i, a) => {
+      return <li key={i}>{e}</li>
+    })
+    let demList = this.state.demographics.map((e, i, a) => {
+      if (i < a.length - 1) {
+        return `${e}, `
+      } else {
+        return `${e}`
+      }
+    })
+
     return (
       <div className="doctor-card">
         <img src={this.state.doctor.img_url} alt="doctor portrait" />
@@ -57,9 +63,9 @@ class DoctorCard extends Component {
           <span>{`${this.state.doctor.category} in ${this.state.doctor.city}, ${
             this.state.doctor.state
           }`}</span>
-          <ul>{this.state.specialties}</ul>
+          <ul>{specList}</ul>
 
-          <ul>{this.state.demographics}</ul>
+          <div>Demographics: {demList}</div>
           <Link to={`/doctor/${this.props.id}`}>
             <button>More info ></button>
           </Link>

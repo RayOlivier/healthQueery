@@ -47,23 +47,6 @@ $background-blue: whitesmoke;
       padding: 10px;
     }
 
-    //affects divs from EmbedMap.js
-    .embed-map {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      .address-text {
-        width: 90%;
-      }
-
-      iframe {
-        height: 30vh;
-        width: 90%;
-        margin: 10px;
-      }
-    }
-
     ul {
       padding: 5px 10px;
       li {

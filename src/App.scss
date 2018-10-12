@@ -155,6 +155,23 @@ $background-blue: whitesmoke;
   }
 }
 
+//affects divs from EmbedMap.js
+.embed-map {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .address-text {
+    width: 90%;
+  }
+
+  iframe {
+    height: 30vh;
+    width: 90%;
+    margin: 10px;
+  }
+}
+
 @media (min-width: 768px) {
   .App {
     font-size: 22px;

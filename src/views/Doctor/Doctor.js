@@ -108,36 +108,19 @@ class Doctor extends Component {
     this.getDocInfo()
 
     axios.get(`/api/specialties/${this.props.match.params.id}`).then((res) => {
-      // console.log("res.data", res.data)
-      let specArr = res.data.map((e) => {
-        return e.specialty + " "
-      })
-      this.setState({ specialties: specArr })
+      this.setState({ specialties: res.data[0].array })
     })
 
     axios.get(`/api/demographics/${this.props.match.params.id}`).then((res) => {
-      let demoArr = res.data.map((e) => {
-        return e.demographic + " "
-      })
-      this.setState({ demographics: demoArr })
+      this.setState({ demographics: res.data[0].array })
     })
 
     axios.get(`/api/reviews/${this.props.match.params.id}`).then((res) => {
       this.setState({ reviews: res.data })
     })
-
-    if (
-      this.state.doctor.img_url === null ||
-      this.state.doctor.img_url === ""
-    ) {
-      this.setState({
-        img:
-          "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"
-      })
-    }
   }
   render() {
-    console.log("this.state.reviews", this.state.reviews)
+    // console.log("this.state.reviews", this.state.reviews)
     let { doctor, reviews } = this.state
     let reviewsList = reviews.map((e, i, arr) => {
       return (

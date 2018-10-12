@@ -9,10 +9,12 @@ class Search extends Component {
 
     this.state = {
       doctors: [],
-      openSearchBar: false
+      openSearchBar: false,
+      list: []
     }
     this.toggleSearchBar = this.toggleSearchBar.bind(this)
     this.searchByKeyword = this.searchByKeyword.bind(this)
+    // this.renderCards = this.renderCards.bind(this)
   }
 
   toggleSearchBar() {
@@ -25,8 +27,9 @@ class Search extends Component {
 
       // let mapped = res.data.map((e,i,arr))
       let mapped = res.data.map((e, i, arr) => {
-        return e.doctor_id
+        return <DoctorCard key={i} id={e.doctor_id} />
       })
+      console.log("mapped", mapped)
       this.setState({ doctors: mapped })
     })
   }
@@ -35,8 +38,11 @@ class Search extends Component {
     axios.get("/api/doctors").then((res) => {
       // console.log("res.data", res.data)
 
+      // let mapped = res.data.map((e, i, arr) => {
+      //   return e.doctor_id
+      // })
       let mapped = res.data.map((e, i, arr) => {
-        return e.doctor_id
+        return <DoctorCard key={i} id={e.doctor_id} />
       })
       console.log("mapped", mapped)
       this.setState({ doctors: mapped })
@@ -45,16 +51,6 @@ class Search extends Component {
   }
   render() {
     console.log("this.state", this.state)
-    let list = this.state.doctors.map((e, i, arr) => {
-      console.log("e", e)
-      return (
-        <DoctorCard
-          key={i}
-          // name={e.doctor_name}
-          id={e}
-        />
-      )
-    })
 
     return (
       <div className="search-view">
@@ -69,7 +65,8 @@ class Search extends Component {
           <SearchBar keywordSearch={this.searchByKeyword} />
         </div>
         <h1>Search Results</h1>
-        {list}
+        {/* {this.renderCards()} */}
+        {this.state.doctors}
       </div>
     )
   }

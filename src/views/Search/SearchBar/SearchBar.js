@@ -24,10 +24,10 @@ class SearchBar extends Component {
     return (
       <div className="search-bar">
         <h1>Filters:</h1>
-        <div className="searchbar-input">
+        {/* <div className="searchbar-input">
           Search by location:
           <input placeholder="Try TX or Dallas" value={this.state.location} />
-        </div>
+        </div> */}
 
         <div>
           Search by Keyword:
@@ -38,10 +38,11 @@ class SearchBar extends Component {
             onChange={(e) => {
               this.changeInput(e)
             }}
+            // onSubmit={this.onKeywordClick}
           />
         </div>
 
-        <button onClick={this.onKeywordClick}>Keyword button</button>
+        <button onClick={this.onKeywordClick}>Submit</button>
       </div>
     )
   }
