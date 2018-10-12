@@ -33,5 +33,13 @@ module.exports = {
         res.sendStatus(200)
       })
       .catch(console.log)
+  },
+  getAverageRating(req, res) {
+    const db = req.app.get("db")
+    db.getAvgRating([req.params.id])
+      .then((info) => {
+        res.status(200).json(info)
+      })
+      .catch(console.log)
   }
 }

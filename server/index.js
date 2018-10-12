@@ -124,6 +124,7 @@ app.get("/api/reviews/:doc_id", reviewController.getReviews) //done
 app.post("/api/review/doctor/:doc_id", reviewController.postReview) //done
 app.put("/api/review/:id", reviewController.editReview)
 app.delete("/api/review/:id", reviewController.deleteReview) //done
+app.get("/api/rating/:id", reviewController.getAverageRating)
 
 const port = 3001
 app.listen(port, () => {

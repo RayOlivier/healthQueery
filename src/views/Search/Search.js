@@ -66,7 +66,7 @@ class Search extends Component {
         </div>
         <h1>Search Results</h1>
         {/* {this.renderCards()} */}
-        {this.state.doctors}
+        <div className="doc-card-container">{this.state.doctors}</div>
       </div>
     )
   }

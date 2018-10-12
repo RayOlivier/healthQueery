@@ -4,6 +4,8 @@ import ReviewCard from "./ReviewCard/ReviewCard"
 import ReviewForm from "./ReviewForm/ReviewForm"
 import { connect } from "react-redux"
 
+// import StarRatingComponent from "react-star-rating-component"
+
 import NumberFormat from "react-number-format"
 
 import EmbedMap from "../../components/EmbedMap/EmbedMap"
@@ -21,7 +23,8 @@ class Doctor extends Component {
       doctor: {},
       reviews: [],
       postingReview: false,
-      editing: false
+      editing: false,
+      avgRating: 0
     }
 
     this.getDocInfo = this.getDocInfo.bind(this)
@@ -57,6 +60,24 @@ class Doctor extends Component {
     axios.get(`/api/doctor/${this.props.match.params.id}`).then((res) => {
       this.setState({ doctor: res.data[0] })
     })
+    axios.get(`/api/specialties/${this.props.match.params.id}`).then((res) => {
+      this.setState({ specialties: res.data[0].array })
+    })
+
+    axios.get(`/api/demographics/${this.props.match.params.id}`).then((res) => {
+      this.setState({ demographics: res.data[0].array })
+    })
+
+    axios.get(`/api/reviews/${this.props.match.params.id}`).then((res) => {
+      this.setState({ reviews: res.data })
+    })
+
+    axios.get(`/api/rating/${this.props.match.params.id}`).then((res) => {
+      console.log("res from rating", res)
+      let rounded = Math.round(10 * res.data[0].avg) / 10
+      this.setState({ avgRating: rounded })
+    })
+    console.log("got info")
   }
 
   toggleEditing() {
@@ -106,21 +127,10 @@ class Doctor extends Component {
 
   componentDidMount() {
     this.getDocInfo()
-
-    axios.get(`/api/specialties/${this.props.match.params.id}`).then((res) => {
-      this.setState({ specialties: res.data[0].array })
-    })
-
-    axios.get(`/api/demographics/${this.props.match.params.id}`).then((res) => {
-      this.setState({ demographics: res.data[0].array })
-    })
-
-    axios.get(`/api/reviews/${this.props.match.params.id}`).then((res) => {
-      this.setState({ reviews: res.data })
-    })
   }
   render() {
     // console.log("this.state.reviews", this.state.reviews)
+    console.log("this.state", this.state)
     let { doctor, reviews } = this.state
     let reviewsList = reviews.map((e, i, arr) => {
       return (
@@ -142,12 +152,29 @@ class Doctor extends Component {
       return <li key={i}>{e}</li>
     })
 
+    // // console.log("doctor.practice_name", doctor.practice_name)
+
     return (
       <div className="doctor-page">
         <div className="doctor-info">
           {this.renderIfAdmin()}
-          <h1>{doctor.doctor_name}</h1>
-          <div style={{ marginLeft: "5px" }}>{doctor.practice_name}</div>
+          <h1>
+            {doctor.doctor_name}
+            <h2> {doctor.practice_name} </h2>
+          </h1>
+          <div style={{ marginLeft: "5px" }}>
+            {this.state.avgRating}
+            /5 stars from {this.state.reviews.length} reviews
+          </div>
+          {/* <div className="star-container">
+            <StarRatingComponent
+              className="stars"
+              name="card-rating"
+              value={Math.round(this.state.avgRating)}
+              editing={false}
+            />
+            ({this.state.avgRating})
+          </div> */}
           <img src={doctor.img_url} alt="doctor portrait" />
 
           <p>{doctor.description}</p>

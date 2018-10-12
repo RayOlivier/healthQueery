@@ -34,7 +34,7 @@ module.exports = {
         data.city,
         data.state,
         data.description,
-        data.practice,
+        data.practice_name,
         data.img_url,
         data.website_url,
         data.phone,

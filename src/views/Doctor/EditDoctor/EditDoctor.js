@@ -82,7 +82,7 @@ class EditDoctor extends Component {
           <input
             placeholder="Enter name of practice..."
             value={this.state.practice_name}
-            name="practice"
+            name="practice_name"
             onChange={(e) => this.changeInput(e)}
           />
         </div>

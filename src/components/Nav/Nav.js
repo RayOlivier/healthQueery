@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
-import axios from "axios"
 import transHQ from "../../images/transHQ.png"
 import { connect } from "react-redux"
 
@@ -14,19 +13,12 @@ class Nav extends Component {
       menuOpen: false
     }
     this.toggleMenu = this.toggleMenu.bind(this)
-    this.loginRedirect = this.loginRedirect.bind(this)
     this.renderIfLoggedIn = this.renderIfLoggedIn.bind(this)
     this.renderIfAdmin = this.renderIfAdmin.bind(this)
   }
 
   toggleMenu() {
     this.setState({ menuOpen: !this.state.menuOpen })
-  }
-
-  loginRedirect() {
-    axios.get("/api/login").then((res) => {
-      console.log(res)
-    })
   }
 
   renderIfLoggedIn() {
@@ -112,7 +104,7 @@ class Nav extends Component {
             <Link to="/about" onClick={this.toggleMenu}>
               About & FAQ
             </Link>
-            {/* Consolidating to the about page
+            {/* Consolidating to the about page for now
              <Link to="/contact" onClick={this.toggleMenu}>
               Contact
             </Link>
@@ -121,6 +113,32 @@ class Nav extends Component {
             </Link> */}
             {this.renderIfAdmin()}
             {this.renderIfLoggedIn()}
+          </div>
+        </div>
+        <div id="desktop-bar">
+          <div className="left">
+            <Link to="/" onClick={this.toggleMenu}>
+              Home
+            </Link>
+            <Link to="/about" onClick={this.toggleMenu}>
+              About & FAQ
+            </Link>
+          </div>
+          <div className="right">
+            <div>
+              {this.renderIfAdmin()}
+              {this.renderIfLoggedIn()}
+            </div>
+
+            <div className="search-field">
+              <input placeholder="  Search by keyword..." />
+              <Link to="/search">
+                <img
+                  src="https://static.thenounproject.com/png/105498-200.png"
+                  alt=""
+                />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

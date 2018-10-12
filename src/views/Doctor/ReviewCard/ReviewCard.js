@@ -14,7 +14,7 @@ class ReviewCard extends Component {
 
   componentDidMount() {
     axios.get(`/api/user/${this.props.userId}`).then((res) => {
-      console.log("res", res)
+      // console.log("res", res)
       this.setState({ username: res.data[0].username })
     })
   }

@@ -2,6 +2,8 @@ import React, { Component } from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
 
+import StarRatingComponent from "react-star-rating-component"
+
 //this component is just for a preview of the doctor that links to their detailed page (Doctor view)
 class DoctorCard extends Component {
   constructor(props) {
@@ -10,7 +12,8 @@ class DoctorCard extends Component {
     this.state = {
       doctor: {},
       specialties: [],
-      demographics: []
+      demographics: [],
+      avgRating: 0
     }
     this.getDoctor = this.getDoctor.bind(this)
   }
@@ -31,6 +34,12 @@ class DoctorCard extends Component {
 
     axios.get(`/api/demographics/${this.props.id}`).then((res) => {
       this.setState({ demographics: res.data[0].array })
+    })
+
+    axios.get(`/api/rating/${this.props.id}`).then((res) => {
+      console.log("res from rating", res)
+      let rounded = Math.round(10 * res.data[0].avg) / 10
+      this.setState({ avgRating: rounded })
     })
   }
 
@@ -56,14 +65,32 @@ class DoctorCard extends Component {
 
     return (
       <div className="doctor-card">
-        <img src={this.state.doctor.img_url} alt="doctor portrait" />
+        <div className="left">
+          <div className="doc-name">{this.state.doctor.doctor_name} </div>
 
+          <img
+            src={this.state.doctor.img_url}
+            className="left-img"
+            alt="doctor portrait"
+          />
+          <div className="star-container">
+            <StarRatingComponent
+              className="stars"
+              name="card-rating"
+              value={Math.round(this.state.avgRating)}
+              editing={false}
+            />
+            ({this.state.avgRating})
+          </div>
+        </div>
         <div className="right">
-          <div>{this.state.doctor.doctor_name} </div>
           <span>{`${this.state.doctor.category} in ${this.state.doctor.city}, ${
             this.state.doctor.state
           }`}</span>
-          <ul>{specList}</ul>
+          <div>
+            <div style={{ textDecoration: "underline" }}>Services:</div>
+            <ul>{specList}</ul>
+          </div>
 
           <div>Demographics: {demList}</div>
           <Link to={`/doctor/${this.props.id}`}>
