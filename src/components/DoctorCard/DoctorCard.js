@@ -37,7 +37,7 @@ class DoctorCard extends Component {
     })
 
     axios.get(`/api/rating/${this.props.id}`).then((res) => {
-      console.log("res from rating", res)
+      // console.log("res from rating", res)
       let rounded = Math.round(10 * res.data[0].avg) / 10
       this.setState({ avgRating: rounded })
     })
@@ -50,7 +50,7 @@ class DoctorCard extends Component {
   }
 
   render() {
-    console.log("this.props", this.props)
+    // console.log("this.props", this.props)
 
     let specList = this.state.specialties.map((e, i, a) => {
       return <li key={i}>{e}</li>
@@ -94,7 +94,7 @@ class DoctorCard extends Component {
 
           <div>Demographics: {demList}</div>
           <Link to={`/doctor/${this.props.id}`}>
-            <button>More info ></button>
+            <div className="button">More info ></div>
           </Link>
         </div>
       </div>

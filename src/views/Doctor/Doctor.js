@@ -73,11 +73,11 @@ class Doctor extends Component {
     })
 
     axios.get(`/api/rating/${this.props.match.params.id}`).then((res) => {
-      console.log("res from rating", res)
+      // console.log("res from rating", res)
       let rounded = Math.round(10 * res.data[0].avg) / 10
       this.setState({ avgRating: rounded })
     })
-    console.log("got info")
+    // console.log("got info")
   }
 
   toggleEditing() {
@@ -96,7 +96,7 @@ class Doctor extends Component {
     let reviewedAlready = this.state.reviews.find((element) => {
       return element.user_id === this.props.user.user_id
     })
-    console.log("reviewedAlready", reviewedAlready)
+    // console.log("reviewedAlready", reviewedAlready)
     if (this.props.loggedIn) {
       //RIGHT NOW ADMINS CAN POST MULTIPLE REVIEWS FOR TESTING PURPOSES
       if (reviewedAlready && !this.props.user.admin) {
@@ -130,7 +130,7 @@ class Doctor extends Component {
   }
   render() {
     // console.log("this.state.reviews", this.state.reviews)
-    console.log("this.state", this.state)
+    // console.log("this.state", this.state)
     let { doctor, reviews } = this.state
     let reviewsList = reviews.map((e, i, arr) => {
       return (
@@ -160,7 +160,7 @@ class Doctor extends Component {
           {this.renderIfAdmin()}
           <h1>
             {doctor.doctor_name}
-            <h2> {doctor.practice_name} </h2>
+            <div className="h2"> {doctor.practice_name} </div>
           </h1>
           <div style={{ marginLeft: "5px" }}>
             {this.state.avgRating}

@@ -25,17 +25,27 @@ class Nav extends Component {
     if (this.props.loggedIn) {
       return (
         <>
-          <Link to="/profile" onClick={this.toggleMenu}>
+          <Link className="single-link" to="/profile" onClick={this.toggleMenu}>
             Profile
           </Link>
-          <Link to="/favorites" onClick={this.toggleMenu}>
+          <Link
+            className="single-link"
+            to="/favorites"
+            onClick={this.toggleMenu}
+          >
             Favorites
           </Link>
-          <a href="http://localhost:3001/logout">Logout</a>
+          <a className="single-link" href="http://localhost:3001/logout">
+            Logout
+          </a>
         </>
       )
     } else {
-      return <a href="http://localhost:3001/login">Login</a>
+      return (
+        <a className="single-link" href="http://localhost:3001/login">
+          Login
+        </a>
+      )
     }
   }
 
@@ -44,7 +54,7 @@ class Nav extends Component {
       return (
         <>
           {" "}
-          <Link to="/admin" onClick={this.toggleMenu}>
+          <Link className="single-link" to="/admin" onClick={this.toggleMenu}>
             Admin
           </Link>
         </>
@@ -74,12 +84,12 @@ class Nav extends Component {
             />
           </div>
           <div className="middle">
-            <Link to="/">
+            <Link className="single-link" to="/">
               <img src={transHQ} alt="Health Queery Logo" />
             </Link>
           </div>
           <div className="right">
-            <Link to="/search">
+            <Link className="single-link" to="/search">
               {" "}
               <img
                 src="https://static.thenounproject.com/png/105498-200.png"
@@ -98,17 +108,17 @@ class Nav extends Component {
             <h1>Menu</h1>
           </div>
           <div className="links">
-            <Link to="/" onClick={this.toggleMenu}>
+            <Link className="single-link" to="/" onClick={this.toggleMenu}>
               Home
             </Link>
-            <Link to="/about" onClick={this.toggleMenu}>
+            <Link className="single-link" to="/about" onClick={this.toggleMenu}>
               About & FAQ
             </Link>
             {/* Consolidating to the about page for now
-             <Link to="/contact" onClick={this.toggleMenu}>
+             <Link className='single-link' to="/contact" onClick={this.toggleMenu}>
               Contact
             </Link>
-            <Link to="/faq" onClick={this.toggleMenu}>
+            <Link className='single-link' to="/faq" onClick={this.toggleMenu}>
               FAQ
             </Link> */}
             {this.renderIfAdmin()}
@@ -117,22 +127,22 @@ class Nav extends Component {
         </div>
         <div id="desktop-bar">
           <div className="left">
-            <Link to="/" onClick={this.toggleMenu}>
+            <Link className="single-link" to="/" onClick={this.toggleMenu}>
               Home
             </Link>
-            <Link to="/about" onClick={this.toggleMenu}>
+            <Link className="single-link" to="/about" onClick={this.toggleMenu}>
               About & FAQ
             </Link>
           </div>
           <div className="right">
-            <div>
+            <div className="user-links">
               {this.renderIfAdmin()}
               {this.renderIfLoggedIn()}
             </div>
 
             <div className="search-field">
               <input placeholder="  Search by keyword..." />
-              <Link to="/search">
+              <Link className="single-link" to="/search">
                 <img
                   src="https://static.thenounproject.com/png/105498-200.png"
                   alt=""
