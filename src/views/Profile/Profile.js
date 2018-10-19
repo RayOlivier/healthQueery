@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import axios from "axios"
 import { connect } from "react-redux"
-import { getUser } from "./../../ducks/reducer"
+import { getUser, getFavorites } from "./../../ducks/reducer"
 
 class Profile extends Component {
   constructor(props) {
@@ -26,7 +26,14 @@ class Profile extends Component {
 
   renderProfile() {
     if (!this.props.loggedIn) {
-      return <div className="no-profile">Log in to view your profile.</div>
+      return (
+        <div className="no-profile">
+          <a className="single-link" href="http://localhost:3001/login">
+            Login
+          </a>{" "}
+          to view your profile.
+        </div>
+      )
     } else if (this.state.editing) {
       return (
         <div className="edit-on">
@@ -102,11 +109,11 @@ class Profile extends Component {
       console.log("res in mount of profile", res)
       //this gives user from db
       this.props.getUser(res.data[0].user_id)
+      this.props.getFavorites(res.data[0].user_id)
     })
   }
 
   render() {
-    // console.log("req.user", req.user)
     console.log("this.state", this.state)
     return <div className="profile">{this.renderProfile()}</div>
   }
@@ -116,5 +123,5 @@ const mapStateToProps = (state) => state
 
 export default connect(
   mapStateToProps,
-  { getUser }
+  { getUser, getFavorites }
 )(Profile)

@@ -116,8 +116,8 @@ app.put("/api/user/:id", userController.editUser)
 
 //FAVORITES
 app.get("/api/favorites/:user_id", userController.getFavorites) //done
-app.post("/api/favorite/doctor/:doc_id", userController.addFavorite) //done
-app.delete("/api/favorite/doctor/:doc_id", userController.deleteFavorite) //done
+app.post("/api/favorite/:doc_id", userController.addFavorite) //done
+app.delete("/api/favorite/:doc_id", userController.deleteFavorite) //done
 
 //REVIEWS
 app.get("/api/reviews/:doc_id", reviewController.getReviews) //done

@@ -22,8 +22,7 @@ module.exports = {
   },
   getFavorites(req, res) {
     const db = req.app.get("db")
-    db.favorites
-      .find({ user_id: req.params.user_id })
+    db.getFavorites([req.params.user_id])
       .then((favs) => {
         res.status(200).json(favs)
       })

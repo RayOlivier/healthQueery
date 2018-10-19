@@ -180,6 +180,14 @@ $background-blue: whitesmoke;
         margin: 5px 0px;
       }
     }
+
+    .cat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      // border: black 2px solid;
+      width: 80%;
+    }
     .button {
       width: 100%;
       display: flex;

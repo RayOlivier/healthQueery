@@ -1,0 +1,29 @@
+#heart-container {
+  //   text-align: right;
+  //   border: black 2px solid;
+  //   font-size: 26px;
+}
+
+#icon {
+  color: #fc2e5a;
+  font-size: 24px;
+  float: right;
+  //   position: fixed;
+  right: 5%;
+  position: absolute;
+  //   border: black 2px solid;
+
+  transition: 0.5s;
+}
+
+#icon.outline {
+  color: black;
+}
+
+#icon.outline:hover {
+  //   font-size: 26px;
+  color: #fc2e5a;
+}
+#icon.full:hover {
+  color: #333;
+}

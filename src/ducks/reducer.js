@@ -1,6 +1,7 @@
 import axios from "axios"
 
 const GET_USER = "GET_USER"
+const GET_FAVORITES = "GET_FAVORITES"
 
 export function getUser(id) {
   return {
@@ -9,12 +10,12 @@ export function getUser(id) {
   }
 }
 
-// export function checkAdmin(){
-//   return{
-//     type: CHECK_ADMIN,
-//     payload:
-//   }
-// }
+export function getFavorites(id) {
+  return {
+    type: GET_FAVORITES,
+    payload: axios.get(`/api/favorites/${id}`)
+  }
+}
 
 const initialState = {
   user: {
@@ -36,7 +37,6 @@ export default function reducer(state = initialState, action) {
   console.log("state, action", state, action)
   switch (action.type) {
     case `${GET_USER}_FULFILLED`:
-      console.log(action.payload.data[0])
       return {
         ...state,
         isLoading: false,
@@ -44,8 +44,19 @@ export default function reducer(state = initialState, action) {
         user: { ...state.user, ...action.payload.data[0] }
       }
     case `${GET_USER}_PENDING`:
-      console.log("action payload", action.payload)
+      return {
+        ...state,
+        isLoading: true
+      }
 
+    case `${GET_FAVORITES}_FULFILLED`:
+      return {
+        ...state,
+        isLoading: false,
+        favorites: action.payload.data[0].array
+      }
+
+    case `${GET_FAVORITES}_PENDING`:
       return {
         ...state,
         isLoading: true

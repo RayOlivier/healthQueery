@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
+import FavoriteButton from "../FavoriteButton/FavoriteButton"
 
 import StarRatingComponent from "react-star-rating-component"
 
@@ -84,9 +85,13 @@ class DoctorCard extends Component {
           </div>
         </div>
         <div className="right">
-          <span>{`${this.state.doctor.category} in ${this.state.doctor.city}, ${
-            this.state.doctor.state
-          }`}</span>
+          <FavoriteButton id={this.props.id} />
+          <div className="cat">{this.state.doctor.category}</div>
+
+          <span>
+            {`${this.state.doctor.city}, ${this.state.doctor.state}
+            `}
+          </span>
           <div>
             <div style={{ textDecoration: "underline" }}>Services:</div>
             <ul>{specList}</ul>
