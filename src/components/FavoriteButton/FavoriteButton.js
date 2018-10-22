@@ -57,7 +57,7 @@ class FavoriteButton extends Component {
         .post(`/api/favorite/${this.props.id}`, {
           user_id: this.props.user.user_id
         })
-        .then(this.props.getFavorites())
+        .then(this.props.getFavorites(this.props.user.user_id))
         .then(this.setState({ onFavorite: true }))
     } else {
       alert("You must be logged in to add favorites")
@@ -65,11 +65,13 @@ class FavoriteButton extends Component {
   }
 
   deleteFav() {
+    console.log("this.props.id", this.props.id)
+    console.log("this.props.user.user_id", this.props.user.user_id)
     axios
       .delete(`/api/favorite/${this.props.id}`, {
-        user_id: this.props.user.user_id
+        data: { user: this.props.user.user_id }
       })
-      .then(this.props.getFavorites())
+      .then(this.props.getFavorites(this.props.user.user_id))
       .then(this.setState({ onFavorite: false }))
   }
 
@@ -82,17 +84,7 @@ class FavoriteButton extends Component {
   render() {
     //pass in the card's doctor id as id
 
-    return (
-      <>
-        {this.renderButton()}
-
-        {/* <div class="heart">
-          <FontAwesomeIcon icon={["fas", "heart"]} />
-          <FontAwesomeIcon icon={["far", "heart"]} />
-        </div> */}
-        {/* <div class="heart" /> */}
-      </>
-    )
+    return <>{this.renderButton()}</>
   }
 }
 

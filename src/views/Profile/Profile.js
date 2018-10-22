@@ -106,7 +106,7 @@ class Profile extends Component {
 
   componentDidMount() {
     axios.get("/profile").then((res) => {
-      console.log("res in mount of profile", res)
+      // console.log("res in mount of profile", res)
       //this gives user from db
       this.props.getUser(res.data[0].user_id)
       this.props.getFavorites(res.data[0].user_id)
@@ -114,7 +114,7 @@ class Profile extends Component {
   }
 
   render() {
-    console.log("this.state", this.state)
+    // console.log("this.state", this.state)
     return <div className="profile">{this.renderProfile()}</div>
   }
 }

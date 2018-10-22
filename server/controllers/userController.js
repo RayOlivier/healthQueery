@@ -31,6 +31,7 @@ module.exports = {
   addFavorite(req, res) {
     const db = req.app.get("db")
     // console.log("req: ", req)
+    console.log("req.body.user_id", req.body.user_id)
     db.addFavorite([req.params.doc_id, req.body.user_id])
       .then((favs) => {
         // console.log(favs)
@@ -40,8 +41,11 @@ module.exports = {
   },
   deleteFavorite(req, res) {
     const db = req.app.get("db")
-    db.deleteFavorite([req.params.doc_id, req.body.user_id])
-      .then(() => {
+    // console.log("req.params.doc_id", req.params.doc_id)
+    // console.log("req.body", req.body)
+    db.deleteFavorite([req.params.doc_id, req.body.user])
+      .then((favs) => {
+        // console.log("supposedly done")
         res.sendStatus(200)
       })
       .catch(console.log)
