@@ -74,10 +74,21 @@ $background-blue: whitesmoke;
   display: flex;
   flex-direction: column;
   // justify-content: center;
-  align-items: center;
+  // align-items: center;
   height: 100%;
 
   // border: #3e87b2 2px dotted;
+
+  .map-container {
+    height: 50vh;
+  }
+
+  .map-div {
+    position: relative;
+    z-index: 0;
+    height: 50vh;
+  }
+
   .doc-card-container {
     width: 100%;
     // height: 30%;

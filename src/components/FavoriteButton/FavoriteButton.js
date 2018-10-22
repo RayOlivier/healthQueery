@@ -27,8 +27,8 @@ class FavoriteButton extends Component {
   }
 
   renderButton() {
-    console.log("this.props.favorites", this.props.favorites)
-    console.log("this.props.id", this.props.id)
+    // console.log("this.props.favorites", this.props.favorites)
+    // console.log("this.props.id", this.props.id)
     // console.log("onFavorite", onFavorite)
     if (this.state.onFavorite) {
       return (

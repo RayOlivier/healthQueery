@@ -22,7 +22,7 @@ class DoctorCard extends Component {
 
   getDoctor() {
     axios.get(`/api/doctor/${this.props.id}`).then((res) => {
-      console.log("res", res)
+      // console.log("res", res)
       this.setState({ doctor: res.data[0] })
     })
   }
