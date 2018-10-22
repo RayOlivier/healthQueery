@@ -2,6 +2,7 @@ import axios from "axios"
 
 const GET_USER = "GET_USER"
 const GET_FAVORITES = "GET_FAVORITES"
+const PROFILE_CHANGE = "PROFILE_CHANGE"
 
 export function getUser(id) {
   return {
@@ -14,6 +15,14 @@ export function getFavorites(id) {
   return {
     type: GET_FAVORITES,
     payload: axios.get(`/api/favorites/${id}`)
+  }
+}
+
+export function profileChange(name, value) {
+  return {
+    type: PROFILE_CHANGE,
+    name: name,
+    payload: value
   }
 }
 
@@ -60,6 +69,17 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         isLoading: true
+      }
+
+    case PROFILE_CHANGE:
+      console.log("state.user", state.user)
+      console.log("")
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          [action.name]: action.payload
+        }
       }
     default:
       console.log("state", state)

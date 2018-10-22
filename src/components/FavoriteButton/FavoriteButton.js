@@ -65,8 +65,8 @@ class FavoriteButton extends Component {
   }
 
   deleteFav() {
-    console.log("this.props.id", this.props.id)
-    console.log("this.props.user.user_id", this.props.user.user_id)
+    // console.log("this.props.id", this.props.id)
+    // console.log("this.props.user.user_id", this.props.user.user_id)
     axios
       .delete(`/api/favorite/${this.props.id}`, {
         data: { user: this.props.user.user_id }

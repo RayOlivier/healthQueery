@@ -103,7 +103,7 @@ $background-blue: whitesmoke;
   overflow: hidden;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1000px) {
   .nav {
     position: fixed;
     width: 100vw;
@@ -150,7 +150,7 @@ $background-blue: whitesmoke;
 
         .user-links {
           min-width: 10vw;
-          max-width: 30vw;
+          max-width: 37vw;
           display: flex;
           justify-content: space-evenly;
 

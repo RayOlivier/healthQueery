@@ -47,7 +47,7 @@ class Favorites extends Component {
     console.log("this.state.cards", this.state.cards)
     return (
       <div>
-        <h1>Your Favorites</h1>
+        <h1 className="profile-header">Your Favorites</h1>
 
         {this.ifNotLoggedIn()}
         {this.state.cards}

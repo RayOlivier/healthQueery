@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
 import FavoriteButton from "../FavoriteButton/FavoriteButton"
+import "./DoctorCard.scss"
 
 import StarRatingComponent from "react-star-rating-component"
 

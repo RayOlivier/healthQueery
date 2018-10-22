@@ -1,0 +1,279 @@
+$bright-pink: #ffcccc;
+$light-pink: #ffe0e0;
+$light-blue: #e0f1ff;
+$middle-blue: #c0e5f7;
+$dark-blue: #3e87b2;
+$background-blue: whitesmoke;
+
+//this is in the component folder
+.doctor-card {
+  margin: 20px 2.5vw;
+
+  border-radius: 6px;
+
+  height: 40vh;
+  padding: 5px 5px 5px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+
+  text-align: left;
+
+  background: $middle-blue;
+  box-shadow: $light-blue 1px 1px 7px 1px;
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    margin: 5px;
+
+    width: 45%;
+    font-size: 18px;
+    height: 100%;
+
+    padding: 2%;
+
+    .doc-name {
+      width: 100%;
+    }
+
+    .left-img {
+      max-height: 150px;
+      padding: 0px 0px;
+      object-fit: cover;
+      overflow: hidden;
+      margin: 2px;
+      box-shadow: $middle-blue 1px 2px 10px 0.1px;
+    }
+
+    .star-container {
+      display: flex;
+      align-items: center;
+
+      overflow: hidden;
+      font-size: 16px;
+      .stars {
+        font-size: 20px;
+      }
+    }
+  }
+  .right {
+    padding: 4px;
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+
+    font-size: 16px;
+
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    border: $light-blue 2px solid;
+
+    ul {
+      padding-left: 20px;
+      list-style-type: square;
+
+      li {
+        margin: 5px 0px;
+      }
+    }
+
+    .cat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      // border: black 2px solid;
+      width: 80%;
+    }
+    .button {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      background: $bright-pink;
+      text-align: center;
+
+      border-radius: 10px;
+    }
+  }
+}
+
+@media (min-width: 767px) {
+  .doctor-card {
+    margin: 30px 2.5vw;
+
+    border-radius: 10px;
+
+    height: 30vh;
+    padding: 20px 20px 20px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+
+    text-align: left;
+
+    background: $middle-blue;
+    box-shadow: $light-blue 5px 5px 10px 1px;
+
+    font-size: 22px;
+
+    .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      overflow: hidden;
+      margin: 5px;
+
+      width: 45%;
+      font-size: 24px;
+      height: 28vh;
+
+      .doc-name {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .left-img {
+        max-height: 20vh;
+
+        object-fit: cover;
+        overflow: hidden;
+        box-shadow: $middle-blue 1px 2px 10px 0.1px;
+      }
+
+      .star-container {
+        display: flex;
+        align-items: center;
+
+        overflow: hidden;
+        font-size: 20px;
+        .stars {
+          font-size: 32px;
+        }
+      }
+    }
+    .right {
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      height: 100%;
+
+      width: 55%;
+      display: flex;
+      flex-direction: column;
+      border: $light-blue 2px solid;
+
+      ul {
+        padding-left: 20px;
+        list-style-type: square;
+
+        li {
+          margin: 5px 0px;
+        }
+      }
+      .button {
+        width: 100%;
+        height: 5vh;
+        font-size: 24px;
+        background: $bright-pink;
+      }
+
+      .button:hover {
+        cursor: pointer;
+        background: $light-pink;
+      }
+    }
+  }
+}
+
+@media (min-width: 1000px) {
+  .doctor-card {
+    margin: 30px 5vw;
+
+    border-radius: 10px;
+
+    height: 30vh;
+    padding: 20px 20px 20px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+
+    text-align: left;
+
+    background: $middle-blue;
+    box-shadow: $light-blue 5px 5px 10px 1px;
+
+    font-size: 22px;
+
+    .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      overflow: hidden;
+      margin: 5px;
+
+      width: 45%;
+      font-size: 24px;
+      height: 28vh;
+
+      .doc-name {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .left-img {
+        max-height: 20vh;
+
+        object-fit: cover;
+        overflow: hidden;
+        box-shadow: $light-blue 1px 2px 10px 0.1px;
+      }
+
+      .star-container {
+        display: flex;
+        align-items: center;
+
+        overflow: hidden;
+        font-size: 20px;
+        .stars {
+          font-size: 32px;
+        }
+      }
+    }
+    .right {
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      height: 100%;
+
+      width: 55%;
+      display: flex;
+      flex-direction: column;
+      border: $light-blue 2px solid;
+
+      ul {
+        padding-left: 20px;
+        list-style-type: square;
+
+        li {
+          margin: 5px 0px;
+        }
+      }
+      .button {
+        width: 100%;
+        height: 5vh;
+        font-size: 24px;
+        background: $bright-pink;
+      }
+    }
+  }
+}

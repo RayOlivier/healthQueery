@@ -19,6 +19,16 @@ module.exports = {
   },
   editUser(req, res) {
     const db = req.app.get("db")
+    db.editUser([
+      req.params.id,
+      req.body.username,
+      req.body.sexual_orientation,
+      req.body.gender
+    ])
+      .then(() => {
+        res.sendStatus(200)
+      })
+      .catch(console.log)
   },
   getFavorites(req, res) {
     const db = req.app.get("db")

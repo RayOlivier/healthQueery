@@ -21,3 +21,18 @@
 #icon.full:hover {
   color: #333;
 }
+@media (min-width: 768px) {
+  //stuff
+  #icon {
+    font-size: 30px;
+    right: 7%;
+  }
+}
+
+@media (min-width: 1000px) {
+  //stuff
+  #icon {
+    font-size: 34px;
+    right: 8%;
+  }
+}

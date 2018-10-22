@@ -26,15 +26,15 @@ class Nav extends Component {
       return (
         <>
           <Link className="single-link" to="/profile" onClick={this.toggleMenu}>
-            Profile
+            Profile & Favorites
           </Link>
-          <Link
+          {/* <Link
             className="single-link"
             to="/favorites"
             onClick={this.toggleMenu}
           >
             Favorites
-          </Link>
+          </Link> */}
           <a className="single-link" href="http://localhost:3001/logout">
             Logout
           </a>
