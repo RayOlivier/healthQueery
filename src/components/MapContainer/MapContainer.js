@@ -23,14 +23,14 @@ export class MapContainer extends Component {
 
   getCoords() {
     console.log("getting coords")
-    console.log("this.state.cards", this.state.cards)
-
+    console.log("this.state", this.state)
+    // this.setState({ markers: [] })
     let newArr = []
 
     this.props.cards.forEach((e, i, arr) => {
       //not getting this part
-      console.log("e", e)
-      console.log("in forEach loop")
+      // console.log("e", e)
+      // console.log("in forEach loop")
       axios
         .get(
           `https://maps.googleapis.com/maps/api/geocode/json?address=${
@@ -38,8 +38,8 @@ export class MapContainer extends Component {
           }&key=${process.env.REACT_APP_MAPS_API_KEY}`
         )
         .then((res) => {
-          console.log("res lat", res.data.results[0].geometry.location.lat)
-          console.log("res lng", res.data.results[0].geometry.location.lng)
+          // console.log("res lat", res.data.results[0].geometry.location.lat)
+          // console.log("res lng", res.data.results[0].geometry.location.lng)
 
           let newMarker = (
             <Marker
@@ -85,7 +85,7 @@ export class MapContainer extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.cards !== prevProps.cards) {
       console.log("it updated")
-      this.setState({ cards: this.props.cards })
+      this.setState({ cards: this.props.cards, markers: [] })
       this.getCoords()
     }
   }

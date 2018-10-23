@@ -19,13 +19,36 @@ class Search extends Component {
     this.toggleSearchBar = this.toggleSearchBar.bind(this)
     this.searchByKeyword = this.searchByKeyword.bind(this)
     this.searchByLocation = this.searchByLocation.bind(this)
-    // this.renderCards = this.renderCards.bind(this)
+    this.searchByMetroplex = this.searchByMetroplex.bind(this)
 
     this.filterResults = this.filterResults.bind(this)
   }
 
   toggleSearchBar() {
     this.setState({ openSearchBar: !this.state.openSearchBar })
+  }
+
+  searchByMetroplex(metroplex) {
+    axios.get(`/api/doctors?metroplex=${metroplex}`).then((res) => {
+      console.log("res from metro search", res)
+      this.setState({ doctorObjects: res.data })
+
+      let mapped = res.data.map((e, i, arr) => {
+        let address = `${e.street_address}, ${e.city}, ${e.state}`
+        // console.log("address", address)
+        return (
+          <DoctorCard
+            key={i}
+            nbInclusive={e.nb_inclusive}
+            address={address}
+            name={e.doctor_name}
+            id={e.doctor_id}
+          />
+        )
+      })
+
+      this.setState({ displayedCards: mapped })
+    })
   }
 
   searchByKeyword(keyword) {
@@ -67,9 +90,6 @@ class Search extends Component {
       // console.log("res.data", res.data)
       this.setState({ doctorObjects: res.data })
 
-      // let mapped = res.data.map((e, i, arr) => {
-      //   return e.doctor_id
-      // })
       let mapped = res.data.map((e, i, arr) => {
         let address = `${e.street_address}, ${e.city}, ${e.state}`
         // console.log("address", address)
@@ -104,6 +124,7 @@ class Search extends Component {
           <SearchBar
             keywordSearch={this.searchByKeyword}
             locationSearch={this.searchByLocation}
+            metroplexSearch={this.searchByMetroplex}
             addFilters={this.filterResults}
           />
         </div>

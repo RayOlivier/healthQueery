@@ -108,23 +108,31 @@ $background-blue: whitesmoke;
   .search-bar {
     width: 100%;
     padding: 2px;
-    transition: transform 0.8s;
+    // transition: transform 0.8s;
     background: $light-pink;
     overflow: hidden;
+    // overflow: scroll;
+
+    h1 {
+      margin-top: 5px;
+    }
   }
 
   #search-bar-false {
     overflow: hidden;
     height: 0;
 
-    transition: height 0.5s ease-in;
+    transition: 0.5s ease-in;
     box-shadow: $light-blue 0px 3px 5px 2px;
   }
 
   #search-bar-true {
-    height: 200px;
+    height: 230px;
+    // height: auto;
 
-    transition: height 0.5s ease-in;
+    // min-height: 200px;
+
+    transition: 0.5s ease-in;
     box-shadow: $light-blue 0px 5px 10px 2px;
   }
 }

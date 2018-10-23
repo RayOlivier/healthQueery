@@ -7,7 +7,8 @@ class SearchBar extends Component {
     this.state = {
       location: "",
       keyword: "",
-      nbCheck: false
+      nbCheck: false,
+      metroplex: ""
     }
     this.onKeywordClick = this.onKeywordClick.bind(this)
     this.changeInput = this.changeInput.bind(this)
@@ -15,6 +16,7 @@ class SearchBar extends Component {
 
     this.onLocationClick = this.onLocationClick.bind(this)
     this.onFiltersClick = this.onFiltersClick.bind(this)
+    this.onMetroplexClick = this.onMetroplexClick.bind(this)
   }
 
   changeInput(e) {
@@ -29,6 +31,11 @@ class SearchBar extends Component {
     this.props.locationSearch(this.state.location)
   }
 
+  onMetroplexClick() {
+    console.log("this.state", this.state)
+    this.props.metroplexSearch(this.state.metroplex)
+  }
+
   onFiltersClick() {
     let obj = {}
     if (this.state.nbCheck) {
@@ -40,8 +47,6 @@ class SearchBar extends Component {
   }
 
   toggleNBCheckbox() {
-    // let { name } = e.target
-    // console.log("e.target", e.target)
     this.setState({
       nbCheck: !this.state.nbCheck
     })
@@ -56,6 +61,18 @@ class SearchBar extends Component {
           Search by location:
           <input placeholder="Try TX or Dallas" value={this.state.location} />
         </div> */}
+        <div>
+          Search by Metroplex:
+          <select
+            value={this.state.metroplex}
+            onChange={this.changeInput}
+            name="metroplex"
+          >
+            <option value="">Select One</option>
+            <option value="Dallas">Dallas Ft.Worth</option>
+          </select>
+          <button onClick={this.onMetroplexClick}>Submit</button>
+        </div>
         <div>
           Search by Keyword:
           <input
@@ -78,7 +95,7 @@ class SearchBar extends Component {
             onChange={(e) => {
               this.changeInput(e)
             }}
-            // onSubmit={this.onKeywordClick}
+            // onSubmit={this.onLocationClick}
           />
           <button onClick={this.onLocationClick}>Submit</button>
         </div>

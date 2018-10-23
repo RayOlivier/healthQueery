@@ -3,20 +3,29 @@ module.exports = {
     const db = req.app.get("db")
 
     if (req.query.keyword) {
-      db.getDoctorsByKeyword([`%${req.query.keyword}%`])
+      return db
+        .getDoctorsByKeyword([`%${req.query.keyword}%`])
         .then((info) => {
           res.status(200).json(info)
         })
         .catch(console.log)
-    } else {
-      //this returns all docs
+    }
+
+    if (req.query.metroplex) {
       return db
-        .getDoctors()
-        .then((user) => {
-          res.status(200).json(user)
+        .getDoctorsByMetroplex([req.query.metroplex])
+        .then((info) => {
+          res.status(200).json(info)
         })
         .catch(console.log)
     }
+    //this returns all docs
+    return db
+      .getDoctors()
+      .then((user) => {
+        res.status(200).json(user)
+      })
+      .catch(console.log)
   },
   getDoctor(req, res) {
     const db = req.app.get("db")
