@@ -6,3 +6,5 @@ WHERE doctor_name ILIKE %$1%
     OR category ILIKE $1 OR practice_name ILIKE $1 OR street_address ILIKE $1 OR city ILIKE $1 OR state ILIKE $1 OR description ILIKE $1 OR specialty ILIKE $1 OR demographic ILIKE $1
 
     --HAD TO DISABLE SQL PREDICTION THING ON BOTTOM RIGHT TO USE ILIKE
+
+    -- this is broken af due to changing demographic and specialties tables

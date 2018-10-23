@@ -106,7 +106,7 @@ class Nav extends Component {
               <FontAwesomeIcon
                 // id="icon"
                 className="icon"
-                onClick={this.toggleMenu}
+                // onClick={this.toggleMenu}
                 icon={"search"}
               />
             </Link>
