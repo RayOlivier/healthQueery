@@ -4,10 +4,15 @@ $light-blue: #e0f1ff;
 $middle-blue: #c0e5f7;
 $dark-blue: #3e87b2;
 $background-blue: whitesmoke;
+
+.single-link {
+  color: $bright-pink;
+}
+
 .nav {
   // $navColor: #b49fcc;
 
-  z-index: 10;
+  // z-index: 10000;
   height: 8vh;
   #desktop-bar {
     visibility: hidden;
@@ -15,6 +20,7 @@ $background-blue: whitesmoke;
   }
   .top-nav {
     position: fixed;
+    z-index: 100;
     background: $dark-blue;
     box-sizing: border-box;
     height: 8vh;
@@ -27,9 +33,21 @@ $background-blue: whitesmoke;
     box-shadow: #333 0px 0.2px 5px 0.5px;
     // border: #000 solid 0px;
     .left {
-      height: 90%;
-      img {
-        height: 100%;
+      width: 10%;
+      color: $light-blue;
+      font-size: 36px;
+      // height: 90%;
+      // border: white solid 2px;
+      .hide {
+        // height: 100%;
+        // background: blue;
+        // transform: rotate(-360deg);
+        transition: transform 0.5s ease-in;
+      }
+      .show {
+        // background: green;
+        transform: rotate(-180deg);
+        transition: transform 0.5s ease-in;
       }
     }
     .middle {
@@ -42,9 +60,14 @@ $background-blue: whitesmoke;
 
     .right {
       height: 90%;
+      width: 10%;
+      // border: white solid 1px;
 
-      img {
+      .icon {
+        // width: 20%;
         height: 100%;
+        color: $light-blue;
+        font-size: 36px;
       }
     }
   }
@@ -53,16 +76,20 @@ $background-blue: whitesmoke;
 #the-menu {
   background: $light-pink;
   font-size: 20px;
-  height: 100vh;
+  height: 92vh;
 
   position: fixed;
   left: 0;
   top: 0vh;
   transition: transform 0.8s;
   overflow: hidden;
-  z-index: 1;
+  z-index: 10;
 
   width: 100%;
+
+  .single-link {
+    color: $dark-blue;
+  }
 
   .top {
     display: flex;
@@ -76,11 +103,11 @@ $background-blue: whitesmoke;
     }
 
     h1 {
-      color: white;
+      color: $dark-blue;
       text-align: center;
       font-size: 36px;
       font-family: "Laila";
-      border-bottom: 2px white solid;
+      border-bottom: 3px $dark-blue solid;
       // border: #000 solid 1px;
     }
   }
@@ -99,7 +126,7 @@ $background-blue: whitesmoke;
   transform: translate3d(0, -100vh, 0);
 }
 #the-menu.show {
-  transform: translate3d(0, 0vh, 0);
+  transform: translate3d(0, 8vh, 0);
   overflow: hidden;
 }
 

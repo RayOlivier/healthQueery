@@ -6,12 +6,12 @@ import "./FavoriteButton.scss"
 import axios from "axios"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { library } from "@fortawesome/fontawesome-svg-core"
+// import { library } from "@fortawesome/fontawesome-svg-core"
 
-import { fas } from "@fortawesome/free-solid-svg-icons"
-import { far } from "@fortawesome/free-regular-svg-icons"
+// import { fas } from "@fortawesome/free-solid-svg-icons"
+// import { far } from "@fortawesome/free-regular-svg-icons"
 
-library.add(fas, far)
+// library.add(fas, far)
 
 class FavoriteButton extends Component {
   constructor(props) {

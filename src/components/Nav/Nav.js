@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 import transHQ from "../../images/transHQ.png"
 import { connect } from "react-redux"
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+
 import "./Nav.scss"
 
 class Nav extends Component {
@@ -77,10 +79,16 @@ class Nav extends Component {
       <div className="nav">
         <div className="top-nav">
           <div className="left">
-            <img
+            {/* <img
               src="http://jslancer.com/wp-content/uploads/2016/11/Hamburger_icon.svg_.png"
               alt=""
               onClick={this.toggleMenu}
+            /> */}
+            <FontAwesomeIcon
+              // id="icon"
+              className={visibility}
+              onClick={this.toggleMenu}
+              icon={"chevron-circle-down"}
             />
           </div>
           <div className="middle">
@@ -90,21 +98,27 @@ class Nav extends Component {
           </div>
           <div className="right">
             <Link className="single-link" to="/search">
-              {" "}
+              {/* {" "}
               <img
                 src="https://static.thenounproject.com/png/105498-200.png"
                 alt=""
+              /> */}
+              <FontAwesomeIcon
+                // id="icon"
+                className="icon"
+                onClick={this.toggleMenu}
+                icon={"search"}
               />
             </Link>
           </div>
         </div>
         <div className={visibility} id="the-menu">
           <div className="top">
-            <img
+            {/* <img
               src="https://www.shoepalace.com/rotator/images/circle-arrow-white.svg"
               alt=""
               onClick={this.toggleMenu}
-            />
+            /> */}
             <h1>Menu</h1>
           </div>
           <div className="links">

@@ -1,7 +1,8 @@
 import React, { Component } from "react"
 import axios from "axios"
+import "./MapContainer.scss"
 
-import { GoogleApiWrapper, Map, Marker } from "google-maps-react"
+import { GoogleApiWrapper, Map, Marker, InfoWindow } from "google-maps-react"
 
 // import Map from "./Map/Map"
 
@@ -9,13 +10,40 @@ export class MapContainer extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { cards: [], markers: [] }
+    this.state = {
+      cards: [],
+      markers: [],
+      showingInfoWindow: false,
+      activeMarker: {},
+      selectedPlace: {}
+    }
 
     this.getCoords = this.getCoords.bind(this)
     this.renderMarkers = this.renderMarkers.bind(this)
+    this.onMapClick = this.onMapClick.bind(this)
+    this.onMarkerClick = this.onMarkerClick.bind(this)
   }
 
   //pass down displayedCards in search, then map to make markers
+
+  onMarkerClick(props, marker, e) {
+    console.log("this.state from marker click", this.state)
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    })
+  }
+
+  onMapClick() {
+    console.log("this.state from map click", this.state)
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      })
+    }
+  }
 
   renderMarkers() {
     return [...this.state.markers]
@@ -25,7 +53,6 @@ export class MapContainer extends Component {
     console.log("getting coords")
     console.log("this.state", this.state)
     // this.setState({ markers: [] })
-    let newArr = []
 
     this.props.cards.forEach((e, i, arr) => {
       //not getting this part
@@ -44,31 +71,21 @@ export class MapContainer extends Component {
           let newMarker = (
             <Marker
               name={e.props.name}
+              address={e.props.address}
               key={i}
               position={{
                 lat: res.data.results[0].geometry.location.lat,
                 lng: res.data.results[0].geometry.location.lng
               }}
+              onClick={this.onMarkerClick}
             />
           )
 
           console.log("newMarker", newMarker)
           this.setState({ markers: [...this.state.markers, newMarker] })
-
-          // newArr.push(
-          //   <Marker
-          //     name={e.props.name}
-          //     key={i}
-          //     position={{
-          //       lat: res.data.results[0].geometry.location.lat,
-          //       lng: res.data.results[0].geometry.location.lng
-          //     }}
-          //   />
-          // )
         })
     })
 
-    console.log("newArr", newArr)
     // this.setState({ markers: [newArr] })
     // console.log("this.state", this.state)
   }
@@ -95,10 +112,11 @@ export class MapContainer extends Component {
     // this.getCoords() DONT DO THIS
 
     return (
-      <div>
+      <div className="map-container">
         <Map
           // className="map-container"
           google={this.props.google}
+          onClick={this.onMapClick}
           style={{
             width: "90vw",
             height: "50vh",
@@ -108,9 +126,19 @@ export class MapContainer extends Component {
           initialCenter={{ lat: 32.7767, lng: -96.797 }}
           // note that the initialCenter is hardcoded to dallas
           zoom={8}
+          //zoom 8 is good for mobile but not desktop
         >
           {[...this.state.markers]}
           {/* <Marker position={{ lat: 32.7767, lng: -96.797 }} /> */}
+          <InfoWindow
+            marker={this.state.activeMarker}
+            visible={this.state.showingInfoWindow}
+          >
+            <div>
+              <div>{this.state.selectedPlace.name}</div>
+              <div>{this.state.selectedPlace.address}</div>
+            </div>
+          </InfoWindow>
         </Map>
       </div>
     )

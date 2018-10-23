@@ -9,6 +9,7 @@ import Favorites from "./views/Favorites/Favorites"
 import Admin from "./views/Admin/Admin"
 import Search from "./views/Search/Search"
 import Doctor from "./views/Doctor/Doctor"
+import Submit from "./views/Submit/Submit"
 
 export default (
   <Switch>
@@ -21,6 +22,7 @@ export default (
     <Route path="/search" component={Search} />
     <Route path="/doctor/:id" component={Doctor} />
     <Route path="/admin" component={Admin} />
+    <Route path="/submit" component={Submit} />
     {/* <Route path="/unauthorized" render={() => <h1>404 Not Found</h1>} /> */}
     <Route path="*" render={() => <h1>404 Not Found</h1>} />
   </Switch>
