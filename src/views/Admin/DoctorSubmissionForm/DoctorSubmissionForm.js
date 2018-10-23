@@ -19,7 +19,8 @@ class DoctorSubmissionForm extends Component {
       phone: null,
       practice: "",
       street_address: "",
-      website_url: ""
+      website_url: "",
+      metroplex: ""
     }
     this.changeInput = this.changeInput.bind(this)
     this.clickSubmit = this.clickSubmit.bind(this)
@@ -147,6 +148,17 @@ class DoctorSubmissionForm extends Component {
             maxLength="2"
             onChange={(e) => this.changeInput(e)}
           />
+        </div>
+        <div>
+          Metroplex:
+          <select
+            value={this.state.metroplex}
+            onChange={this.changeInput}
+            name="metroplex"
+          >
+            <option value="">Select One</option>
+            <option value="Dallas">Dallas Ft.Worth</option>
+          </select>
         </div>
         <div className="input-with-title">
           Website URL:

@@ -31,12 +31,12 @@ class DoctorCard extends Component {
     this.getDoctor()
 
     axios.get(`/api/specialties/${this.props.id}`).then((res) => {
-      console.log("res.data from spec", res.data)
+      // console.log("res.data from spec", res.data)
       this.setState({ specialties: res.data[0].array })
     })
 
     axios.get(`/api/demographics/${this.props.id}`).then((res) => {
-      console.log("res.data from demo", res.data)
+      // console.log("res.data from demo", res.data)
       this.setState({ demographics: res.data[0].array })
     })
 

@@ -16,7 +16,8 @@ module.exports = {
         data.phone,
         data.nb_inclusive,
         data.email,
-        data.gender
+        data.gender,
+        data.metroplex
       ])
       .then((stuff) => {
         res.sendStatus(200)
@@ -41,6 +42,7 @@ module.exports = {
         data.nb_inclusive,
         data.email,
         data.gender,
+        data.metroplex,
         req.params.id
       ])
       .then(() => {

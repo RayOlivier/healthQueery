@@ -1,0 +1,65 @@
+$bright-pink: #ffcccc;
+$light-pink: #ffe0e0;
+$light-blue: #e0f1ff;
+$middle-blue: #c0e5f7;
+$dark-blue: #3e87b2;
+$background-blue: whitesmoke;
+
+.about-page {
+  background: $light-pink;
+  padding: 10px;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    font-size: 24px;
+    border-bottom: $dark-blue 2px solid;
+    width: 70%;
+  }
+
+  .about-section {
+    p {
+      margin: 5px;
+    }
+  }
+
+  .contact-section {
+    // background: $bright-pink
+    background: $light-blue;
+    margin: 10px 0px;
+    padding: 5px;
+    border-radius: 5px;
+
+    li {
+      margin: 5px 0px;
+    }
+  }
+
+  .faq-section {
+    background: $light-blue;
+    padding: 5px;
+    border-radius: 5px;
+
+    .full-question {
+      display: flex;
+      margin: 10px;
+      .icon {
+        margin: 5px;
+        color: $dark-blue;
+      }
+      .q-and-a {
+        .question {
+          font-size: 18px;
+          //   color: #0942bd;
+          margin-bottom: 5px;
+        }
+
+        .answer {
+          padding-left: 10px;
+        }
+      }
+    }
+  }
+}

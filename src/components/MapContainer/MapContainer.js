@@ -15,7 +15,8 @@ export class MapContainer extends Component {
       markers: [],
       showingInfoWindow: false,
       activeMarker: {},
-      selectedPlace: {}
+      selectedPlace: {},
+      center: { lat: 32.7767, lng: -96.797 }
     }
 
     this.getCoords = this.getCoords.bind(this)
@@ -123,7 +124,7 @@ export class MapContainer extends Component {
             position: "relative",
             margin: "auto"
           }}
-          initialCenter={{ lat: 32.7767, lng: -96.797 }}
+          initialCenter={this.state.center}
           // note that the initialCenter is hardcoded to dallas
           zoom={8}
           //zoom 8 is good for mobile but not desktop

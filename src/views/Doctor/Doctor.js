@@ -4,6 +4,8 @@ import ReviewCard from "./ReviewCard/ReviewCard"
 import ReviewForm from "./ReviewForm/ReviewForm"
 import { connect } from "react-redux"
 
+import { Redirect } from "react-router-dom"
+
 // import StarRatingComponent from "react-star-rating-component"
 
 import NumberFormat from "react-number-format"
@@ -24,7 +26,8 @@ class Doctor extends Component {
       reviews: [],
       postingReview: false,
       editing: false,
-      avgRating: 0
+      avgRating: 0,
+      redirect: false
     }
 
     this.getDocInfo = this.getDocInfo.bind(this)
@@ -34,6 +37,15 @@ class Doctor extends Component {
     this.renderPostingForm = this.renderPostingForm.bind(this)
     this.renderIfLoggedIn = this.renderIfLoggedIn.bind(this)
     this.renderIfAdmin = this.renderIfAdmin.bind(this)
+
+    this.renderRedirect = this.renderRedirect.bind(this)
+  }
+
+  renderRedirect() {
+    //this will give an error but theoretically should be fine in production ??
+    if (this.state.redirect) {
+      return <Redirect push to="/" />
+    }
   }
 
   renderIfAdmin() {
@@ -58,6 +70,11 @@ class Doctor extends Component {
 
   getDocInfo() {
     axios.get(`/api/doctor/${this.props.match.params.id}`).then((res) => {
+      console.log("res from get doc", res)
+      if (res.data.length < 1) {
+        console.log("doctor doesnt exist")
+        this.setState({ redirect: true })
+      }
       this.setState({ doctor: res.data[0] })
     })
     axios.get(`/api/specialties/${this.props.match.params.id}`).then((res) => {
@@ -157,6 +174,7 @@ class Doctor extends Component {
     return (
       <div className="doctor-page">
         <div className="doctor-info">
+          {this.renderRedirect()}
           {this.renderIfAdmin()}
           <h1>
             {doctor.doctor_name}

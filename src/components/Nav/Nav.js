@@ -17,10 +17,15 @@ class Nav extends Component {
     this.toggleMenu = this.toggleMenu.bind(this)
     this.renderIfLoggedIn = this.renderIfLoggedIn.bind(this)
     this.renderIfAdmin = this.renderIfAdmin.bind(this)
+    this.menuOff = this.menuOff.bind(this)
   }
 
   toggleMenu() {
     this.setState({ menuOpen: !this.state.menuOpen })
+  }
+
+  menuOff() {
+    this.setState({ menuOpen: false })
   }
 
   renderIfLoggedIn() {
@@ -73,17 +78,10 @@ class Nav extends Component {
       visibility = "show"
     }
 
-    // console.log("visibility", visibility)
-
     return (
       <div className="nav">
         <div className="top-nav">
           <div className="left">
-            {/* <img
-              src="http://jslancer.com/wp-content/uploads/2016/11/Hamburger_icon.svg_.png"
-              alt=""
-              onClick={this.toggleMenu}
-            /> */}
             <FontAwesomeIcon
               // id="icon"
               className={visibility}
@@ -98,15 +96,10 @@ class Nav extends Component {
           </div>
           <div className="right">
             <Link className="single-link" to="/search">
-              {/* {" "}
-              <img
-                src="https://static.thenounproject.com/png/105498-200.png"
-                alt=""
-              /> */}
               <FontAwesomeIcon
                 // id="icon"
                 className="icon"
-                // onClick={this.toggleMenu}
+                onClick={this.menuOff}
                 icon={"search"}
               />
             </Link>
@@ -114,11 +107,6 @@ class Nav extends Component {
         </div>
         <div className={visibility} id="the-menu">
           <div className="top">
-            {/* <img
-              src="https://www.shoepalace.com/rotator/images/circle-arrow-white.svg"
-              alt=""
-              onClick={this.toggleMenu}
-            /> */}
             <h1>Menu</h1>
           </div>
           <div className="links">
@@ -157,9 +145,16 @@ class Nav extends Component {
             <div className="search-field">
               <input placeholder="  Search by keyword..." />
               <Link className="single-link" to="/search">
-                <img
+                {/* <img
                   src="https://static.thenounproject.com/png/105498-200.png"
                   alt=""
+                /> */}
+
+                <FontAwesomeIcon
+                  // id="icon"
+                  className="icon"
+                  onClick={this.menuOff}
+                  icon={"search"}
                 />
               </Link>
             </div>

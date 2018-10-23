@@ -73,7 +73,7 @@ class SearchBar extends Component {
           </select>
           <button onClick={this.onMetroplexClick}>Submit</button>
         </div>
-        <div>
+        {/* <div>
           Search by Keyword:
           <input
             placeholder="Enter keyword..."
@@ -85,7 +85,7 @@ class SearchBar extends Component {
             // onSubmit={this.onKeywordClick}
           />
           <button onClick={this.onKeywordClick}>Submit</button>
-        </div>
+        </div> */}
         <div>
           Search by Distance:
           <input
@@ -99,14 +99,16 @@ class SearchBar extends Component {
           />
           <button onClick={this.onLocationClick}>Submit</button>
         </div>
-        <h1>Filters:</h1>
-        <input
-          type="checkbox"
-          name="nbCheck"
-          onChange={() => this.toggleNBCheckbox()}
-        />
-        Confirmed Nonbinary Inclusive Doctors
-        <button onClick={this.onFiltersClick}>Add Filters</button>
+        <div>
+          <h1>Filters:</h1>
+          <input
+            type="checkbox"
+            name="nbCheck"
+            onChange={() => this.toggleNBCheckbox()}
+          />
+          Only Nonbinary Inclusive Doctors
+          <button onClick={this.onFiltersClick}>Add Filters</button>
+        </div>
       </div>
     )
   }

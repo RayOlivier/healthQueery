@@ -4,6 +4,8 @@ import DoctorCard from "../../components/DoctorCard/DoctorCard"
 import SearchBar from "./SearchBar/SearchBar"
 import MapContainer from "../../components/MapContainer/MapContainer"
 
+import queryString from "query-string"
+
 class Search extends Component {
   constructor() {
     super()
@@ -17,7 +19,7 @@ class Search extends Component {
     //should be able to access each address via doctorObjects[index].street_address
 
     this.toggleSearchBar = this.toggleSearchBar.bind(this)
-    this.searchByKeyword = this.searchByKeyword.bind(this)
+    // this.searchByKeyword = this.searchByKeyword.bind(this)
     this.searchByLocation = this.searchByLocation.bind(this)
     this.searchByMetroplex = this.searchByMetroplex.bind(this)
 
@@ -51,21 +53,21 @@ class Search extends Component {
     })
   }
 
-  searchByKeyword(keyword) {
-    axios.get(`/api/doctors?keyword=${keyword}`).then((res) => {
-      console.log("res from keyword", res)
-      this.setState({ doctorObjects: res.data })
+  // searchByKeyword(keyword) {
+  //   axios.get(`/api/doctors?keyword=${keyword}`).then((res) => {
+  //     console.log("res from keyword", res)
+  //     this.setState({ doctorObjects: res.data })
 
-      // let mapped = res.data.map((e,i,arr))
-      let mapped = res.data.map((e, i, arr) => {
-        return (
-          <DoctorCard key={i} nbInclusive={e.nb_inclusive} id={e.doctor_id} />
-        )
-      })
-      console.log("mapped", mapped)
-      this.setState({ displayedCards: mapped })
-    })
-  }
+  //     // let mapped = res.data.map((e,i,arr))
+  //     let mapped = res.data.map((e, i, arr) => {
+  //       return (
+  //         <DoctorCard key={i} nbInclusive={e.nb_inclusive} id={e.doctor_id} />
+  //       )
+  //     })
+  //     console.log("mapped", mapped)
+  //     this.setState({ displayedCards: mapped })
+  //   })
+  // }
 
   searchByLocation(address) {
     console.log("searching by location")
@@ -86,27 +88,40 @@ class Search extends Component {
   }
 
   componentDidMount() {
-    axios.get("/api/doctors").then((res) => {
-      // console.log("res.data", res.data)
-      this.setState({ doctorObjects: res.data })
+    console.log(
+      "this.props.location.search aka query string",
+      this.props.location.search
+    )
 
-      let mapped = res.data.map((e, i, arr) => {
-        let address = `${e.street_address}, ${e.city}, ${e.state}`
-        // console.log("address", address)
-        return (
-          <DoctorCard
-            key={i}
-            nbInclusive={e.nb_inclusive}
-            address={address}
-            name={e.doctor_name}
-            id={e.doctor_id}
-          />
-        )
+    if (this.props.location.search) {
+      console.log("there's a query")
+      const values = queryString.parse(this.props.location.search)
+      console.log("values", values)
+
+      this.searchByMetroplex(values.metroplex)
+    } else {
+      axios.get("/api/doctors").then((res) => {
+        // console.log("res.data", res.data)
+        this.setState({ doctorObjects: res.data })
+
+        let mapped = res.data.map((e, i, arr) => {
+          let address = `${e.street_address}, ${e.city}, ${e.state}`
+          // console.log("address", address)
+          return (
+            <DoctorCard
+              key={i}
+              nbInclusive={e.nb_inclusive}
+              address={address}
+              name={e.doctor_name}
+              id={e.doctor_id}
+            />
+          )
+        })
+        // console.log("mapped", mapped)
+        this.setState({ displayedCards: mapped })
+        // console.log("this.state", this.state)
       })
-      // console.log("mapped", mapped)
-      this.setState({ displayedCards: mapped })
-      // console.log("this.state", this.state)
-    })
+    }
   }
   render() {
     console.log("this.state", this.state)

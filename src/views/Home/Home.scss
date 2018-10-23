@@ -1,5 +1,14 @@
+$bright-pink: #ffcccc;
+$light-pink: #ffe0e0;
+$light-blue: #e0f1ff;
+$middle-blue: #c0e5f7;
+$dark-blue: #3e87b2;
+$background-blue: whitesmoke;
+
 .homepage {
   width: 100vw;
+  min-height: 100vh;
+  background: $light-blue;
 
   h1 {
     text-align: center;

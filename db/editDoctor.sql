@@ -11,6 +11,7 @@ SET doctor_name = $1,
     phone= $10,
     nb_inclusive= $11,
     email= $12,
-    gender= $13
+    gender= $13,
+    metroplex= $14
 
-WHERE doctor_id = $14;
+WHERE doctor_id = $15;

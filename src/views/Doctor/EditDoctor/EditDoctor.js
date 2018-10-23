@@ -21,7 +21,8 @@ class EditDoctor extends Component {
       phone: doctorObj.phone,
       practice_name: doctorObj.practice_name,
       street_address: doctorObj.street_address,
-      website_url: doctorObj.website_url
+      website_url: doctorObj.website_url,
+      metroplex: doctorObj.metroplex
     }
 
     this.changeInput = this.changeInput.bind(this)
@@ -172,6 +173,17 @@ class EditDoctor extends Component {
             <option value="">Pick One</option>
             <option value="True">Yes</option>
             <option value="False">No</option>
+          </select>
+        </div>
+        <div className="input-with-title">
+          Metroplex:
+          <select
+            value={this.state.metroplex}
+            name="metroplex"
+            onChange={this.changeInput}
+          >
+            <option value="">Pick One</option>
+            <option value="Dallas">Dallas Ft.Worth</option>
           </select>
         </div>
         <button
