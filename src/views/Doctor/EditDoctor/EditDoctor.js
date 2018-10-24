@@ -2,6 +2,8 @@ import React, { Component } from "react"
 import axios from "axios"
 import NumberFormat from "react-number-format"
 
+import "./EditDoctor.scss"
+
 class EditDoctor extends Component {
   constructor(props) {
     super(props)
@@ -94,6 +96,7 @@ class EditDoctor extends Component {
             value={this.state.description || ""}
             name="description"
             maxLength="1000"
+            rows="5"
             onChange={(e) => this.changeInput(e)}
           />
         </div>

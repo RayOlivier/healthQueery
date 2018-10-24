@@ -2,6 +2,24 @@ import React, { Component } from "react"
 import axios from "axios"
 import NumberFormat from "react-number-format"
 
+import Select from "react-select"
+
+const nbOptions = [
+  // { name: "nb_inclusive", label: "Unsure", value: "" },
+  { name: "nb_inclusive", label: "Yes", value: true },
+  { name: "nb_inclusive", label: "No or Unsure", value: false }
+]
+
+const metroplexOptions = [
+  { name: "metroplex", label: "Dallas Ft.Worth", value: "Dallas" },
+  { name: "metroplex", label: "Other", value: "other" }
+]
+
+const categoryOptions = [
+  { name: "category", label: "Medical", value: "Medical" },
+  { name: "category", label: "Mental Health", value: "Mental Health" }
+]
+
 class UserSubmissionForm extends Component {
   constructor() {
     super()
@@ -15,21 +33,33 @@ class UserSubmissionForm extends Component {
       email: "",
       gender: "",
       img_url: "",
-      nb_inclusive: false,
+      nb_inclusive: null,
       phone: null,
       practice: "",
       street_address: "",
       website_url: "",
-      metroplex: ""
+      metroplex: "",
+      nb_inclusiveSelected: null,
+      metroplexSelected: null,
+      categorySelected: null
     }
     this.changeInput = this.changeInput.bind(this)
+    this.changeSelect = this.changeSelect.bind(this)
     this.clickSubmit = this.clickSubmit.bind(this)
     this.clearInput = this.clearInput.bind(this)
   }
 
   changeInput(e) {
+    console.log("e", e)
     this.setState({ [e.target.name]: e.target.value })
     console.log(this.state)
+  }
+
+  changeSelect(e) {
+    // console.log("e", e)
+    let selected = `${e.name}Selected`
+    this.setState({ [e.name]: e.value, [selected]: e })
+    console.log("this.state", this.state)
   }
 
   clearInput() {
@@ -42,12 +72,15 @@ class UserSubmissionForm extends Component {
       email: "",
       gender: "",
       img_url: "",
-      nb_inclusive: false,
+      nb_inclusive: null,
       phone: null,
       practice: "",
       street_address: "",
       website_url: "",
-      metroplex: ""
+      metroplex: "",
+      nb_inclusiveSelected: null,
+      metroplexSelected: null,
+      categorySelected: null
     }
     this.setState(initialState)
   }
@@ -84,7 +117,7 @@ class UserSubmissionForm extends Component {
         </div>
         <div className="input-with-title">
           Category:
-          <select
+          {/* <select
             value={this.state.category}
             name="category"
             onChange={this.changeInput}
@@ -92,7 +125,13 @@ class UserSubmissionForm extends Component {
             <option value="">Pick One</option>
             <option value="Medical">Medical</option>
             <option value="Mental Health">Mental Health</option>
-          </select>
+          </select> */}
+          <Select
+            value={this.state.categorySelected}
+            name="metroplex"
+            onChange={this.changeSelect}
+            options={categoryOptions}
+          />
         </div>
         <div className="input-with-title">
           Name of Practice:
@@ -153,14 +192,20 @@ class UserSubmissionForm extends Component {
         </div>
         <div className="input-with-title">
           Metroplex:
-          <select
+          {/* <select
             value={this.state.metroplex}
             onChange={this.changeInput}
             name="metroplex"
           >
             <option value="">Select One</option>
             <option value="Dallas">Dallas Ft.Worth</option>
-          </select>
+          </select> */}
+          <Select
+            value={this.state.metroplexSelected}
+            name="metroplex"
+            onChange={this.changeSelect}
+            options={metroplexOptions}
+          />
         </div>
         <div className="input-with-title">
           Website URL:
@@ -193,7 +238,7 @@ class UserSubmissionForm extends Component {
         </div>
         <div className="input-with-title">
           Nonbinary Inclusive?
-          <select
+          {/* <select
             value={this.state.nb_inclusive}
             name="nb_inclusive"
             onChange={this.changeInput}
@@ -201,8 +246,15 @@ class UserSubmissionForm extends Component {
             <option value="">Pick One</option>
             <option value="True">Yes</option>
             <option value="False">No</option>
-          </select>
+          </select> */}
         </div>
+
+        <Select
+          value={this.state.nb_inclusiveSelected}
+          name="nb_inclusive"
+          onChange={this.changeSelect}
+          options={nbOptions}
+        />
         <div className="input-with-title">
           <button
             disabled={
