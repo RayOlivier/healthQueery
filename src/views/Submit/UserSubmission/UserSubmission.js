@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import axios from "axios"
 import NumberFormat from "react-number-format"
 
-class DoctorSubmissionForm extends Component {
+class UserSubmissionForm extends Component {
   constructor() {
     super()
 
@@ -53,17 +53,17 @@ class DoctorSubmissionForm extends Component {
   }
 
   clickSubmit() {
-    axios.post("/api/doctor", { data: this.state }).then((res) => {
+    axios.post("/api/submission", { data: this.state }).then((res) => {
       console.log("hi")
       console.log(res)
       this.clearInput()
+      alert("Thank you for your submission!")
     })
   }
 
   render() {
     return (
       <div className="admin-doctor-submit">
-        <h1> Doctor Submission </h1>
         <div className="input-with-title">
           Image URL:
           <input
@@ -106,7 +106,7 @@ class DoctorSubmissionForm extends Component {
         <div className="input-with-title">
           Description:
           <textarea
-            placeholder="Enter description for this doctor. Be detailed."
+            placeholder="Enter description for this doctor. This can be a blurb from their website. Or you can put it in your own words and the admins can edit it later."
             value={this.state.description}
             name="description"
             maxLength="1000"
@@ -151,7 +151,7 @@ class DoctorSubmissionForm extends Component {
             onChange={(e) => this.changeInput(e)}
           />
         </div>
-        <div>
+        <div className="input-with-title">
           Metroplex:
           <select
             value={this.state.metroplex}
@@ -203,10 +203,22 @@ class DoctorSubmissionForm extends Component {
             <option value="False">No</option>
           </select>
         </div>
-        <button onClick={this.clickSubmit}> Submit</button>
+        <div className="input-with-title">
+          <button
+            disabled={
+              !this.state.doctor_name ||
+              !this.state.city ||
+              !this.state.state ||
+              !this.state.website_url
+            }
+            onClick={this.clickSubmit}
+          >
+            Submit
+          </button>
+        </div>
       </div>
     )
   }
 }
 
-export default DoctorSubmissionForm
+export default UserSubmissionForm

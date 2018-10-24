@@ -113,11 +113,13 @@ app.get("/api/demographics/:id", doctorController.getDemographics) //done
 app.get("/api/user/:id", userController.getUserById) //done
 // app.get("/api/user/:email", userController.getUserByEmail) //done
 app.put("/api/user/:id", userController.editUser)
-
 //FAVORITES
 app.get("/api/favorites/:user_id", userController.getFavorites) //done
 app.post("/api/favorite/:doc_id", userController.addFavorite) //done
 app.delete("/api/favorite/:doc_id", userController.deleteFavorite) //done
+
+//SUBMISSIONS
+app.post("/api/submission", userController.addSubmission)
 
 //REVIEWS
 app.get("/api/reviews/:doc_id", reviewController.getReviews) //done

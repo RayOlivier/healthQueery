@@ -68,6 +68,7 @@ export class MapContainer extends Component {
         .then((res) => {
           // console.log("res lat", res.data.results[0].geometry.location.lat)
           // console.log("res lng", res.data.results[0].geometry.location.lng)
+          // console.log("res.data", res.data)
 
           let newMarker = (
             <Marker

@@ -59,5 +59,30 @@ module.exports = {
         res.sendStatus(200)
       })
       .catch(console.log)
+  },
+  addSubmission(req, res) {
+    const db = req.app.get("db")
+    let { data } = req.body
+
+    db.addSubmission([
+      data.doctor_name,
+      data.category,
+      data.street_address,
+      data.city,
+      data.state,
+      data.description,
+      data.practice,
+      data.img_url,
+      data.website_url,
+      data.phone,
+      data.nb_inclusive,
+      data.email,
+      data.gender,
+      data.metroplex
+    ])
+      .then((response) => {
+        res.sendStatus(200)
+      })
+      .catch(console.log)
   }
 }
