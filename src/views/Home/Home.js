@@ -1,21 +1,36 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
 import "./Home.scss"
+import Select from "react-select"
+
+const metroplexOptions = [
+  { name: "metroplex", label: "Dallas Ft.Worth", value: "Dallas" }
+  //,{ name: "metroplex", label: "Other", value: "other" }
+]
 
 class Home extends Component {
   constructor() {
     super()
 
     this.state = {
-      metroplex: ""
+      metroplex: "",
+      metroplexSelected: null
     }
 
     this.changeInput = this.changeInput.bind(this)
+    this.changeSelect = this.changeSelect.bind(this)
   }
 
   changeInput(e) {
     console.log("this.state", this.state)
     this.setState({ [e.target.name]: e.target.value })
+  }
+
+  changeSelect(e) {
+    // console.log("e", e)
+    let selected = `${e.name}Selected`
+    this.setState({ [e.name]: e.value, [selected]: e })
+    console.log("this.state", this.state)
   }
 
   render() {
@@ -24,35 +39,47 @@ class Home extends Component {
         <div className="welcome-img">
           <h1>Welcome to HealthQueery</h1>
         </div>
-        <div className="get-started">
+        <div className="under-img">
           <p>
             HealthQueery is a review site for inclusive healthcare. Find a new
             healthcare provider or leave a review for one you've been to.
           </p>
-          <div>
+          <div className="get-started">
             <h2>Get Started</h2>
             <div>
               <div> Find Providers in your Metroplex: </div>
-              <select
-                value={this.state.metroplex}
-                onChange={this.changeInput}
-                name="metroplex"
-              >
-                <option value="">Select One</option>
-                <option value="Dallas">Dallas Ft.Worth</option>
-              </select>
-              <Link
-                to={{
-                  pathname: "/search",
-                  search: `?metroplex=${this.state.metroplex}`
-                }}
-              >
-                <button
-                // onClick={this.onMetroplexClick}
+
+              <div className="select-and-button">
+                <Select
+                  className="select"
+                  value={this.state.metroplexSelected}
+                  name="metroplex"
+                  onChange={this.changeSelect}
+                  options={metroplexOptions}
+                  theme={(theme) => ({
+                    ...theme,
+                    borderRadius: 8,
+                    colors: {
+                      ...theme.colors,
+                      // text: "green",
+                      primary25: "#ffcccc",
+                      primary: "#3e87b2"
+                    }
+                  })}
+                />
+                <Link
+                  to={{
+                    pathname: "/search",
+                    search: `?metroplex=${this.state.metroplex}`
+                  }}
                 >
-                  Go
-                </button>
-              </Link>
+                  <button
+                  // onClick={this.onMetroplexClick}
+                  >
+                    Go
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

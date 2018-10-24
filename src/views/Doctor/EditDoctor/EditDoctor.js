@@ -4,6 +4,24 @@ import NumberFormat from "react-number-format"
 
 import "./EditDoctor.scss"
 
+// import Select from "react-select"
+
+// const nbOptions = [
+//   // { name: "nb_inclusive", label: "Unsure", value: "" },
+//   { name: "nb_inclusive", label: "Yes", value: true },
+//   { name: "nb_inclusive", label: "No or Unsure", value: false }
+// ]
+
+// const metroplexOptions = [
+//   { name: "metroplex", label: "Dallas Ft.Worth", value: "Dallas" },
+//   { name: "metroplex", label: "Other", value: "other" }
+// ]
+
+// const categoryOptions = [
+//   { name: "category", label: "Medical", value: "Medical" },
+//   { name: "category", label: "Mental Health", value: "Mental Health" }
+// ]
+
 class EditDoctor extends Component {
   constructor(props) {
     super(props)

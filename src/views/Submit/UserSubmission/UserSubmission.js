@@ -127,6 +127,17 @@ class UserSubmissionForm extends Component {
             <option value="Mental Health">Mental Health</option>
           </select> */}
           <Select
+            // styles={customStyles}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 8,
+              colors: {
+                ...theme.colors,
+                // text: "green",
+                primary25: "#ffcccc",
+                primary: "#3e87b2"
+              }
+            })}
             value={this.state.categorySelected}
             name="metroplex"
             onChange={this.changeSelect}
@@ -205,6 +216,16 @@ class UserSubmissionForm extends Component {
             name="metroplex"
             onChange={this.changeSelect}
             options={metroplexOptions}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 8,
+              colors: {
+                ...theme.colors,
+                // text: "green",
+                primary25: "#ffcccc",
+                primary: "#3e87b2"
+              }
+            })}
           />
         </div>
         <div className="input-with-title">
@@ -247,15 +268,24 @@ class UserSubmissionForm extends Component {
             <option value="True">Yes</option>
             <option value="False">No</option>
           </select> */}
+          <Select
+            value={this.state.nb_inclusiveSelected}
+            name="nb_inclusive"
+            onChange={this.changeSelect}
+            options={nbOptions}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 8,
+              colors: {
+                ...theme.colors,
+                // text: "green",
+                primary25: "#ffcccc",
+                primary: "#3e87b2"
+              }
+            })}
+          />
         </div>
-
-        <Select
-          value={this.state.nb_inclusiveSelected}
-          name="nb_inclusive"
-          onChange={this.changeSelect}
-          options={nbOptions}
-        />
-        <div className="input-with-title">
+        <div className="button-container">
           <button
             disabled={
               !this.state.doctor_name ||

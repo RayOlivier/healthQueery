@@ -1,5 +1,12 @@
 import React, { Component } from "react"
 
+import Select from "react-select"
+
+const metroplexOptions = [
+  { name: "metroplex", label: "Dallas Ft.Worth", value: "Dallas" }
+  //,{ name: "metroplex", label: "Other", value: "other" }
+]
+
 class SearchBar extends Component {
   constructor() {
     super()
@@ -8,15 +15,25 @@ class SearchBar extends Component {
       location: "",
       keyword: "",
       nbCheck: false,
-      metroplex: ""
+      metroplex: "",
+      metroplexSelected: null
     }
     this.onKeywordClick = this.onKeywordClick.bind(this)
     this.changeInput = this.changeInput.bind(this)
     this.toggleNBCheckbox = this.toggleNBCheckbox.bind(this)
 
+    this.changeSelect = this.changeSelect.bind(this)
+
     this.onLocationClick = this.onLocationClick.bind(this)
     this.onFiltersClick = this.onFiltersClick.bind(this)
     this.onMetroplexClick = this.onMetroplexClick.bind(this)
+  }
+
+  changeSelect(e) {
+    // console.log("e", e)
+    let selected = `${e.name}Selected`
+    this.setState({ [e.name]: e.value, [selected]: e })
+    console.log("this.state", this.state)
   }
 
   changeInput(e) {
@@ -63,15 +80,34 @@ class SearchBar extends Component {
         </div> */}
         <div>
           Search by Metroplex:
-          <select
+          {/* <select
             value={this.state.metroplex}
             onChange={this.changeInput}
             name="metroplex"
           >
             <option value="">Select One</option>
             <option value="Dallas">Dallas Ft.Worth</option>
-          </select>
-          <button onClick={this.onMetroplexClick}>Submit</button>
+          </select> */}
+          <div className="select-and-button">
+            <Select
+              className="select"
+              value={this.state.metroplexSelected}
+              name="metroplex"
+              onChange={this.changeSelect}
+              options={metroplexOptions}
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 8,
+                colors: {
+                  ...theme.colors,
+                  // text: "green",
+                  primary25: "#ffcccc",
+                  primary: "#3e87b2"
+                }
+              })}
+            />
+            <button onClick={this.onMetroplexClick}>Go</button>
+          </div>
         </div>
         {/* <div>
           Search by Keyword:
@@ -86,7 +122,7 @@ class SearchBar extends Component {
           />
           <button onClick={this.onKeywordClick}>Submit</button>
         </div> */}
-        <div>
+        {/* <div>
           Search by Distance:
           <input
             placeholder="Enter your location..."
@@ -98,7 +134,7 @@ class SearchBar extends Component {
             // onSubmit={this.onLocationClick}
           />
           <button onClick={this.onLocationClick}>Submit</button>
-        </div>
+        </div> */}
         <div>
           <h1>Filters:</h1>
           <input

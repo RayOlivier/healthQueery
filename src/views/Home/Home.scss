@@ -7,8 +7,28 @@ $background-blue: whitesmoke;
 
 .homepage {
   width: 100vw;
-  min-height: 100vh;
+  min-height: 90vh;
   background: $light-blue;
+
+  .under-img {
+    padding: 5px;
+  }
+  .select-and-button {
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+
+    .select {
+      width: 75%;
+    }
+
+    button {
+      // width: 20%;
+      height: 100%;
+      width: 50px;
+    }
+  }
 
   h1 {
     text-align: center;

@@ -119,6 +119,21 @@ $background-blue: whitesmoke;
     overflow: hidden;
     // overflow: scroll;
 
+    .select-and-button {
+      display: flex;
+      justify-content: space-between;
+
+      width: 100%;
+
+      .select {
+        width: 75%;
+      }
+
+      button {
+        width: 20%;
+      }
+    }
+
     h1 {
       margin-top: 5px;
     }

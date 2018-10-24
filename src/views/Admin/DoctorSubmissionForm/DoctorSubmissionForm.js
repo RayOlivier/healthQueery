@@ -2,6 +2,24 @@ import React, { Component } from "react"
 import axios from "axios"
 import NumberFormat from "react-number-format"
 
+import Select from "react-select"
+
+const nbOptions = [
+  // { name: "nb_inclusive", label: "Unsure", value: "" },
+  { name: "nb_inclusive", label: "Yes", value: true },
+  { name: "nb_inclusive", label: "No or Unsure", value: false }
+]
+
+const metroplexOptions = [
+  { name: "metroplex", label: "Dallas Ft.Worth", value: "Dallas" },
+  { name: "metroplex", label: "Other", value: "other" }
+]
+
+const categoryOptions = [
+  { name: "category", label: "Medical", value: "Medical" },
+  { name: "category", label: "Mental Health", value: "Mental Health" }
+]
+
 class DoctorSubmissionForm extends Component {
   constructor() {
     super()
@@ -20,9 +38,13 @@ class DoctorSubmissionForm extends Component {
       practice: "",
       street_address: "",
       website_url: "",
-      metroplex: ""
+      metroplex: "",
+      nb_inclusiveSelected: null,
+      metroplexSelected: null,
+      categorySelected: null
     }
     this.changeInput = this.changeInput.bind(this)
+    this.changeSelect = this.changeSelect.bind(this)
     this.clickSubmit = this.clickSubmit.bind(this)
     this.clearInput = this.clearInput.bind(this)
   }
@@ -30,6 +52,13 @@ class DoctorSubmissionForm extends Component {
   changeInput(e) {
     this.setState({ [e.target.name]: e.target.value })
     console.log(this.state)
+  }
+
+  changeSelect(e) {
+    // console.log("e", e)
+    let selected = `${e.name}Selected`
+    this.setState({ [e.name]: e.value, [selected]: e })
+    console.log("this.state", this.state)
   }
 
   clearInput() {
@@ -47,7 +76,10 @@ class DoctorSubmissionForm extends Component {
       practice: "",
       street_address: "",
       website_url: "",
-      metroplex: ""
+      metroplex: "",
+      nb_inclusiveSelected: null,
+      metroplexSelected: null,
+      categorySelected: null
     }
     this.setState(initialState)
   }
@@ -84,7 +116,7 @@ class DoctorSubmissionForm extends Component {
         </div>
         <div className="input-with-title">
           Category:
-          <select
+          {/* <select
             value={this.state.category}
             name="category"
             onChange={this.changeInput}
@@ -92,7 +124,23 @@ class DoctorSubmissionForm extends Component {
             <option value="">Pick One</option>
             <option value="Medical">Medical</option>
             <option value="Mental Health">Mental Health</option>
-          </select>
+          </select> */}
+          <Select
+            value={this.state.categorySelected}
+            name="metroplex"
+            onChange={this.changeSelect}
+            options={categoryOptions}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 8,
+              colors: {
+                ...theme.colors,
+                // text: "green",
+                primary25: "#ffcccc",
+                primary: "#3e87b2"
+              }
+            })}
+          />
         </div>
         <div className="input-with-title">
           Name of Practice:
@@ -153,14 +201,30 @@ class DoctorSubmissionForm extends Component {
         </div>
         <div>
           Metroplex:
-          <select
+          {/* <select
             value={this.state.metroplex}
             onChange={this.changeInput}
             name="metroplex"
           >
             <option value="">Select One</option>
             <option value="Dallas">Dallas Ft.Worth</option>
-          </select>
+          </select> */}
+          <Select
+            value={this.state.metroplexSelected}
+            name="metroplex"
+            onChange={this.changeSelect}
+            options={metroplexOptions}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 8,
+              colors: {
+                ...theme.colors,
+                // text: "green",
+                primary25: "#ffcccc",
+                primary: "#3e87b2"
+              }
+            })}
+          />
         </div>
         <div className="input-with-title">
           Website URL:
@@ -193,7 +257,7 @@ class DoctorSubmissionForm extends Component {
         </div>
         <div className="input-with-title">
           Nonbinary Inclusive?
-          <select
+          {/* <select
             value={this.state.nb_inclusive}
             name="nb_inclusive"
             onChange={this.changeInput}
@@ -201,7 +265,23 @@ class DoctorSubmissionForm extends Component {
             <option value="">Pick One</option>
             <option value="True">Yes</option>
             <option value="False">No</option>
-          </select>
+          </select> */}
+          <Select
+            value={this.state.nb_inclusiveSelected}
+            name="nb_inclusive"
+            onChange={this.changeSelect}
+            options={nbOptions}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 8,
+              colors: {
+                ...theme.colors,
+                // text: "green",
+                primary25: "#ffcccc",
+                primary: "#3e87b2"
+              }
+            })}
+          />
         </div>
         <button onClick={this.clickSubmit}> Submit</button>
       </div>
