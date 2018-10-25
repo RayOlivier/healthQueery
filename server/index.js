@@ -34,6 +34,8 @@ app.use(
   })
 )
 
+app.use(express.static(`${__dirname}/../build`))
+
 app.use(passport.initialize())
 app.use(passport.session()) //this has to been done after session so that session exists
 passport.use(strategy)
