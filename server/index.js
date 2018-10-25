@@ -16,12 +16,6 @@ const adminController = require("./controllers/adminController")
 const strategy = require("./strategy")
 
 const app = express()
-// app.use(
-//   cors({
-//     origin: "http://localhost:3000",
-//     credentials: true
-//   })
-// )
 
 app.use(json())
 
@@ -81,8 +75,8 @@ function isUser(req, res, next) {
 app.get(
   "/login",
   passport.authenticate("auth0", {
-    // successRedirect: "/profile", //MIGHT CHANGE TO HOME
-    successRedirect: "http://localhost:3000/profile", //MIGHT CHANGE TO HOME
+    successRedirect: `${process.env.REACT_APP_URL}/profile`, //MIGHT CHANGE TO HOME
+    // successRedirect: "http://localhost:3000/profile", //MIGHT CHANGE TO HOME
     failureRedirect: "/fail"
   })
 )
@@ -95,7 +89,7 @@ app.get("/profile", isUser, (req, res) => {
 
 app.get("/logout", (req, res) => {
   req.session.destroy(() => {
-    res.redirect("http://localhost:3000/")
+    res.redirect(`${process.env.REACT_APP_URL}/`)
   })
 })
 
