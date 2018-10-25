@@ -1,0 +1,2 @@
+SELECT specialty_id, specialty_name
+FROM specialties

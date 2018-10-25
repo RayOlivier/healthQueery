@@ -108,6 +108,8 @@ app.get("/api/doctors", doctorController.getDoctors) //done
 app.get("/api/doctor/:id", doctorController.getDoctor) //done
 app.get("/api/specialties/:id", doctorController.getSpecialties) //done
 app.get("/api/demographics/:id", doctorController.getDemographics) //done
+app.get("/api/allSpecialties", doctorController.getAllSpecialties)
+app.get("/api/allDemographics", doctorController.getAllDemographics)
 
 //USER
 app.get("/api/user/:id", userController.getUserById) //done

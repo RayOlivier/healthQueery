@@ -59,6 +59,8 @@ class Doctor extends Component {
           {this.state.editing && (
             <EditDoctor
               doctorObj={this.state.doctor}
+              specialties={this.state.specialties}
+              demographics={this.state.demographics}
               id={this.props.match.params.id}
               toggleEdit={this.toggleEditing}
             />

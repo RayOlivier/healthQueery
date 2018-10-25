@@ -7,6 +7,13 @@ const metroplexOptions = [
   //,{ name: "metroplex", label: "Other", value: "other" }
 ]
 
+const demographicOptions = [
+  { name: "demographic", label: "Children", value: "Children" },
+  { name: "demographic", label: "Adolescents", value: "Adolescents" },
+  { name: "demographic", label: "Adults", value: "Adults" },
+  { name: "demographic", label: "Seniors", value: "Seniors" }
+]
+
 class SearchBar extends Component {
   constructor() {
     super()
@@ -16,7 +23,9 @@ class SearchBar extends Component {
       keyword: "",
       nbCheck: false,
       metroplex: "",
-      metroplexSelected: null
+      metroplexSelected: null,
+      demographic: "",
+      demographicSelected: null
     }
     this.onKeywordClick = this.onKeywordClick.bind(this)
     this.changeInput = this.changeInput.bind(this)
@@ -57,9 +66,14 @@ class SearchBar extends Component {
     let obj = {}
     if (this.state.nbCheck) {
       obj.nbCheck = true
-    } else {
-      obj.none = true
     }
+
+    if (this.state.demographic !== "") {
+      obj.demographic = this.state.demographic
+    }
+    // else {
+    //   obj.none = true
+    // }
     this.props.addFilters(obj)
   }
 
@@ -137,12 +151,35 @@ class SearchBar extends Component {
         </div> */}
         <div>
           <h1>Filters:</h1>
-          <input
-            type="checkbox"
-            name="nbCheck"
-            onChange={() => this.toggleNBCheckbox()}
-          />
-          Only Nonbinary Inclusive Doctors
+          <div>
+            <input
+              type="checkbox"
+              name="nbCheck"
+              onChange={() => this.toggleNBCheckbox()}
+            />
+            Only Nonbinary Inclusive Doctors
+          </div>
+
+          <div>
+            Demographic:
+            <Select
+              className="select"
+              name="demographic"
+              onChange={this.changeSelect}
+              options={demographicOptions}
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 8,
+                colors: {
+                  ...theme.colors,
+                  // text: "green",
+                  primary25: "#ffcccc",
+                  primary: "#3e87b2"
+                }
+              })}
+            />
+          </div>
+
           <button onClick={this.onFiltersClick}>Add Filters</button>
         </div>
       </div>

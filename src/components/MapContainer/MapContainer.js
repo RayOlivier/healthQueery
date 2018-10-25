@@ -51,8 +51,8 @@ export class MapContainer extends Component {
   }
 
   getCoords() {
-    console.log("getting coords")
-    console.log("this.state", this.state)
+    // console.log("getting coords")
+    // console.log("this.state", this.state)
     // this.setState({ markers: [] })
 
     this.props.cards.forEach((e, i, arr) => {
@@ -83,7 +83,7 @@ export class MapContainer extends Component {
             />
           )
 
-          console.log("newMarker", newMarker)
+          // console.log("newMarker", newMarker)
           this.setState({ markers: [...this.state.markers, newMarker] })
         })
     })
@@ -93,24 +93,24 @@ export class MapContainer extends Component {
   }
 
   componentDidMount() {
-    console.log("this.props", this.props)
+    // console.log("this.props", this.props)
     this.setState({ cards: this.props.cards })
     if (this.props.cards.length > 0) {
-      console.log("in the length if statement")
+      // console.log("in the length if statement")
       this.getCoords()
     }
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.cards !== prevProps.cards) {
-      console.log("it updated")
+      // console.log("it updated")
       this.setState({ cards: this.props.cards, markers: [] })
       this.getCoords()
     }
   }
 
   render() {
-    console.log("this.state", this.state)
+    // console.log("this.state", this.state)
     // this.getCoords() DONT DO THIS
 
     return (

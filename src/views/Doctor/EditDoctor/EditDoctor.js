@@ -4,23 +4,22 @@ import NumberFormat from "react-number-format"
 
 import "./EditDoctor.scss"
 
-// import Select from "react-select"
+import Select from "react-select"
 
-// const nbOptions = [
-//   // { name: "nb_inclusive", label: "Unsure", value: "" },
-//   { name: "nb_inclusive", label: "Yes", value: true },
-//   { name: "nb_inclusive", label: "No or Unsure", value: false }
-// ]
+const nbOptions = [
+  { name: "nb_inclusive", label: "true", value: true },
+  { name: "nb_inclusive", label: "false", value: false }
+]
 
-// const metroplexOptions = [
-//   { name: "metroplex", label: "Dallas Ft.Worth", value: "Dallas" },
-//   { name: "metroplex", label: "Other", value: "other" }
-// ]
+const metroplexOptions = [
+  { name: "metroplex", label: "Dallas Ft.Worth", value: "Dallas" },
+  { name: "metroplex", label: "Other", value: "other" }
+]
 
-// const categoryOptions = [
-//   { name: "category", label: "Medical", value: "Medical" },
-//   { name: "category", label: "Mental Health", value: "Mental Health" }
-// ]
+const categoryOptions = [
+  { name: "category", label: "Medical", value: "Medical" },
+  { name: "category", label: "Mental Health", value: "Mental Health" }
+]
 
 class EditDoctor extends Component {
   constructor(props) {
@@ -47,14 +46,33 @@ class EditDoctor extends Component {
 
     this.changeInput = this.changeInput.bind(this)
     this.clickSubmit = this.clickSubmit.bind(this)
+    this.changeSelect = this.changeSelect.bind(this)
+    this.changeMultiSelect = this.changeMultiSelect.bind(this)
   }
 
   changeInput(e) {
     this.setState({ [e.target.name]: e.target.value })
     console.log(this.state)
   }
+  changeSelect(e) {
+    console.log("e", e)
+    // console.log("e.name", e.name)
+    let selected = `${e.name}Selected`
+    this.setState({ [e.name]: e.value, [selected]: e })
+    console.log("this.state", this.state)
+  }
+  changeMultiSelect(e) {
+    console.log("e", e)
+    // console.log("e[0].name", e[0].name)
+    let selected = `${e[0].name}Selected`
+    this.setState({ [selected]: e })
+    //only changing selected at the moment
+    console.log("this.state", this.state)
+  }
 
   clickSubmit() {
+    //need to have submit change doctor_specialties and doctor_demographics, by putting in both ids pulled from the selected objects on state
+
     axios
       .put(`/api/doctor/${this.props.id}`, { data: this.state })
       .then((res) => {
@@ -62,9 +80,96 @@ class EditDoctor extends Component {
       })
   }
 
+  componentDidMount() {
+    axios.get("/api/allSpecialties").then((res) => {
+      console.log("res from all specs", res)
+      let optionsMapped = []
+      let selectedMapped = []
+
+      res.data.forEach((e, i, arr) => {
+        console.log("e in spec map", e)
+        optionsMapped.push({
+          name: "specialties",
+          label: e.specialty_name,
+          value: e.specialty_id
+        })
+
+        if (this.props.specialties.includes(e.specialty_name)) {
+          console.log("does include", e.specialty_name)
+          selectedMapped.push({
+            name: "specialties",
+            label: e.specialty_name,
+            value: e.specialty_id
+          })
+        }
+      })
+      this.setState({
+        specialtyOptions: optionsMapped,
+        specialtiesSelected: selectedMapped
+      })
+    })
+
+    axios.get("/api/allDemographics").then((res) => {
+      console.log("res from all dems", res)
+      let optionsMapped = []
+      let selectedMapped = []
+
+      res.data.forEach((e, i, arr) => {
+        console.log("e in dem map", e)
+        optionsMapped.push({
+          name: "demographics",
+          label: e.demographic_name,
+          value: e.demographic_id
+        })
+
+        if (this.props.demographics.includes(e.demographic_name)) {
+          console.log("does include", e.demographic_name)
+          selectedMapped.push({
+            name: "demographics",
+            label: e.demographic_name,
+            value: e.demographic_id
+          })
+        }
+      })
+      this.setState({
+        demographicOptions: optionsMapped,
+        demographicsSelected: selectedMapped
+      })
+    })
+
+    const initialCategory = [
+      {
+        label: this.props.doctorObj.category,
+        value: this.props.doctorObj.category
+      }
+    ]
+    const initialMetroplex = [
+      {
+        label: this.props.doctorObj.metroplex,
+        value: this.props.doctorObj.metroplex
+      }
+    ]
+    const initialNB = [
+      {
+        name: "nb_inclusive",
+        label: this.props.doctorObj.nb_inclusive.toString(),
+        value: this.props.doctorObj.nb_inclusive
+      }
+    ]
+    //the nb one is kinda fucked but whatever
+
+    this.setState({
+      categorySelected: initialCategory,
+      metroplexSelected: initialMetroplex,
+      nb_inclusiveSelected: initialNB
+      // ,demographicsSelected: demoMapped
+    })
+  }
+
   render() {
     console.log("this.props", this.props)
     console.log("this.state", this.state)
+
     return (
       <div className="edit-doctor">
         <h1>Editing Doctor</h1>
@@ -88,7 +193,24 @@ class EditDoctor extends Component {
         </div>
         <div className="input-with-title">
           Category:
-          <select
+          <Select
+            // styles={customStyles}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 8,
+              colors: {
+                ...theme.colors,
+                // text: "green",
+                primary25: "#ffcccc",
+                primary: "#3e87b2"
+              }
+            })}
+            value={this.state.categorySelected}
+            name="metroplex"
+            onChange={this.changeSelect}
+            options={categoryOptions}
+          />
+          {/* <select
             value={this.state.category}
             name="category"
             onChange={this.changeInput}
@@ -96,7 +218,7 @@ class EditDoctor extends Component {
             <option value="">Pick One</option>
             <option value="Medical">Medical</option>
             <option value="Mental Health">Mental Health</option>
-          </select>
+          </select> */}
         </div>
         <div className="input-with-title">
           Name of Practice:
@@ -186,7 +308,23 @@ class EditDoctor extends Component {
         </div>
         <div className="input-with-title">
           Nonbinary Inclusive?
-          <select
+          <Select
+            value={this.state.nb_inclusiveSelected}
+            name="nb_inclusive"
+            onChange={this.changeSelect}
+            options={nbOptions}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 8,
+              colors: {
+                ...theme.colors,
+                // text: "green",
+                primary25: "#ffcccc",
+                primary: "#3e87b2"
+              }
+            })}
+          />
+          {/* <select
             value={this.state.nb_inclusive}
             name="nb_inclusive"
             onChange={this.changeInput}
@@ -194,18 +332,74 @@ class EditDoctor extends Component {
             <option value="">Pick One</option>
             <option value="True">Yes</option>
             <option value="False">No</option>
-          </select>
+          </select> */}
         </div>
         <div className="input-with-title">
           Metroplex:
-          <select
+          <Select
+            value={this.state.metroplexSelected}
+            name="metroplex"
+            onChange={this.changeSelect}
+            options={metroplexOptions}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 8,
+              colors: {
+                ...theme.colors,
+                // text: "green",
+                primary25: "#ffcccc",
+                primary: "#3e87b2"
+              }
+            })}
+          />
+          {/* <select
             value={this.state.metroplex}
             name="metroplex"
             onChange={this.changeInput}
           >
             <option value="">Pick One</option>
             <option value="Dallas">Dallas Ft.Worth</option>
-          </select>
+          </select> */}
+        </div>
+        <div>
+          Demographics:
+          <Select
+            isMulti={true}
+            value={this.state.demographicsSelected}
+            name="demographics"
+            onChange={this.changeMultiSelect}
+            options={this.state.demographicOptions}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 8,
+              colors: {
+                ...theme.colors,
+                // text: "green",
+                primary25: "#ffcccc",
+                primary: "#3e87b2"
+              }
+            })}
+          />
+        </div>
+        <div>
+          Specialties:
+          <Select
+            isMulti={true}
+            value={this.state.specialtiesSelected}
+            name="specialties"
+            onChange={this.changeMultiSelect}
+            options={this.state.specialtyOptions}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 8,
+              colors: {
+                ...theme.colors,
+                // text: "green",
+                primary25: "#ffcccc",
+                primary: "#3e87b2"
+              }
+            })}
+          />
         </div>
         <button
           onClick={this.clickSubmit}

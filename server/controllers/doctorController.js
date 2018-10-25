@@ -53,5 +53,23 @@ module.exports = {
         res.status(200).json(demos)
       })
       .catch(console.log)
+  },
+  getAllSpecialties(req, res) {
+    const db = req.app.get("db")
+    return db
+      .getAllSpecialties()
+      .then((specialties) => {
+        res.status(200).json(specialties)
+      })
+      .catch(console.log)
+  },
+  getAllDemographics(req, res) {
+    const db = req.app.get("db")
+    return db
+      .getAllDemographics()
+      .then((demographics) => {
+        res.status(200).json(demographics)
+      })
+      .catch(console.log)
   }
 }

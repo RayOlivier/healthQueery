@@ -4,6 +4,8 @@ import DoctorCard from "../../components/DoctorCard/DoctorCard"
 import SearchBar from "./SearchBar/SearchBar"
 import MapContainer from "../../components/MapContainer/MapContainer"
 
+import "./Search.scss"
+
 import queryString from "query-string"
 
 class Search extends Component {
@@ -16,8 +18,6 @@ class Search extends Component {
       list: [],
       doctorObjects: []
     }
-    //should be able to access each address via doctorObjects[index].street_address
-
     this.toggleSearchBar = this.toggleSearchBar.bind(this)
     // this.searchByKeyword = this.searchByKeyword.bind(this)
     this.searchByLocation = this.searchByLocation.bind(this)
@@ -53,38 +53,37 @@ class Search extends Component {
     })
   }
 
-  // searchByKeyword(keyword) {
-  //   axios.get(`/api/doctors?keyword=${keyword}`).then((res) => {
-  //     console.log("res from keyword", res)
-  //     this.setState({ doctorObjects: res.data })
-
-  //     // let mapped = res.data.map((e,i,arr))
-  //     let mapped = res.data.map((e, i, arr) => {
-  //       return (
-  //         <DoctorCard key={i} nbInclusive={e.nb_inclusive} id={e.doctor_id} />
-  //       )
-  //     })
-  //     console.log("mapped", mapped)
-  //     this.setState({ displayedCards: mapped })
-  //   })
-  // }
-
   searchByLocation(address) {
     console.log("searching by location")
   }
 
   filterResults(obj) {
+    console.log("this.state.doctorObjects", this.state.doctorObjects)
     console.log("obj", obj)
+    let filteredCards = this.state.displayedCards
     if (obj.nbCheck) {
-      let filteredCards = this.state.displayedCards.filter((e, i, arr) => {
+      filteredCards = filteredCards.filter((e, i, arr) => {
         console.log("e", e)
 
         return e.props.nbInclusive
       })
-      this.setState({ displayedCards: filteredCards })
-    } else if ((obj.none = true)) {
-      console.log("idk but there aren't filters")
+      // this.setState({ displayedCards: filteredCards })
     }
+
+    if (obj.demographic) {
+      console.log("we got ourselves a demographic")
+      filteredCards = filteredCards.filter((e, i, arr) => {
+        console.log("e", e)
+
+        return (e.props.demographic = obj.demographic)
+      })
+    }
+
+    this.setState({ displayedCards: filteredCards })
+
+    // else if ((obj.none = true)) {
+    //   console.log("idk but there aren't filters")
+    // }
   }
 
   componentDidMount() {
@@ -101,7 +100,7 @@ class Search extends Component {
       this.searchByMetroplex(values.metroplex)
     } else {
       axios.get("/api/doctors").then((res) => {
-        // console.log("res.data", res.data)
+        console.log("res.data", res.data)
         this.setState({ doctorObjects: res.data })
 
         let mapped = res.data.map((e, i, arr) => {
@@ -124,7 +123,9 @@ class Search extends Component {
     }
   }
   render() {
-    console.log("this.state", this.state)
+    // console.log("this.state", this.state)
+
+    console.log("this.state.doctorObjects", this.state.doctorObjects)
 
     return (
       <div className="search-view">
@@ -156,3 +157,19 @@ class Search extends Component {
 }
 
 export default Search
+
+// searchByKeyword(keyword) {
+//   axios.get(`/api/doctors?keyword=${keyword}`).then((res) => {
+//     console.log("res from keyword", res)
+//     this.setState({ doctorObjects: res.data })
+
+//     // let mapped = res.data.map((e,i,arr))
+//     let mapped = res.data.map((e, i, arr) => {
+//       return (
+//         <DoctorCard key={i} nbInclusive={e.nb_inclusive} id={e.doctor_id} />
+//       )
+//     })
+//     console.log("mapped", mapped)
+//     this.setState({ displayedCards: mapped })
+//   })
+// }
