@@ -49,5 +49,41 @@ module.exports = {
         res.sendStatus(200)
       })
       .catch(console.log)
+  },
+  addSpecialty(req, res) {
+    const db = req.app.get("db")
+    console.log("req.body", req.body)
+    db.addSpecialty([req.params.doctor_id, req.body.specialty_id])
+      .then(() => {
+        res.sendStatus(200)
+      })
+      .catch(console.log)
+  },
+  addDemographic(req, res) {
+    const db = req.app.get("db")
+    console.log("req.body", req.body)
+
+    db.addDemographic([req.params.doctor_id, req.body.demographic_id])
+      .then(() => {
+        res.sendStatus(200)
+      })
+      .catch(console.log)
+  },
+  clearDocSpecialties(req, res) {
+    const db = req.app.get("db")
+
+    db.clearDocSpecialties([req.params.doctor_id])
+      .then(() => {
+        res.sendStatus(200)
+      })
+      .catch(console.log)
+  },
+  clearDocDemographics(req, res) {
+    const db = req.app.get("db")
+    db.clearDocDemographics([req.params.doctor_id])
+      .then(() => {
+        res.sendStatus(200)
+      })
+      .catch(console.log)
   }
 }

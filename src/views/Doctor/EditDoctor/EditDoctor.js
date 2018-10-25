@@ -78,6 +78,21 @@ class EditDoctor extends Component {
       .then((res) => {
         this.props.toggleEdit()
       })
+
+    axios.delete(`/api/clearDocSpecialties/${this.props.id}`)
+    axios.delete(`/api/clearDocDemographics/${this.props.id}`)
+    this.state.specialtiesSelected.forEach((e, i, arr) => {
+      console.log("e in forEach spec", e)
+      axios.post(`/api/addSpecialty/${this.props.id}`, {
+        specialty_id: e.value
+      })
+    })
+    this.state.demographicsSelected.forEach((e, i, arr) => {
+      console.log("e in forEach dem", e)
+      axios.post(`/api/addDemographic/${this.props.id}`, {
+        demographic_id: e.value
+      })
+    })
   }
 
   componentDidMount() {
@@ -162,7 +177,6 @@ class EditDoctor extends Component {
       categorySelected: initialCategory,
       metroplexSelected: initialMetroplex,
       nb_inclusiveSelected: initialNB
-      // ,demographicsSelected: demoMapped
     })
   }
 
@@ -194,13 +208,11 @@ class EditDoctor extends Component {
         <div className="input-with-title">
           Category:
           <Select
-            // styles={customStyles}
             theme={(theme) => ({
               ...theme,
               borderRadius: 8,
               colors: {
                 ...theme.colors,
-                // text: "green",
                 primary25: "#ffcccc",
                 primary: "#3e87b2"
               }
@@ -210,15 +222,6 @@ class EditDoctor extends Component {
             onChange={this.changeSelect}
             options={categoryOptions}
           />
-          {/* <select
-            value={this.state.category}
-            name="category"
-            onChange={this.changeInput}
-          >
-            <option value="">Pick One</option>
-            <option value="Medical">Medical</option>
-            <option value="Mental Health">Mental Health</option>
-          </select> */}
         </div>
         <div className="input-with-title">
           Name of Practice:
@@ -318,21 +321,11 @@ class EditDoctor extends Component {
               borderRadius: 8,
               colors: {
                 ...theme.colors,
-                // text: "green",
                 primary25: "#ffcccc",
                 primary: "#3e87b2"
               }
             })}
           />
-          {/* <select
-            value={this.state.nb_inclusive}
-            name="nb_inclusive"
-            onChange={this.changeInput}
-          >
-            <option value="">Pick One</option>
-            <option value="True">Yes</option>
-            <option value="False">No</option>
-          </select> */}
         </div>
         <div className="input-with-title">
           Metroplex:
@@ -346,20 +339,11 @@ class EditDoctor extends Component {
               borderRadius: 8,
               colors: {
                 ...theme.colors,
-                // text: "green",
                 primary25: "#ffcccc",
                 primary: "#3e87b2"
               }
             })}
           />
-          {/* <select
-            value={this.state.metroplex}
-            name="metroplex"
-            onChange={this.changeInput}
-          >
-            <option value="">Pick One</option>
-            <option value="Dallas">Dallas Ft.Worth</option>
-          </select> */}
         </div>
         <div>
           Demographics:
@@ -374,7 +358,6 @@ class EditDoctor extends Component {
               borderRadius: 8,
               colors: {
                 ...theme.colors,
-                // text: "green",
                 primary25: "#ffcccc",
                 primary: "#3e87b2"
               }
@@ -401,13 +384,7 @@ class EditDoctor extends Component {
             })}
           />
         </div>
-        <button
-          onClick={this.clickSubmit}
-          //   disabled={this.state.nb_inclusive === null}
-        >
-          {" "}
-          Submit
-        </button>
+        <button onClick={this.clickSubmit}> Submit</button>
       </div>
     )
   }

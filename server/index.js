@@ -102,6 +102,16 @@ app.get("/logout", (req, res) => {
 //ADMIN
 app.post("/api/doctor", adminController.addDoctor)
 app.put("/api/doctor/:id", adminController.editDoctor)
+app.delete(
+  "/api/clearDocSpecialties/:doctor_id",
+  adminController.clearDocSpecialties
+)
+app.delete(
+  "/api/clearDocDemographics/:doctor_id",
+  adminController.clearDocDemographics
+)
+app.post("/api/addSpecialty/:doctor_id", adminController.addSpecialty)
+app.post("/api/addDemographic/:doctor_id", adminController.addDemographic)
 
 //DOCTOR
 app.get("/api/doctors", doctorController.getDoctors) //done
