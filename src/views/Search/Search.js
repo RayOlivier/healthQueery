@@ -37,6 +37,7 @@ class Search extends Component {
 
       let mapped = res.data.map((e, i, arr) => {
         let address = `${e.street_address}, ${e.city}, ${e.state}`
+        console.log("e IN SEARCH BY METRO", e)
         // console.log("address", address)
         return (
           <DoctorCard
@@ -45,6 +46,8 @@ class Search extends Component {
             address={address}
             name={e.doctor_name}
             id={e.doctor_id}
+            demographics={e.demographics}
+            specialties={e.specialties}
           />
         )
       })
@@ -61,6 +64,7 @@ class Search extends Component {
     console.log("this.state.doctorObjects", this.state.doctorObjects)
     console.log("obj", obj)
     let filteredCards = this.state.displayedCards
+    console.log("this.state.displayedCards", this.state.displayedCards)
     if (obj.nbCheck) {
       filteredCards = filteredCards.filter((e, i, arr) => {
         console.log("e", e)
@@ -75,7 +79,11 @@ class Search extends Component {
       filteredCards = filteredCards.filter((e, i, arr) => {
         console.log("e", e)
 
-        return (e.props.demographic = obj.demographic)
+        console.log(
+          "e.props.demographics.includes(obj.demographic)",
+          e.props.demographics.includes(obj.demographic)
+        )
+        return e.props.demographics.includes(obj.demographic)
       })
     }
 

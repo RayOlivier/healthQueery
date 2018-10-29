@@ -40,14 +40,11 @@ class Home extends Component {
           <h1>Welcome to HealthQueery</h1>
         </div>
         <div className="under-img">
-          <p>
-            HealthQueery is a review site for inclusive healthcare. Find a new
-            healthcare provider or leave a review for one you've been to.
-          </p>
+          <p>Find or review LGBTQ+ inclusive healthcare providers.</p>
           <div className="get-started">
             <h2>Get Started</h2>
             <div>
-              <div> Find Providers in your Metroplex: </div>
+              <div> Find a Provider in Your Metroplex: </div>
 
               <div className="select-and-button">
                 <Select

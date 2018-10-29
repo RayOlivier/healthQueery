@@ -3,9 +3,13 @@ import { Link } from "react-router-dom"
 import transHQ from "../../images/transHQ.png"
 import { connect } from "react-redux"
 
+import Select from "react-select"
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import "./Nav.scss"
+
+const options = [{ label: "Dallas Ft.Worth", value: "Dallas" }]
 
 class Nav extends Component {
   constructor() {
@@ -18,6 +22,11 @@ class Nav extends Component {
     this.renderIfLoggedIn = this.renderIfLoggedIn.bind(this)
     this.renderIfAdmin = this.renderIfAdmin.bind(this)
     this.menuOff = this.menuOff.bind(this)
+    this.changeSearch = this.changeSearch.bind(this)
+  }
+
+  changeSearch() {
+    //
   }
 
   toggleMenu() {
@@ -129,13 +138,17 @@ class Nav extends Component {
         </div>
         <div id="desktop-bar">
           <div className="left">
-            <Link className="single-link" to="/" onClick={this.toggleMenu}>
-              Home
-            </Link>
             <Link className="single-link" to="/about" onClick={this.toggleMenu}>
               About & FAQ
             </Link>
           </div>
+
+          <div className="middle">
+            <Link className="middle-link" to="/" onClick={this.toggleMenu}>
+              HealthQueery
+            </Link>
+          </div>
+
           <div className="right">
             <div className="user-links">
               {this.renderIfAdmin()}
@@ -143,7 +156,11 @@ class Nav extends Component {
             </div>
 
             <div className="search-field">
-              <input placeholder="  Search by keyword..." />
+              <Select
+                className="search-select"
+                options={options}
+                onChange={this.changeSearch}
+              />
               <Link className="single-link" to="/search">
                 {/* <img
                   src="https://static.thenounproject.com/png/105498-200.png"

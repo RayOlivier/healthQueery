@@ -28,6 +28,20 @@ export default function About() {
             icon={"question-circle"}
           />
           <div className="q-and-a">
+            <h2 className="question">My metroplex isn't listed.</h2>
+            <p className="answer">
+              HealthQueery had limited listings. So far, the only fully
+              supported metroplex is DFW.
+            </p>
+          </div>
+        </div>
+        <div className="full-question">
+          <FontAwesomeIcon
+            // id="icon"
+            className="icon"
+            icon={"question-circle"}
+          />
+          <div className="q-and-a">
             <h2 className="question">
               Is HealthQueery only for transgender healthcare?
             </h2>

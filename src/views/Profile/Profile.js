@@ -109,19 +109,17 @@ class Profile extends Component {
             Display name: {this.props.user.username}
           </div>
           <div className="profile-info">Email: {this.props.user.email}</div>
-          <div className="profile-info">Gender: {this.props.user.gender}</div>
+          {/* <div className="profile-info">Gender: {this.props.user.gender}</div>
           <div className="profile-info">
             Sexuality: {this.props.user.sexual_orientation}
-          </div>
+          </div> */}
+          {/* //////////////////////////////// */}
           {/* <div className="profile-info">
             Profile Picture URL: {this.props.user.display_img}
           </div> */}
           <button onClick={this.toggleEdit} className="profile-info">
             Edit Profile
           </button>
-          {/* <div className="profile-info">
-            Date of Birth: {this.props.user.date_of_birth}
-          </div> */}
 
           <div className="App" id="profile-favorites">
             <Favorites />

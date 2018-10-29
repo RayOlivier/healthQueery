@@ -8,6 +8,11 @@ $background-blue: whitesmoke;
 .single-link {
   color: $bright-pink;
 }
+.middle-link {
+  color: white;
+  text-decoration: none;
+  font-size: 28px;
+}
 
 .nav {
   // $navColor: #b49fcc;
@@ -33,8 +38,8 @@ $background-blue: whitesmoke;
     box-shadow: #333 0px 0.2px 5px 0.5px;
     // border: #000 solid 0px;
     .left {
-      width: 10%;
-      color: $light-blue;
+      // width: 10%;
+      color: white;
       font-size: 36px;
       // height: 90%;
       // border: white solid 2px;
@@ -60,14 +65,14 @@ $background-blue: whitesmoke;
 
     .right {
       height: 90%;
-      width: 10%;
+      font-size: 36px;
+      // width: 10%;
       // border: white solid 1px;
 
       .icon {
         // width: 20%;
         height: 100%;
-        color: $light-blue;
-        font-size: 36px;
+        color: white;
       }
     }
   }
@@ -130,6 +135,20 @@ $background-blue: whitesmoke;
   overflow: hidden;
 }
 
+@media (min-width: 767px) {
+  .nav {
+    .top-nav {
+      .left {
+        font-size: 50px;
+      }
+
+      .right {
+        font-size: 50px;
+      }
+    }
+  }
+}
+
 @media (min-width: 1000px) {
   .nav {
     position: fixed;
@@ -159,13 +178,18 @@ $background-blue: whitesmoke;
       // border: black 2px solid;
 
       .left {
-        width: 20%;
+        width: 33.33%;
         display: flex;
         justify-content: space-between;
       }
 
+      .middle {
+        font-family: "Quando";
+        color: white;
+      }
+
       .right {
-        min-width: 25%;
+        min-width: 33.33%;
         height: 100%;
 
         display: flex;
@@ -189,12 +213,17 @@ $background-blue: whitesmoke;
         .search-field {
           display: flex;
           align-items: center;
+          height: 50%;
+          // border: green solid 1px;
 
-          input {
+          .search-select {
             border-radius: 8px;
+            width: 200px;
+            font-size: 16px;
           }
-          img {
-            height: 30px;
+          .icon {
+            font-size: 30px;
+            margin-left: 5px;
           }
         }
       }
