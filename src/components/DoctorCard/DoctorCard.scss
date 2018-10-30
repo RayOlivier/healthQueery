@@ -10,8 +10,9 @@ $background-blue: whitesmoke;
   margin: 20px 2.5vw;
 
   border-radius: 6px;
-
+  //////////////////////////////////
   height: 40vh;
+  /////////////////////////////////
   padding: 5px 5px 5px 0px;
   display: flex;
   align-items: center;
@@ -74,6 +75,12 @@ $background-blue: whitesmoke;
     flex-direction: column;
     border: $light-blue 2px solid;
 
+    .services {
+      // max-height: 20%;
+      overflow: hidden;
+      // background: green;
+    }
+
     ul {
       padding-left: 20px;
       list-style-type: square;
@@ -92,6 +99,7 @@ $background-blue: whitesmoke;
     }
     .button {
       width: 100%;
+      height: 20px;
       display: flex;
       align-items: center;
       justify-content: space-around;
@@ -100,6 +108,13 @@ $background-blue: whitesmoke;
 
       border-radius: 10px;
     }
+  }
+}
+
+@media (min-height: 650px) {
+  .doctor-card {
+    // color: green;
+    height: 30vh;
   }
 }
 
@@ -169,6 +184,7 @@ $background-blue: whitesmoke;
       display: flex;
       flex-direction: column;
       border: $light-blue 2px solid;
+      font-size: 18px;
 
       ul {
         padding-left: 20px;
@@ -176,11 +192,15 @@ $background-blue: whitesmoke;
 
         li {
           margin: 5px 0px;
+
+          // max-height: 20%;
+          // overflow: hidden;
+          // border: red 1px solid;
         }
       }
       .button {
         width: 100%;
-        height: 5vh;
+        height: 40px;
         font-size: 24px;
         background: $bright-pink;
       }

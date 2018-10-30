@@ -27,6 +27,7 @@ class Nav extends Component {
 
   changeSearch() {
     //
+    this.setState({ metroplex: "Dallas" })
   }
 
   toggleMenu() {
@@ -42,7 +43,8 @@ class Nav extends Component {
       return (
         <>
           <Link className="single-link" to="/profile" onClick={this.toggleMenu}>
-            Profile & Favorites
+            Profile
+            {/* & Favorites */}
           </Link>
           {/* <Link
             className="single-link"
@@ -160,8 +162,12 @@ class Nav extends Component {
                 className="search-select"
                 options={options}
                 onChange={this.changeSearch}
+                placeholder="Select metroplex..."
               />
-              <Link className="single-link" to="/search">
+              <Link
+                className="single-link"
+                to={`/search?metroplex=${this.state.metroplex}`}
+              >
                 {/* <img
                   src="https://static.thenounproject.com/png/105498-200.png"
                   alt=""

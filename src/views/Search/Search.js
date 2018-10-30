@@ -48,6 +48,7 @@ class Search extends Component {
             id={e.doctor_id}
             demographics={e.demographics}
             specialties={e.specialties}
+            className="doctor-card"
           />
         )
       })
@@ -79,11 +80,20 @@ class Search extends Component {
       filteredCards = filteredCards.filter((e, i, arr) => {
         console.log("e", e)
 
-        console.log(
-          "e.props.demographics.includes(obj.demographic)",
-          e.props.demographics.includes(obj.demographic)
-        )
+        // console.log(
+        //   "e.props.demographics.includes(obj.demographic)",
+        //   e.props.demographics.includes(obj.demographic)
+        // )
         return e.props.demographics.includes(obj.demographic)
+      })
+    }
+
+    if (obj.specialty) {
+      console.log("we got ourselves a specialty")
+      filteredCards = filteredCards.filter((e, i, arr) => {
+        console.log("e", e)
+
+        return e.props.specialties.includes(obj.specialty)
       })
     }
 
@@ -121,6 +131,7 @@ class Search extends Component {
               address={address}
               name={e.doctor_name}
               id={e.doctor_id}
+              className="doctor-card"
             />
           )
         })

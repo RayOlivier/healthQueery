@@ -136,6 +136,18 @@ $background-blue: whitesmoke;
 }
 
 @media (min-width: 767px) {
+  #the-menu {
+    // background: black;
+    .top {
+      h1 {
+        font-size: 60px;
+      }
+    }
+    .single-link {
+      font-size: 36px;
+    }
+  }
+
   .nav {
     .top-nav {
       .left {

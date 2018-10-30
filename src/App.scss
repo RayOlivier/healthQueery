@@ -35,6 +35,12 @@ $background-blue: whitesmoke;
   justify-content: space-evenly;
   font-size: 20px;
 
+  // padding: 10px;
+
+  .single-link {
+    color: $dark-blue;
+  }
+
   .logged-in-profile {
     width: 100%;
   }
@@ -51,6 +57,8 @@ $background-blue: whitesmoke;
   .profile-info {
     width: 90%;
     margin: 2px 10px;
+    // margin-bottom: 10px;
+    padding: 5px;
   }
 
   #no-profile {

@@ -1,4 +1,6 @@
 import React, { Component } from "react"
+import axios from "axios"
+import { Link } from "react-router-dom"
 
 import Select from "react-select"
 
@@ -25,7 +27,10 @@ class SearchBar extends Component {
       metroplex: "",
       metroplexSelected: null,
       demographic: "",
-      demographicSelected: null
+      demographicSelected: null,
+      specialty: "",
+      specialtySelected: null,
+      specialtyOptions: []
     }
     this.onKeywordClick = this.onKeywordClick.bind(this)
     this.changeInput = this.changeInput.bind(this)
@@ -39,9 +44,9 @@ class SearchBar extends Component {
   }
 
   changeSelect(e) {
-    // console.log("e", e)
+    console.log("e", e)
     let selected = `${e.name}Selected`
-    this.setState({ [e.name]: e.value, [selected]: e })
+    this.setState({ [e.name]: e.label, [selected]: e })
     console.log("this.state", this.state)
   }
 
@@ -59,7 +64,7 @@ class SearchBar extends Component {
 
   onMetroplexClick() {
     console.log("this.state", this.state)
-    this.props.metroplexSearch(this.state.metroplex)
+    this.props.metroplexSearch("Dallas")
   }
 
   onFiltersClick() {
@@ -74,6 +79,10 @@ class SearchBar extends Component {
     // else {
     //   obj.none = true
     // }
+
+    if (this.state.specialty !== "") {
+      obj.specialty = this.state.specialty
+    }
     this.props.addFilters(obj)
   }
 
@@ -82,6 +91,36 @@ class SearchBar extends Component {
       nbCheck: !this.state.nbCheck
     })
     console.log("this.state", this.state)
+  }
+
+  componentDidMount() {
+    axios.get("/api/allSpecialties").then((res) => {
+      console.log("res from all specs", res)
+      let optionsMapped = []
+      let selectedMapped = []
+
+      res.data.forEach((e, i, arr) => {
+        console.log("e in spec map", e)
+        optionsMapped.push({
+          name: "specialty",
+          label: e.specialty_name,
+          value: e.specialty_id
+        })
+
+        // if (this.props.specialties.includes(e.specialty_name)) {
+        //   console.log("does include", e.specialty_name)
+        //   selectedMapped.push({
+        //     name: "specialties",
+        //     label: e.specialty_name,
+        //     value: e.specialty_id
+        //   })
+        // }
+      })
+      this.setState({
+        specialtyOptions: optionsMapped
+        // specialtiesSelected: selectedMapped
+      })
+    })
   }
 
   render() {
@@ -120,7 +159,14 @@ class SearchBar extends Component {
                 }
               })}
             />
-            <button onClick={this.onMetroplexClick}>Go</button>
+            <Link
+              // to={`/search?metroplex=${this.state.metroplex}`}
+              to={`/search?metroplex=Dallas`}
+            >
+              <button onClick={this.onMetroplexClick} className="go-button">
+                Go
+              </button>
+            </Link>
           </div>
         </div>
         {/* <div>
@@ -179,8 +225,30 @@ class SearchBar extends Component {
               })}
             />
           </div>
-
-          <button onClick={this.onFiltersClick}>Add Filters</button>
+          <div>
+            Specialty:
+            <Select
+              className="select"
+              name="specialty"
+              onChange={this.changeSelect}
+              options={this.state.specialtyOptions}
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 8,
+                colors: {
+                  ...theme.colors,
+                  // text: "green",
+                  primary25: "#ffcccc",
+                  primary: "#3e87b2"
+                }
+              })}
+            />
+          </div>
+          <div className="filter-button-container">
+            <button onClick={this.onFiltersClick} className="filter-button">
+              Add Filters
+            </button>
+          </div>
         </div>
       </div>
     )

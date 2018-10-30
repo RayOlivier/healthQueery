@@ -95,7 +95,7 @@ class DoctorCard extends Component {
             {`${this.state.doctor.city}, ${this.state.doctor.state}
             `}
           </span>
-          <div>
+          <div className="services">
             <div style={{ textDecoration: "underline" }}>Services:</div>
             <ul>{specList}</ul>
           </div>

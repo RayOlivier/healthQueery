@@ -117,17 +117,18 @@ class Profile extends Component {
           {/* <div className="profile-info">
             Profile Picture URL: {this.props.user.display_img}
           </div> */}
-          <button onClick={this.toggleEdit} className="profile-info">
+
+          {/* <button onClick={this.toggleEdit} className="profile-info">
             Edit Profile
-          </button>
+          </button> */}
 
           <div className="App" id="profile-favorites">
             <Favorites />
           </div>
 
-          <div className="my-reviews">
+          {/* <div className="my-reviews">
             Render review cards that match the user's id
-          </div>
+          </div> */}
         </div>
       )
     }
