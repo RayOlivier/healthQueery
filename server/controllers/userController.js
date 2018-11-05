@@ -4,6 +4,8 @@ module.exports = {
     return db.users
       .find({ user_id: req.params.id })
       .then((user) => {
+        // req.session.user_id = response[0].user_id
+
         res.status(200).json(user)
       })
       .catch(console.log)
@@ -13,6 +15,8 @@ module.exports = {
     return db.users
       .find({ email: req.params.email })
       .then((user) => {
+        // req.session.user_id = response[0].user_id
+
         res.status(200).json(user)
       })
       .catch(console.log)

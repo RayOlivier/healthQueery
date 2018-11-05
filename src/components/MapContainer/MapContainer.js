@@ -68,7 +68,7 @@ export class MapContainer extends Component {
         .then((res) => {
           // console.log("res lat", res.data.results[0].geometry.location.lat)
           // console.log("res lng", res.data.results[0].geometry.location.lng)
-          // console.log("res.data", res.data)
+          console.log("res.data", res.data)
 
           let newMarker = (
             <Marker
@@ -120,14 +120,14 @@ export class MapContainer extends Component {
           google={this.props.google}
           onClick={this.onMapClick}
           style={{
-            width: "90vw",
-            height: "50vh",
+            width: "95vw",
+            height: "60vh",
             position: "relative",
             margin: "auto"
           }}
           initialCenter={this.state.center}
           // note that the initialCenter is hardcoded to dallas
-          zoom={8}
+          zoom={9}
           //zoom 8 is good for mobile but not desktop
         >
           {[...this.state.markers]}

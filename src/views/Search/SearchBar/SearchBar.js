@@ -132,7 +132,7 @@ class SearchBar extends Component {
           <input placeholder="Try TX or Dallas" value={this.state.location} />
         </div> */}
         <div>
-          Search by Metroplex:
+          <h2>Change Metroplex:</h2>
           {/* <select
             value={this.state.metroplex}
             onChange={this.changeInput}
@@ -197,7 +197,7 @@ class SearchBar extends Component {
         </div> */}
         <div>
           <h1>Filters:</h1>
-          <div>
+          <div className="filter-option" id="nb-check">
             <input
               type="checkbox"
               name="nbCheck"
@@ -206,8 +206,8 @@ class SearchBar extends Component {
             Only Nonbinary Inclusive Doctors
           </div>
 
-          <div>
-            Demographic:
+          <div className="filter-option">
+            <h2>Demographic:</h2>
             <Select
               className="select"
               name="demographic"
@@ -225,8 +225,8 @@ class SearchBar extends Component {
               })}
             />
           </div>
-          <div>
-            Specialty:
+          <div className="filter-option">
+            <h2>Specialty:</h2>
             <Select
               className="select"
               name="specialty"

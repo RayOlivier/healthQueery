@@ -30,8 +30,9 @@ export default function About() {
           <div className="q-and-a">
             <h2 className="question">My metroplex isn't listed.</h2>
             <p className="answer">
-              HealthQueery had limited listings. So far, the only fully
-              supported metroplex is DFW.
+              HealthQueery has limited listings and only one admin. So far, the
+              only fully supported metroplex is DFW, but the hope is to expand
+              further.
             </p>
           </div>
         </div>

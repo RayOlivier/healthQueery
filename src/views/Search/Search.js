@@ -115,7 +115,11 @@ class Search extends Component {
       const values = queryString.parse(this.props.location.search)
       console.log("values", values)
 
-      this.searchByMetroplex(values.metroplex)
+      if (values.metroplex === "undefined" || values.metroplex === "") {
+        console.log("undefined", undefined)
+      } else {
+        this.searchByMetroplex(values.metroplex)
+      }
     } else {
       axios.get("/api/doctors").then((res) => {
         console.log("res.data", res.data)

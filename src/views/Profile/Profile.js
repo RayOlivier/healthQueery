@@ -4,8 +4,8 @@ import { connect } from "react-redux"
 import {
   getUser,
   getFavorites,
-  profileChange
-  // submitProfileEdit
+  profileChange,
+  submitProfileEdit
 } from "./../../ducks/reducer"
 
 import Favorites from "../Favorites/Favorites"
@@ -109,18 +109,18 @@ class Profile extends Component {
             Display name: {this.props.user.username}
           </div>
           <div className="profile-info">Email: {this.props.user.email}</div>
-          {/* <div className="profile-info">Gender: {this.props.user.gender}</div>
+          <div className="profile-info">Gender: {this.props.user.gender}</div>
           <div className="profile-info">
             Sexuality: {this.props.user.sexual_orientation}
-          </div> */}
+          </div>
           {/* //////////////////////////////// */}
           {/* <div className="profile-info">
             Profile Picture URL: {this.props.user.display_img}
           </div> */}
 
-          {/* <button onClick={this.toggleEdit} className="profile-info">
+          <button onClick={this.toggleEdit} className="profile-info">
             Edit Profile
-          </button> */}
+          </button>
 
           <div className="App" id="profile-favorites">
             <Favorites />

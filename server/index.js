@@ -4,7 +4,7 @@ const express = require("express")
 const session = require("express-session")
 const passport = require("passport")
 const { json } = require("body-parser")
-var cors = require("cors")
+// var cors = require("cors")
 
 const massive = require("massive")
 
