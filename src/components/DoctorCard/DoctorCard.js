@@ -88,13 +88,15 @@ class DoctorCard extends Component {
           </div>
         </div>
         <div className="right">
-          <FavoriteButton id={this.props.id} />
+          <div className="fav">
+            <FavoriteButton id={this.props.id} />
+          </div>
           <div className="cat">{this.state.doctor.category}</div>
 
-          <span>
+          <div>
             {`${this.state.doctor.city}, ${this.state.doctor.state}
             `}
-          </span>
+          </div>
           <div className="services">
             <div style={{ textDecoration: "underline" }}>Services:</div>
             <ul>{specList}</ul>

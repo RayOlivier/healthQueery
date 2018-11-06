@@ -76,9 +76,6 @@ class SearchBar extends Component {
     if (this.state.demographic !== "") {
       obj.demographic = this.state.demographic
     }
-    // else {
-    //   obj.none = true
-    // }
 
     if (this.state.specialty !== "") {
       obj.specialty = this.state.specialty
@@ -160,8 +157,8 @@ class SearchBar extends Component {
               })}
             />
             <Link
-              // to={`/search?metroplex=${this.state.metroplex}`}
-              to={`/search?metroplex=Dallas`}
+              to={`/search?metroplex=${this.state.metroplex}`}
+              // to={`/search?metroplex=Dallas`}
             >
               <button onClick={this.onMetroplexClick} className="go-button">
                 Go
