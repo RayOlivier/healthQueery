@@ -11,11 +11,7 @@ $background-blue: whitesmoke;
   flex-direction: column;
 
   height: 100%;
-  min-height: 90vh;
-
-  // .map-container {
-  //   height: 50vh;
-  // }
+  min-height: 80vh;
 
   .map-div {
     position: relative;
@@ -23,15 +19,21 @@ $background-blue: whitesmoke;
     height: 60vh;
     // width: 50vw;
     margin-top: 10px;
-    // .map-container {
-    //   width: 50vw;
-    // }
   }
 
   .doc-card-container {
     width: 100%;
     // height: 30%;
-    // background: green;
+
+    .false {
+      visibility: hidden;
+    }
+
+    .true {
+      background: $light-blue;
+      padding: 5%;
+      text-align: center;
+    }
   }
 
   .search-button {
@@ -52,20 +54,24 @@ $background-blue: whitesmoke;
 
   .search-bar {
     width: 100%;
-    padding: 1%;
+    padding: 0 2%;
     // transition: transform 0.8s;
     background: $light-pink;
-    // overflow: hidden;
     // overflow: scroll;
 
     z-index: 0;
+
+    h1 {
+      margin-top: 5px;
+    }
+
     .filter-button-container {
       // border: black 2px solid;
       margin: auto;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      padding: 10px;
+      padding-top: 10px;
       button {
         height: 30px;
       }
@@ -92,10 +98,6 @@ $background-blue: whitesmoke;
       }
     }
 
-    h1 {
-      margin-top: 5px;
-    }
-
     .select {
       // background: green;
       margin: 1%;
@@ -109,7 +111,8 @@ $background-blue: whitesmoke;
     #nb-check {
       background: $light-blue;
       border-radius: 10px;
-      margin: 2%;
+      margin: 1%;
+      margin-left: 2%;
       padding: 0.5%;
     }
   }
@@ -125,7 +128,7 @@ $background-blue: whitesmoke;
 
   #search-bar-true {
     padding: 5px;
-    height: 350px;
+    height: 340px;
     // height: auto;
 
     // z-index: 1000;
@@ -142,17 +145,8 @@ $background-blue: whitesmoke;
   }
 }
 
-// @media (min-width: 767px) {
-//   .search-view {
-//     h1 {
-//       font-size: 22px;
-//     }
-//   }
-// }
 @media (min-width: 767px) {
   .search-view {
-    //  width: 70%;
-    // padding: 7%;
     font-size: 20px;
 
     .doc-card-container {
@@ -174,28 +168,44 @@ $background-blue: whitesmoke;
     }
 
     h2 {
-      font-size: 24px;
+      font-size: 22px;
     }
 
     .search-button {
-      // visibility: hidden;
+      height: 0;
       button {
         visibility: hidden;
       }
     }
 
+    .filters {
+      position: relative;
+      .filter-button {
+        position: absolute;
+        bottom: 3%;
+        right: 0px;
+      }
+
+      .filter-option {
+        width: 70%;
+      }
+
+      #nb-check {
+        width: 40%;
+      }
+    }
+
     #search-bar-false {
+      //this needs to be here bc the search bar needs to be the same whether true or false when viewed on a tablet or desktop
+
       height: auto;
+      overflow: visible;
+      z-index: 10;
     }
 
     #search-bar-true {
-      // height: 300px;
-      // height: auto;
-
       z-index: 10;
-
       height: auto;
-
       overflow: visible;
     }
   }

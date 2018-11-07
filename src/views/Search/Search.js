@@ -16,7 +16,8 @@ class Search extends Component {
       displayedCards: [],
       openSearchBar: false,
       list: [],
-      doctorObjects: []
+      doctorObjects: [],
+      noMetro: false
     }
     this.toggleSearchBar = this.toggleSearchBar.bind(this)
     // this.searchByKeyword = this.searchByKeyword.bind(this)
@@ -80,10 +81,6 @@ class Search extends Component {
       filteredCards = filteredCards.filter((e, i, arr) => {
         console.log("e", e)
 
-        // console.log(
-        //   "e.props.demographics.includes(obj.demographic)",
-        //   e.props.demographics.includes(obj.demographic)
-        // )
         return e.props.demographics.includes(obj.demographic)
       })
     }
@@ -98,10 +95,6 @@ class Search extends Component {
     }
 
     this.setState({ displayedCards: filteredCards })
-
-    // else if ((obj.none = true)) {
-    //   console.log("idk but there aren't filters")
-    // }
   }
 
   componentDidMount() {
@@ -119,34 +112,38 @@ class Search extends Component {
         console.log("undefined", undefined)
       } else {
         this.searchByMetroplex(values.metroplex)
+        this.setState({ noMetro: false })
       }
     } else {
-      axios.get("/api/doctors").then((res) => {
-        console.log("res.data", res.data)
-        this.setState({ doctorObjects: res.data })
+      // axios.get("/api/doctors").then((res) => {
+      //   console.log("res.data", res.data)
+      //   this.setState({ doctorObjects: res.data })
 
-        let mapped = res.data.map((e, i, arr) => {
-          let address = `${e.street_address}, ${e.city}, ${e.state}`
-          // console.log("address", address)
-          return (
-            <DoctorCard
-              key={i}
-              nbInclusive={e.nb_inclusive}
-              address={address}
-              name={e.doctor_name}
-              id={e.doctor_id}
-              className="doctor-card"
-            />
-          )
-        })
-        // console.log("mapped", mapped)
-        this.setState({ displayedCards: mapped })
-        // console.log("this.state", this.state)
-      })
+      //   let mapped = res.data.map((e, i, arr) => {
+      //     let address = `${e.street_address}, ${e.city}, ${e.state}`
+      //     // console.log("address", address)
+      //     return (
+      //       <DoctorCard
+      //         key={i}
+      //         nbInclusive={e.nb_inclusive}
+      //         address={address}
+      //         name={e.doctor_name}
+      //         id={e.doctor_id}
+      //         className="doctor-card"
+      //       />
+      //     )
+      //   })
+      //   // console.log("mapped", mapped)
+      //   this.setState({ displayedCards: mapped })
+      //   // console.log("this.state", this.state)
+      // })
+
+      this.setState({ noMetro: true })
+      console.log("this.state", this.state)
     }
   }
   render() {
-    // console.log("this.state", this.state)
+    console.log("this.state", this.state)
 
     console.log("this.state.doctorObjects", this.state.doctorObjects)
 
@@ -167,13 +164,19 @@ class Search extends Component {
             addFilters={this.filterResults}
           />
         </div>
+
         <h1>Search Results</h1>
 
         <div className="map-div">
           <MapContainer cards={this.state.displayedCards} />
         </div>
         {/* {this.renderCards()} */}
-        <div className="doc-card-container">{this.state.displayedCards}</div>
+        <div className="doc-card-container">
+          <div className={`${this.state.noMetro}`}>
+            Please select a metroplex to find providers in your area.
+          </div>
+          {this.state.displayedCards}
+        </div>
       </div>
     )
   }

@@ -173,10 +173,9 @@ $background-blue: whitesmoke;
     }
     z-index: 100;
     background: $dark-blue;
-
     box-shadow: #333 0px 0px 10px 3px;
     height: 5vh;
-    // border: 3px $bright-pink solid;
+
     #desktop-bar {
       position: fixed;
       visibility: visible;
@@ -187,12 +186,15 @@ $background-blue: whitesmoke;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      // border: black 2px solid;
 
       .left {
         width: 33.33%;
         display: flex;
         justify-content: space-between;
+
+        .single-link {
+          color: white;
+        }
       }
 
       .middle {
@@ -209,6 +211,8 @@ $background-blue: whitesmoke;
         align-items: center;
         padding: 10px;
 
+        // color: white;
+
         // border: black 2px solid;
 
         .user-links {
@@ -217,8 +221,11 @@ $background-blue: whitesmoke;
           display: flex;
           justify-content: space-evenly;
 
+          // color: white;
+
           .single-link {
             margin: 0px 1vw;
+            color: white;
           }
         }
 
@@ -226,7 +233,6 @@ $background-blue: whitesmoke;
           display: flex;
           align-items: center;
           height: 50%;
-          // border: green solid 1px;
 
           .search-select {
             border-radius: 8px;
@@ -236,6 +242,7 @@ $background-blue: whitesmoke;
           .icon {
             font-size: 30px;
             margin-left: 5px;
+            color: white;
           }
         }
       }

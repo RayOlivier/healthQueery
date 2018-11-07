@@ -92,30 +92,18 @@ class SearchBar extends Component {
 
   componentDidMount() {
     axios.get("/api/allSpecialties").then((res) => {
-      console.log("res from all specs", res)
       let optionsMapped = []
-      let selectedMapped = []
 
       res.data.forEach((e, i, arr) => {
-        console.log("e in spec map", e)
+        // console.log("e in spec map", e)
         optionsMapped.push({
           name: "specialty",
           label: e.specialty_name,
           value: e.specialty_id
         })
-
-        // if (this.props.specialties.includes(e.specialty_name)) {
-        //   console.log("does include", e.specialty_name)
-        //   selectedMapped.push({
-        //     name: "specialties",
-        //     label: e.specialty_name,
-        //     value: e.specialty_id
-        //   })
-        // }
       })
       this.setState({
         specialtyOptions: optionsMapped
-        // specialtiesSelected: selectedMapped
       })
     })
   }
@@ -150,7 +138,6 @@ class SearchBar extends Component {
                 borderRadius: 8,
                 colors: {
                   ...theme.colors,
-                  // text: "green",
                   primary25: "#ffcccc",
                   primary: "#3e87b2"
                 }
@@ -192,7 +179,7 @@ class SearchBar extends Component {
           />
           <button onClick={this.onLocationClick}>Submit</button>
         </div> */}
-        <div>
+        <div className="filters">
           <h1>Filters:</h1>
           <div className="filter-option" id="nb-check">
             <input
@@ -215,7 +202,6 @@ class SearchBar extends Component {
                 borderRadius: 8,
                 colors: {
                   ...theme.colors,
-                  // text: "green",
                   primary25: "#ffcccc",
                   primary: "#3e87b2"
                 }
@@ -234,7 +220,6 @@ class SearchBar extends Component {
                 borderRadius: 8,
                 colors: {
                   ...theme.colors,
-                  // text: "green",
                   primary25: "#ffcccc",
                   primary: "#3e87b2"
                 }
