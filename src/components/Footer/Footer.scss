@@ -40,9 +40,11 @@ $background-blue: whitesmoke;
 
     .footer-contact {
       margin: 10px;
-      width: 25%;
+      // min-width: 35%;
+      // text-align: end;
       h1 {
-        width: 30%;
+        width: 40%;
+        text-align: start;
       }
     }
   }

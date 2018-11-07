@@ -4,8 +4,8 @@ import { connect } from "react-redux"
 import {
   getUser,
   getFavorites,
-  profileChange,
-  submitProfileEdit
+  profileChange
+  // ,submitProfileEdit
 } from "./../../ducks/reducer"
 
 import Favorites from "../Favorites/Favorites"

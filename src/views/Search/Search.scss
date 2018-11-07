@@ -26,7 +26,7 @@ $background-blue: whitesmoke;
     // height: 30%;
 
     .false {
-      visibility: hidden;
+      display: none;
     }
 
     .true {
@@ -44,7 +44,7 @@ $background-blue: whitesmoke;
   h1 {
     font-size: 24px;
     border-bottom: $dark-blue 2.5px solid;
-    margin-top: 4%;
+    margin-top: 3%;
   }
 
   h2 {
@@ -151,15 +151,18 @@ $background-blue: whitesmoke;
 
     .doc-card-container {
       display: flex;
+      // flex-direction: column;
+
       flex-wrap: wrap;
+      // align-items: center;
 
-      justify-content: space-between;
+      justify-content: space-evenly;
 
-      padding: 2%;
+      // padding: 1%;
 
       .doctor-card {
         width: 46vw;
-        margin: 2% 0%;
+        margin: 0.5% 0%;
       }
     }
 
