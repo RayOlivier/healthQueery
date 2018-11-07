@@ -5,7 +5,6 @@ import NumberFormat from "react-number-format"
 import Select from "react-select"
 
 const nbOptions = [
-  // { name: "nb_inclusive", label: "Unsure", value: "" },
   { name: "nb_inclusive", label: "Yes", value: true },
   { name: "nb_inclusive", label: "No or Unsure", value: false }
 ]
@@ -47,6 +46,17 @@ class DoctorSubmissionForm extends Component {
     this.changeSelect = this.changeSelect.bind(this)
     this.clickSubmit = this.clickSubmit.bind(this)
     this.clearInput = this.clearInput.bind(this)
+
+    this.changeMultiSelect = this.changeMultiSelect.bind(this)
+  }
+
+  changeMultiSelect(e) {
+    console.log("e", e)
+    // console.log("e[0].name", e[0].name)
+    let selected = `${e[0].name}Selected`
+    this.setState({ [selected]: e })
+    //only changing selected at the moment
+    console.log("this.state", this.state)
   }
 
   changeInput(e) {
@@ -89,6 +99,60 @@ class DoctorSubmissionForm extends Component {
       console.log("hi")
       console.log(res)
       this.clearInput()
+      axios.delete(`/api/clearDocSpecialties/${res.data[0].max}`)
+      axios.delete(`/api/clearDocDemographics/${res.data[0].max}`)
+      this.state.specialtiesSelected.forEach((e, i, arr) => {
+        console.log("e in forEach spec", e)
+        axios.post(`/api/addSpecialty/${res.data[0].max}`, {
+          specialty_id: e.value
+        })
+      })
+      this.state.demographicsSelected.forEach((e, i, arr) => {
+        console.log("e in forEach dem", e)
+        axios.post(`/api/addDemographic/${res.data[0].max}`, {
+          demographic_id: e.value
+        })
+      })
+    })
+  }
+
+  componentDidMount() {
+    axios.get("/api/allSpecialties").then((res) => {
+      console.log("res from all specs", res)
+      let optionsMapped = []
+      let selectedMapped = []
+
+      res.data.forEach((e, i, arr) => {
+        console.log("e in spec map", e)
+        optionsMapped.push({
+          name: "specialties",
+          label: e.specialty_name,
+          value: e.specialty_id
+        })
+      })
+      this.setState({
+        specialtyOptions: optionsMapped,
+        specialtiesSelected: selectedMapped
+      })
+    })
+
+    axios.get("/api/allDemographics").then((res) => {
+      console.log("res from all dems", res)
+      let optionsMapped = []
+      let selectedMapped = []
+
+      res.data.forEach((e, i, arr) => {
+        console.log("e in dem map", e)
+        optionsMapped.push({
+          name: "demographics",
+          label: e.demographic_name,
+          value: e.demographic_id
+        })
+      })
+      this.setState({
+        demographicOptions: optionsMapped,
+        demographicsSelected: selectedMapped
+      })
     })
   }
 
@@ -283,6 +347,46 @@ class DoctorSubmissionForm extends Component {
             })}
           />
         </div>
+        <div>
+          Demographics:
+          <Select
+            isMulti={true}
+            value={this.state.demographicsSelected}
+            name="demographics"
+            onChange={this.changeMultiSelect}
+            options={this.state.demographicOptions}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 8,
+              colors: {
+                ...theme.colors,
+                primary25: "#ffcccc",
+                primary: "#3e87b2"
+              }
+            })}
+          />
+        </div>
+        <div>
+          Specialties:
+          <Select
+            isMulti={true}
+            value={this.state.specialtiesSelected}
+            name="specialties"
+            onChange={this.changeMultiSelect}
+            options={this.state.specialtyOptions}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 8,
+              colors: {
+                ...theme.colors,
+                // text: "green",
+                primary25: "#ffcccc",
+                primary: "#3e87b2"
+              }
+            })}
+          />
+        </div>
+
         <button onClick={this.clickSubmit}> Submit</button>
       </div>
     )

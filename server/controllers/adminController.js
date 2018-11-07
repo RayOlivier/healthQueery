@@ -20,7 +20,7 @@ module.exports = {
         data.metroplex
       ])
       .then((stuff) => {
-        res.sendStatus(200)
+        res.status(200).json(stuff)
       })
       .catch(console.log)
   },

@@ -72,6 +72,7 @@ class EditDoctor extends Component {
 
   clickSubmit() {
     //need to have submit change doctor_specialties and doctor_demographics, by putting in both ids pulled from the selected objects on state
+    //done ????
 
     axios
       .put(`/api/doctor/${this.props.id}`, { data: this.state })
