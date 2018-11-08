@@ -236,13 +236,26 @@ $background-blue: whitesmoke;
 
           .search-select {
             border-radius: 8px;
-            width: 200px;
+            width: 50px;
             font-size: 16px;
+            // display: none;
+            opacity: 0;
+            transition: 0.5s;
           }
           .icon {
             font-size: 30px;
             margin-left: 5px;
             color: white;
+          }
+        }
+
+        .search-field:hover {
+          .search-select {
+            // color: green;
+            display: block;
+            width: 190px;
+
+            opacity: 100;
           }
         }
       }

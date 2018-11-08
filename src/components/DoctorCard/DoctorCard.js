@@ -91,20 +91,22 @@ class DoctorCard extends Component {
           <div className="fav">
             <FavoriteButton id={this.props.id} />
           </div>
-          <div className="cat">{this.state.doctor.category}</div>
+          {/* <div className="cat">{this.state.doctor.category}</div> */}
 
           <div>
             {`${this.state.doctor.city}, ${this.state.doctor.state}
             `}
+          </div>
+          <div className="demographics">
+            <div className="title">Demographics:</div> {demList}
           </div>
           <div className="services">
             <div style={{ textDecoration: "underline" }}>Services:</div>
             <ul>{specList}</ul>
           </div>
 
-          <div>Demographics: {demList}</div>
           <Link to={`/doctor/${this.props.id}`}>
-            <div className="button">More info ></div>
+            <button className="button">View</button>
           </Link>
         </div>
       </div>

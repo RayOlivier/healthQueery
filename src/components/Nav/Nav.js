@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 import transHQ from "../../images/transHQ.png"
 import { connect } from "react-redux"
 
@@ -9,25 +9,33 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import "./Nav.scss"
 
-const options = [{ label: "Dallas Ft.Worth", value: "Dallas" }]
+const options = [
+  { name: "metroplex", label: "Dallas Ft.Worth", value: "Dallas" }
+]
 
 class Nav extends Component {
   constructor() {
     super()
 
     this.state = {
-      menuOpen: false
+      menuOpen: false,
+      redirect: false,
+      metroplex: null,
+      selected: null
     }
     this.toggleMenu = this.toggleMenu.bind(this)
     this.renderIfLoggedIn = this.renderIfLoggedIn.bind(this)
     this.renderIfAdmin = this.renderIfAdmin.bind(this)
     this.menuOff = this.menuOff.bind(this)
     this.changeSearch = this.changeSearch.bind(this)
+
+    this.renderRedirect = this.renderRedirect.bind(this)
   }
 
-  changeSearch() {
+  changeSearch(e) {
     //
-    this.setState({ metroplex: "Dallas" })
+    console.log("e", e)
+    this.setState({ [e.name]: e.value, redirect: true })
   }
 
   toggleMenu() {
@@ -36,6 +44,14 @@ class Nav extends Component {
 
   menuOff() {
     this.setState({ menuOpen: false })
+  }
+
+  renderRedirect() {
+    //this will give an error but theoretically should be fine in production ??
+    if (this.state.redirect) {
+      this.setState({ redirect: false })
+      return <Redirect push to={`/search?metroplex=${this.state.metroplex}`} />
+    }
   }
 
   renderIfLoggedIn() {
@@ -81,7 +97,7 @@ class Nav extends Component {
   }
 
   render() {
-    console.log("this.state", this.state)
+    // console.log("this.state", this.state)
 
     var visibility = "hide"
 
@@ -91,6 +107,8 @@ class Nav extends Component {
 
     return (
       <div className="nav">
+        {this.renderRedirect()}
+
         <div className="top-nav">
           <div className="left">
             <FontAwesomeIcon
@@ -161,25 +179,26 @@ class Nav extends Component {
               <Select
                 className="search-select"
                 options={options}
-                onChange={this.changeSearch}
+                onChange={(e) => this.changeSearch(e)}
                 placeholder="Select metroplex..."
+                value={this.state.selected}
               />
-              <Link
+              {/* <Link
                 className="single-link"
                 to={`/search?metroplex=${this.state.metroplex}`}
-              >
-                {/* <img
+              > */}
+              {/* <img
                   src="https://static.thenounproject.com/png/105498-200.png"
                   alt=""
                 /> */}
 
-                <FontAwesomeIcon
-                  // id="icon"
-                  className="icon"
-                  onClick={this.menuOff}
-                  icon={"search"}
-                />
-              </Link>
+              <FontAwesomeIcon
+                // id="icon"
+                className="icon"
+                onClick={this.menuOff}
+                icon={"search"}
+              />
+              {/* </Link> */}
             </div>
           </div>
         </div>

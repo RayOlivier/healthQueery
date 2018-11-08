@@ -13,7 +13,7 @@ class Home extends Component {
     super()
 
     this.state = {
-      metroplex: "",
+      metroplex: null,
       metroplexSelected: null
     }
 
@@ -44,7 +44,7 @@ class Home extends Component {
           <div className="get-started">
             <h2>Get Started</h2>
             <div>
-              <div> Find a Provider in Your Metroplex: </div>
+              <p className="find-text"> Find a Provider in Your Metroplex </p>
 
               <div className="select-and-button">
                 <Select
@@ -71,7 +71,10 @@ class Home extends Component {
                   }}
                 >
                   <button
-                  // onClick={this.onMetroplexClick}
+                    className="go-button"
+                    // onClick={this.onMetroplexClick}
+
+                    disabled={!this.state.metroplex}
                   >
                     Go
                   </button>
