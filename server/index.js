@@ -1,4 +1,5 @@
 require("dotenv").config();
+const path = require("path");
 
 const express = require("express");
 const session = require("express-session");
@@ -136,6 +137,9 @@ app.put("/api/review/:id", reviewController.editReview);
 app.delete("/api/review/:id", reviewController.deleteReview); //done
 app.get("/api/rating/:id", reviewController.getAverageRating);
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../build/index.html"));
+});
 const port = 3001;
 app.listen(port, () => {
   console.log(`HQ Server listening on port ${port}`);
