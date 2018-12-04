@@ -1,56 +1,56 @@
-import React, { Component } from "react"
-import { Link, Redirect } from "react-router-dom"
-import transHQ from "../../images/transHQ.png"
-import { connect } from "react-redux"
+import React, { Component } from "react";
+import { Link, Redirect } from "react-router-dom";
+import transHQ from "../../images/transHQ.png";
+import { connect } from "react-redux";
 
-import Select from "react-select"
+import Select from "react-select";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import "./Nav.scss"
+import "./Nav.scss";
 
 const options = [
   { name: "metroplex", label: "Dallas Ft.Worth", value: "Dallas" }
-]
+];
 
 class Nav extends Component {
   constructor() {
-    super()
+    super();
 
     this.state = {
       menuOpen: false,
       redirect: false,
       metroplex: null,
       selected: null
-    }
-    this.toggleMenu = this.toggleMenu.bind(this)
-    this.renderIfLoggedIn = this.renderIfLoggedIn.bind(this)
-    this.renderIfAdmin = this.renderIfAdmin.bind(this)
-    this.menuOff = this.menuOff.bind(this)
-    this.changeSearch = this.changeSearch.bind(this)
+    };
+    this.toggleMenu = this.toggleMenu.bind(this);
+    this.renderIfLoggedIn = this.renderIfLoggedIn.bind(this);
+    this.renderIfAdmin = this.renderIfAdmin.bind(this);
+    this.menuOff = this.menuOff.bind(this);
+    this.changeSearch = this.changeSearch.bind(this);
 
-    this.renderRedirect = this.renderRedirect.bind(this)
+    this.renderRedirect = this.renderRedirect.bind(this);
   }
 
   changeSearch(e) {
     //
-    console.log("e", e)
-    this.setState({ [e.name]: e.value, redirect: true })
+    console.log("e", e);
+    this.setState({ [e.name]: e.value, redirect: true });
   }
 
   toggleMenu() {
-    this.setState({ menuOpen: !this.state.menuOpen })
+    this.setState({ menuOpen: !this.state.menuOpen });
   }
 
   menuOff() {
-    this.setState({ menuOpen: false })
+    this.setState({ menuOpen: false });
   }
 
   renderRedirect() {
     //this will give an error but theoretically should be fine in production ??
     if (this.state.redirect) {
-      this.setState({ redirect: false })
-      return <Redirect push to={`/search?metroplex=${this.state.metroplex}`} />
+      this.setState({ redirect: false });
+      return <Redirect push to={`/search?metroplex=${this.state.metroplex}`} />;
     }
   }
 
@@ -69,17 +69,17 @@ class Nav extends Component {
           >
             Favorites
           </Link> */}
-          <a className="single-link" href="http://localhost:3001/logout">
+          <a className="single-link" href={process.env.REACT_APP_LOGOUT}>
             Logout
           </a>
         </>
-      )
+      );
     } else {
       return (
-        <a className="single-link" href="http://localhost:3001/login">
+        <a className="single-link" href={process.env.REACT_APP_LOGIN}>
           Login
         </a>
-      )
+      );
     }
   }
 
@@ -92,17 +92,17 @@ class Nav extends Component {
             Admin
           </Link>
         </>
-      )
+      );
     }
   }
 
   render() {
     // console.log("this.state", this.state)
 
-    var visibility = "hide"
+    var visibility = "hide";
 
     if (this.state.menuOpen) {
-      visibility = "show"
+      visibility = "show";
     }
 
     return (
@@ -203,10 +203,10 @@ class Nav extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = (state) => state
+const mapStateToProps = (state) => state;
 
-export default connect(mapStateToProps)(Nav)
+export default connect(mapStateToProps)(Nav);

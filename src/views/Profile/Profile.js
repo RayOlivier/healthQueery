@@ -1,33 +1,33 @@
-import React, { Component } from "react"
-import axios from "axios"
-import { connect } from "react-redux"
+import React, { Component } from "react";
+import axios from "axios";
+import { connect } from "react-redux";
 import {
   getUser,
   getFavorites,
   profileChange
   // ,submitProfileEdit
-} from "./../../ducks/reducer"
+} from "./../../ducks/reducer";
 
-import Favorites from "../Favorites/Favorites"
+import Favorites from "../Favorites/Favorites";
 
 class Profile extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       emailFromRedirect: "",
       editing: false
-    }
-    this.toggleEdit = this.toggleEdit.bind(this)
-    this.renderProfile = this.renderProfile.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.submitEdit = this.submitEdit.bind(this)
+    };
+    this.toggleEdit = this.toggleEdit.bind(this);
+    this.renderProfile = this.renderProfile.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.submitEdit = this.submitEdit.bind(this);
   }
 
   toggleEdit() {
     // this.props.submitProfileEdit(this.props.user.user_id)
 
-    this.setState({ editing: !this.state.editing })
+    this.setState({ editing: !this.state.editing });
   }
 
   submitEdit() {
@@ -37,25 +37,25 @@ class Profile extends Component {
         gender: this.props.user.gender,
         sexual_orientation: this.props.user.sexual_orientation
       })
-      .then(this.props.getUser(this.props.user.user_id))
-    this.toggleEdit()
+      .then(this.props.getUser(this.props.user.user_id));
+    this.toggleEdit();
   }
 
   handleChange(e) {
     //do some redux magics and put requests
-    this.props.profileChange(e.target.name, e.target.value)
+    this.props.profileChange(e.target.name, e.target.value);
   }
 
   renderProfile() {
     if (!this.props.loggedIn) {
       return (
         <div id="no-profile">
-          <a className="single-link" href="http://localhost:3001/login">
+          <a className="single-link" href={process.env.REACT_APP_LOGIN}>
             Login
           </a>{" "}
           to view your profile.
         </div>
-      )
+      );
     } else if (this.state.editing) {
       return (
         <div className="edit-on">
@@ -99,7 +99,7 @@ class Profile extends Component {
 
           <button onClick={this.submitEdit}>Submit</button>
         </div>
-      )
+      );
     } else {
       return (
         <div className="logged-in-profile">
@@ -130,7 +130,7 @@ class Profile extends Component {
             Render review cards that match the user's id
           </div> */}
         </div>
-      )
+      );
     }
   }
 
@@ -138,20 +138,20 @@ class Profile extends Component {
     axios.get("/profile").then((res) => {
       // console.log("res in mount of profile", res)
       //this gives user from db
-      this.props.getUser(res.data[0].user_id)
-      this.props.getFavorites(res.data[0].user_id)
-    })
+      this.props.getUser(res.data[0].user_id);
+      this.props.getFavorites(res.data[0].user_id);
+    });
   }
 
   render() {
     // console.log("this.state", this.state)
-    return <div className="any-profile">{this.renderProfile()}</div>
+    return <div className="any-profile">{this.renderProfile()}</div>;
   }
 }
 
-const mapStateToProps = (state) => state
+const mapStateToProps = (state) => state;
 
 export default connect(
   mapStateToProps,
   { getUser, getFavorites, profileChange }
-)(Profile)
+)(Profile);
