@@ -1,16 +1,16 @@
-import React, { Component } from "react"
-import axios from "axios"
-import DoctorCard from "../../components/DoctorCard/DoctorCard"
-import SearchBar from "./SearchBar/SearchBar"
-import MapContainer from "../../components/MapContainer/MapContainer"
+import React, { Component } from "react";
+import axios from "axios";
+import DoctorCard from "../../components/DoctorCard/DoctorCard";
+import SearchBar from "./SearchBar/SearchBar";
+import MapContainer from "../../components/MapContainer/MapContainer";
 
-import "./Search.scss"
+import "./Search.scss";
 
-import queryString from "query-string"
+import queryString from "query-string";
 
 class Search extends Component {
   constructor() {
-    super()
+    super();
 
     this.state = {
       displayedCards: [],
@@ -18,27 +18,27 @@ class Search extends Component {
       list: [],
       doctorObjects: [],
       noMetro: false
-    }
-    this.toggleSearchBar = this.toggleSearchBar.bind(this)
+    };
+    this.toggleSearchBar = this.toggleSearchBar.bind(this);
     // this.searchByKeyword = this.searchByKeyword.bind(this)
-    this.searchByLocation = this.searchByLocation.bind(this)
-    this.searchByMetroplex = this.searchByMetroplex.bind(this)
+    this.searchByLocation = this.searchByLocation.bind(this);
+    this.searchByMetroplex = this.searchByMetroplex.bind(this);
 
-    this.filterResults = this.filterResults.bind(this)
+    this.filterResults = this.filterResults.bind(this);
   }
 
   toggleSearchBar() {
-    this.setState({ openSearchBar: !this.state.openSearchBar })
+    this.setState({ openSearchBar: !this.state.openSearchBar });
   }
 
   searchByMetroplex(metroplex) {
     axios.get(`/api/doctors?metroplex=${metroplex}`).then((res) => {
-      console.log("res from metro search", res)
-      this.setState({ doctorObjects: res.data })
+      console.log("res from metro search", res);
+      this.setState({ doctorObjects: res.data });
 
       let mapped = res.data.map((e, i, arr) => {
-        let address = `${e.street_address}, ${e.city}, ${e.state}`
-        console.log("e IN SEARCH BY METRO", e)
+        let address = `${e.street_address}, ${e.city}, ${e.state}`;
+        console.log("e IN SEARCH BY METRO", e);
         // console.log("address", address)
         return (
           <DoctorCard
@@ -51,68 +51,68 @@ class Search extends Component {
             specialties={e.specialties}
             className="doctor-card"
           />
-        )
-      })
+        );
+      });
 
-      this.setState({ displayedCards: mapped })
-    })
+      this.setState({ displayedCards: mapped });
+    });
   }
 
   searchByLocation(address) {
-    console.log("searching by location")
+    console.log("searching by location");
   }
 
   filterResults(obj) {
-    console.log("this.state.doctorObjects", this.state.doctorObjects)
-    console.log("obj", obj)
-    let filteredCards = this.state.displayedCards
-    console.log("this.state.displayedCards", this.state.displayedCards)
+    console.log("this.state.doctorObjects", this.state.doctorObjects);
+    console.log("obj", obj);
+    let filteredCards = this.state.displayedCards;
+    console.log("this.state.displayedCards", this.state.displayedCards);
     if (obj.nbCheck) {
       filteredCards = filteredCards.filter((e, i, arr) => {
-        console.log("e", e)
+        console.log("e", e);
 
-        return e.props.nbInclusive
-      })
+        return e.props.nbInclusive;
+      });
       // this.setState({ displayedCards: filteredCards })
     }
 
     if (obj.demographic) {
-      console.log("we got ourselves a demographic")
+      console.log("we got ourselves a demographic");
       filteredCards = filteredCards.filter((e, i, arr) => {
-        console.log("e", e)
+        console.log("e", e);
 
-        return e.props.demographics.includes(obj.demographic)
-      })
+        return e.props.demographics.includes(obj.demographic);
+      });
     }
 
     if (obj.specialty) {
-      console.log("we got ourselves a specialty")
+      console.log("we got ourselves a specialty");
       filteredCards = filteredCards.filter((e, i, arr) => {
-        console.log("e", e)
+        console.log("e", e);
 
-        return e.props.specialties.includes(obj.specialty)
-      })
+        return e.props.specialties.includes(obj.specialty);
+      });
     }
 
-    this.setState({ displayedCards: filteredCards })
+    this.setState({ displayedCards: filteredCards });
   }
 
   componentDidMount() {
     console.log(
       "this.props.location.search aka query string",
       this.props.location.search
-    )
+    );
 
     if (this.props.location.search) {
-      console.log("there's a query")
-      const values = queryString.parse(this.props.location.search)
-      console.log("values", values)
+      console.log("there's a query");
+      const values = queryString.parse(this.props.location.search);
+      console.log("values", values);
 
       if (values.metroplex === "undefined" || values.metroplex === "") {
-        console.log("undefined", undefined)
+        console.log("undefined", undefined);
       } else {
-        this.searchByMetroplex(values.metroplex)
-        this.setState({ noMetro: false })
+        this.searchByMetroplex(values.metroplex);
+        this.setState({ noMetro: false });
       }
     } else {
       // axios.get("/api/doctors").then((res) => {
@@ -138,20 +138,25 @@ class Search extends Component {
       //   // console.log("this.state", this.state)
       // })
 
-      this.setState({ noMetro: true })
-      console.log("this.state", this.state)
+      this.setState({ noMetro: true });
+      console.log("this.state", this.state);
     }
   }
   render() {
-    console.log("this.state", this.state)
+    console.log("this.state", this.state);
 
-    console.log("this.state.doctorObjects", this.state.doctorObjects)
+    console.log("this.state.doctorObjects", this.state.doctorObjects);
 
     return (
       <div className="search-view">
-        <div className="search-button">
+        <div className="search-toggle-container">
           {" "}
-          <button onClick={this.toggleSearchBar}>Search Options</button>
+          <button
+            className="search-toggle-button"
+            onClick={this.toggleSearchBar}
+          >
+            Filters
+          </button>
         </div>
         <div
           className="search-bar"
@@ -178,11 +183,11 @@ class Search extends Component {
           {this.state.displayedCards}
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Search
+export default Search;
 
 // searchByKeyword(keyword) {
 //   axios.get(`/api/doctors?keyword=${keyword}`).then((res) => {

@@ -36,9 +36,63 @@ $background-blue: whitesmoke;
     }
   }
 
-  .search-button {
+  .search-toggle-container {
     background: $light-pink;
     width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    .search-toggle-button {
+      -moz-box-shadow: 0px 10px 14px -7px #276873;
+      -webkit-box-shadow: 0px 10px 14px -7px #276873;
+      box-shadow: 0px 10px 14px -7px #276873;
+      background: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0.05, #599bb3),
+        color-stop(1, #408c99)
+      );
+      background: -moz-linear-gradient(top, #599bb3 5%, #408c99 100%);
+      background: -webkit-linear-gradient(top, #599bb3 5%, #408c99 100%);
+      background: -o-linear-gradient(top, #599bb3 5%, #408c99 100%);
+      background: -ms-linear-gradient(top, #599bb3 5%, #408c99 100%);
+      background: linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#599bb3', endColorstr='#408c99',GradientType=0);
+      background-color: #599bb3;
+      -moz-border-radius: 8px;
+      -webkit-border-radius: 8px;
+      border-radius: 8px;
+      display: inline-block;
+      cursor: pointer;
+      color: #ffffff;
+      // font-family: Arial;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 8px 15px;
+      text-decoration: none;
+      text-shadow: 0px 1px 0px #3d768a;
+
+      border: none;
+
+      &:hover {
+        background: -webkit-gradient(
+          linear,
+          left top,
+          left bottom,
+          color-stop(0.05, #408c99),
+          color-stop(1, #599bb3)
+        );
+        background: -moz-linear-gradient(top, #408c99 5%, #599bb3 100%);
+        background: -webkit-linear-gradient(top, #408c99 5%, #599bb3 100%);
+        background: -o-linear-gradient(top, #408c99 5%, #599bb3 100%);
+        background: -ms-linear-gradient(top, #408c99 5%, #599bb3 100%);
+        background: linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#408c99', endColorstr='#599bb3',GradientType=0);
+        background-color: #408c99;
+      }
+    }
   }
 
   h1 {
@@ -59,21 +113,67 @@ $background-blue: whitesmoke;
     background: $light-pink;
     // overflow: scroll;
 
-    z-index: 0;
+    z-index: 1;
 
     h1 {
       margin-top: 5px;
     }
 
     .filter-button-container {
-      // border: black 2px solid;
       margin: auto;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
       padding-top: 10px;
-      button {
-        height: 30px;
+      .filter-button {
+        -moz-box-shadow: 0px 10px 14px -7px #276873;
+        -webkit-box-shadow: 0px 10px 14px -7px #276873;
+        box-shadow: 0px 10px 14px -7px #276873;
+        background: -webkit-gradient(
+          linear,
+          left top,
+          left bottom,
+          color-stop(0.05, #599bb3),
+          color-stop(1, #408c99)
+        );
+        background: -moz-linear-gradient(top, #599bb3 5%, #408c99 100%);
+        background: -webkit-linear-gradient(top, #599bb3 5%, #408c99 100%);
+        background: -o-linear-gradient(top, #599bb3 5%, #408c99 100%);
+        background: -ms-linear-gradient(top, #599bb3 5%, #408c99 100%);
+        background: linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#599bb3', endColorstr='#408c99',GradientType=0);
+        background-color: #599bb3;
+        -moz-border-radius: 8px;
+        -webkit-border-radius: 8px;
+        border-radius: 8px;
+        display: inline-block;
+        cursor: pointer;
+        color: #ffffff;
+        // font-family: Arial;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 8px 15px;
+        text-decoration: none;
+        text-shadow: 0px 1px 0px #3d768a;
+
+        border: none;
+
+        &:hover {
+          background: -webkit-gradient(
+            linear,
+            left top,
+            left bottom,
+            color-stop(0.05, #408c99),
+            color-stop(1, #599bb3)
+          );
+          background: -moz-linear-gradient(top, #408c99 5%, #599bb3 100%);
+          background: -webkit-linear-gradient(top, #408c99 5%, #599bb3 100%);
+          background: -o-linear-gradient(top, #408c99 5%, #599bb3 100%);
+          background: -ms-linear-gradient(top, #408c99 5%, #599bb3 100%);
+          background: linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#408c99', endColorstr='#599bb3',GradientType=0);
+          background-color: #408c99;
+        }
       }
     }
 
@@ -89,18 +189,63 @@ $background-blue: whitesmoke;
 
       .select {
         width: 75%;
+        margin: 1%;
       }
 
       .go-button {
-        width: 50px;
-        height: 30px;
+        // width: 50px;
+        // height: 30px;
         margin-right: 3vw;
-      }
-    }
 
-    .select {
-      // background: green;
-      margin: 1%;
+        -moz-box-shadow: 0px 10px 14px -7px #276873;
+        -webkit-box-shadow: 0px 10px 14px -7px #276873;
+        box-shadow: 0px 10px 14px -7px #276873;
+        background: -webkit-gradient(
+          linear,
+          left top,
+          left bottom,
+          color-stop(0.05, #599bb3),
+          color-stop(1, #408c99)
+        );
+        background: -moz-linear-gradient(top, #599bb3 5%, #408c99 100%);
+        background: -webkit-linear-gradient(top, #599bb3 5%, #408c99 100%);
+        background: -o-linear-gradient(top, #599bb3 5%, #408c99 100%);
+        background: -ms-linear-gradient(top, #599bb3 5%, #408c99 100%);
+        background: linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#599bb3', endColorstr='#408c99',GradientType=0);
+        background-color: #599bb3;
+        -moz-border-radius: 8px;
+        -webkit-border-radius: 8px;
+        border-radius: 8px;
+        display: inline-block;
+        cursor: pointer;
+        color: #ffffff;
+        // font-family: Arial;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 8px 15px;
+        text-decoration: none;
+        text-shadow: 0px 1px 0px #3d768a;
+
+        border: none;
+
+        &:hover {
+          background: -webkit-gradient(
+            linear,
+            left top,
+            left bottom,
+            color-stop(0.05, #408c99),
+            color-stop(1, #599bb3)
+          );
+          background: -moz-linear-gradient(top, #408c99 5%, #599bb3 100%);
+          background: -webkit-linear-gradient(top, #408c99 5%, #599bb3 100%);
+          background: -o-linear-gradient(top, #408c99 5%, #599bb3 100%);
+          background: -ms-linear-gradient(top, #408c99 5%, #599bb3 100%);
+          background: linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#408c99', endColorstr='#599bb3',GradientType=0);
+          background-color: #408c99;
+        }
+      }
     }
 
     .filter-option {
@@ -118,7 +263,7 @@ $background-blue: whitesmoke;
   }
 
   #search-bar-false {
-    padding: 5px;
+    padding: 0px;
     overflow: hidden;
     height: 0;
 
@@ -127,15 +272,15 @@ $background-blue: whitesmoke;
   }
 
   #search-bar-true {
-    padding: 5px;
-    height: 340px;
+    padding: 10px;
+    height: 370px;
     // height: auto;
 
     // z-index: 1000;
 
     // overflow: hidden;
 
-    overflow: scroll;
+    overflow: visible;
     // overflow: visible;
 
     // min-height: 200px;
@@ -148,6 +293,10 @@ $background-blue: whitesmoke;
 @media (min-width: 767px) {
   .search-view {
     font-size: 20px;
+
+    .search-toggle-container {
+      display: none;
+    }
 
     .doc-card-container {
       display: flex;
@@ -174,19 +323,26 @@ $background-blue: whitesmoke;
       font-size: 22px;
     }
 
-    .search-button {
-      height: 0;
-      button {
-        visibility: hidden;
+    .search-bar {
+      .select-and-button {
+        .go-button {
+          padding: 10px 32px;
+          font-size: 18px;
+        }
       }
     }
 
     .filters {
       position: relative;
-      .filter-button {
-        position: absolute;
-        bottom: 3%;
-        right: 0px;
+
+      .filter-button-container {
+        .filter-button {
+          position: absolute;
+          bottom: 5%;
+          // right: 0px;
+
+          padding: 12px 10px;
+        }
       }
 
       .filter-option {
