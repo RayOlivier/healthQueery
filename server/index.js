@@ -78,8 +78,8 @@ function isUser(req, res, next) {
 app.get(
   "/login",
   passport.authenticate("auth0", {
-    successRedirect: `${process.env.REACT_APP_URL}`, //MIGHT CHANGE TO HOME
-    // successRedirect: "http://localhost:3000/profile", //MIGHT CHANGE TO HOME
+    // successRedirect: `${process.env.REACT_APP_URL}`,
+    successRedirect: `/`,
     failureRedirect: "/fail"
   })
 );

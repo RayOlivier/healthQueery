@@ -25,8 +25,6 @@ class Profile extends Component {
   }
 
   toggleEdit() {
-    // this.props.submitProfileEdit(this.props.user.user_id)
-
     this.setState({ editing: !this.state.editing });
   }
 
@@ -42,7 +40,6 @@ class Profile extends Component {
   }
 
   handleChange(e) {
-    //do some redux magics and put requests
     this.props.profileChange(e.target.name, e.target.value);
   }
 
