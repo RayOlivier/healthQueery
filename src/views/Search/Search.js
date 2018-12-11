@@ -20,7 +20,6 @@ class Search extends Component {
       noMetro: false
     };
     this.toggleSearchBar = this.toggleSearchBar.bind(this);
-    // this.searchByKeyword = this.searchByKeyword.bind(this)
     this.searchByLocation = this.searchByLocation.bind(this);
     this.searchByMetroplex = this.searchByMetroplex.bind(this);
 
@@ -188,19 +187,3 @@ class Search extends Component {
 }
 
 export default Search;
-
-// searchByKeyword(keyword) {
-//   axios.get(`/api/doctors?keyword=${keyword}`).then((res) => {
-//     console.log("res from keyword", res)
-//     this.setState({ doctorObjects: res.data })
-
-//     // let mapped = res.data.map((e,i,arr))
-//     let mapped = res.data.map((e, i, arr) => {
-//       return (
-//         <DoctorCard key={i} nbInclusive={e.nb_inclusive} id={e.doctor_id} />
-//       )
-//     })
-//     console.log("mapped", mapped)
-//     this.setState({ displayedCards: mapped })
-//   })
-// }

@@ -135,7 +135,7 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    axios.get("/profile").then((res) => {
+    axios.get("/api/profile").then((res) => {
       // console.log("res in mount of profile", res)
       //this gives user from db
       this.props.getUser(res.data[0].user_id);

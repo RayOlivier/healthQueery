@@ -84,7 +84,7 @@ app.get(
   })
 );
 
-app.get("/profile", isUser, (req, res) => {
+app.get("/api/profile", isUser, (req, res) => {
   //this just sends you to the json file with your user info from auth0
   console.log("INSIDE app.get profile");
   res.status(200).send(req.user);
