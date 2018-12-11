@@ -5,6 +5,7 @@ const express = require("express");
 const session = require("express-session");
 const passport = require("passport");
 const { json } = require("body-parser");
+// var cors = require("cors")
 
 const massive = require("massive");
 
@@ -37,10 +38,10 @@ app.use(
 app.use(express.static(`${__dirname}/../build`));
 
 app.use(passport.initialize());
-app.use(passport.session()); //this has to bee after session so that session exists
+app.use(passport.session()); //this has to been done after session so that session exists
 passport.use(strategy);
 
-passport.serializeUser((user) => {
+passport.serializeUser((user, done) => {
   //this creates the user object
   console.log("USER: ", user);
 
@@ -51,17 +52,18 @@ passport.serializeUser((user) => {
       if (!response[0]) {
         console.log("no response");
         db.addUserByEmail([user.emails[0].value])
-          .then((res = (null, res[0])))
+          .then((res) => done(null, res[0]))
           .catch(console.log);
       } else {
         console.log("AFTER ELSE");
-        retur(null, response);
+        return done(null, response);
       }
     })
     .catch(console.log);
 });
-passport.deserializeUser((user) => {
-  // console.log(user)(null, user);
+passport.deserializeUser((user, done) => {
+  // console.log(user)
+  done(null, user);
 });
 
 function isUser(req, res, next) {
@@ -76,7 +78,8 @@ function isUser(req, res, next) {
 app.get(
   "/login",
   passport.authenticate("auth0", {
-    successRedirect: `${process.env.REACT_APP_URL}`,
+    successRedirect: `${process.env.REACT_APP_URL}`, //MIGHT CHANGE TO HOME
+    // successRedirect: "http://localhost:3000/profile", //MIGHT CHANGE TO HOME
     failureRedirect: "/fail"
   })
 );
@@ -108,31 +111,30 @@ app.post("/api/addSpecialty/:doctor_id", adminController.addSpecialty);
 app.post("/api/addDemographic/:doctor_id", adminController.addDemographic);
 
 //DOCTOR
-app.get("/api/doctors", doctorController.getDoctors);
-app.get("/api/doctor/:id", doctorController.getDoctor);
-app.get("/api/specialties/:id", doctorController.getSpecialties);
-app.get("/api/demographics/:id", doctorController.getDemographics);
+app.get("/api/doctors", doctorController.getDoctors); //done
+app.get("/api/doctor/:id", doctorController.getDoctor); //done
+app.get("/api/specialties/:id", doctorController.getSpecialties); //done
+app.get("/api/demographics/:id", doctorController.getDemographics); //done
 app.get("/api/allSpecialties", doctorController.getAllSpecialties);
 app.get("/api/allDemographics", doctorController.getAllDemographics);
 
 //USER
-app.get("/api/user/:id", userController.getUserById);
-// app.get("/api/user/:email", userController.getUserByEmail)
+app.get("/api/user/:id", userController.getUserById); //done
+// app.get("/api/user/:email", userController.getUserByEmail) //done
 app.put("/api/user/:id", userController.editUser);
-
 //FAVORITES
-app.get("/api/favorites/:user_id", userController.getFavorites);
-app.post("/api/favorite/:doc_id", userController.addFavorite);
-app.delete("/api/favorite/:doc_id", userController.deleteFavorite);
+app.get("/api/favorites/:user_id", userController.getFavorites); //done
+app.post("/api/favorite/:doc_id", userController.addFavorite); //done
+app.delete("/api/favorite/:doc_id", userController.deleteFavorite); //done
 
 //SUBMISSIONS
 app.post("/api/submission", userController.addSubmission);
 
 //REVIEWS
-app.get("/api/reviews/:doc_id", reviewController.getReviews);
-app.post("/api/review/doctor/:doc_id", reviewController.postReview);
+app.get("/api/reviews/:doc_id", reviewController.getReviews); //done
+app.post("/api/review/doctor/:doc_id", reviewController.postReview); //done
 app.put("/api/review/:id", reviewController.editReview);
-app.delete("/api/review/:id", reviewController.deleteReview);
+app.delete("/api/review/:id", reviewController.deleteReview); //done
 app.get("/api/rating/:id", reviewController.getAverageRating);
 
 app.get("*", (req, res) => {
