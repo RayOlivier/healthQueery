@@ -1,24 +1,24 @@
-import React, { Component } from "react"
-import axios from "axios"
-import { Link } from "react-router-dom"
+import React, { Component } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
-import Select from "react-select"
+import Select from "react-select";
 
 const metroplexOptions = [
   { name: "metroplex", label: "Dallas Ft.Worth", value: "Dallas" }
   //,{ name: "metroplex", label: "Other", value: "other" }
-]
+];
 
 const demographicOptions = [
   { name: "demographic", label: "Children", value: "Children" },
   { name: "demographic", label: "Adolescents", value: "Adolescents" },
   { name: "demographic", label: "Adults", value: "Adults" },
   { name: "demographic", label: "Seniors", value: "Seniors" }
-]
+];
 
 class SearchBar extends Component {
   constructor() {
-    super()
+    super();
 
     this.state = {
       location: "",
@@ -31,68 +31,64 @@ class SearchBar extends Component {
       specialty: "",
       specialtySelected: null,
       specialtyOptions: []
-    }
-    this.onKeywordClick = this.onKeywordClick.bind(this)
-    this.changeInput = this.changeInput.bind(this)
-    this.toggleNBCheckbox = this.toggleNBCheckbox.bind(this)
+    };
+    this.onKeywordClick = this.onKeywordClick.bind(this);
+    this.changeInput = this.changeInput.bind(this);
+    this.toggleNBCheckbox = this.toggleNBCheckbox.bind(this);
 
-    this.changeSelect = this.changeSelect.bind(this)
+    this.changeSelect = this.changeSelect.bind(this);
 
-    this.onLocationClick = this.onLocationClick.bind(this)
-    this.onFiltersClick = this.onFiltersClick.bind(this)
-    this.onMetroplexClick = this.onMetroplexClick.bind(this)
+    this.onLocationClick = this.onLocationClick.bind(this);
+    this.onFiltersClick = this.onFiltersClick.bind(this);
+    this.onMetroplexClick = this.onMetroplexClick.bind(this);
   }
 
   changeSelect(e) {
-    console.log("e", e)
-    let selected = `${e.name}Selected`
-    this.setState({ [e.name]: e.label, [selected]: e })
-    console.log("this.state", this.state)
+    let selected = `${e.name}Selected`;
+    this.setState({ [e.name]: e.label, [selected]: e });
   }
 
   changeInput(e) {
-    this.setState({ [e.target.name]: e.target.value })
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   onKeywordClick() {
-    this.props.keywordSearch(this.state.keyword)
+    this.props.keywordSearch(this.state.keyword);
   }
 
   onLocationClick() {
-    this.props.locationSearch(this.state.location)
+    this.props.locationSearch(this.state.location);
   }
 
   onMetroplexClick() {
-    console.log("this.state", this.state)
-    this.props.metroplexSearch("Dallas")
+    this.props.metroplexSearch("Dallas");
   }
 
   onFiltersClick() {
-    let obj = {}
+    let obj = {};
     if (this.state.nbCheck) {
-      obj.nbCheck = true
+      obj.nbCheck = true;
     }
 
     if (this.state.demographic !== "") {
-      obj.demographic = this.state.demographic
+      obj.demographic = this.state.demographic;
     }
 
     if (this.state.specialty !== "") {
-      obj.specialty = this.state.specialty
+      obj.specialty = this.state.specialty;
     }
-    this.props.addFilters(obj)
+    this.props.addFilters(obj);
   }
 
   toggleNBCheckbox() {
     this.setState({
       nbCheck: !this.state.nbCheck
-    })
-    console.log("this.state", this.state)
+    });
   }
 
   componentDidMount() {
     axios.get("/api/allSpecialties").then((res) => {
-      let optionsMapped = []
+      let optionsMapped = [];
 
       res.data.forEach((e, i, arr) => {
         // console.log("e in spec map", e)
@@ -100,12 +96,12 @@ class SearchBar extends Component {
           name: "specialty",
           label: e.specialty_name,
           value: e.specialty_id
-        })
-      })
+        });
+      });
       this.setState({
         specialtyOptions: optionsMapped
-      })
-    })
+      });
+    });
   }
 
   render() {
@@ -233,8 +229,8 @@ class SearchBar extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default SearchBar
+export default SearchBar;

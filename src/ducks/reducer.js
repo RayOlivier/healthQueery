@@ -1,21 +1,21 @@
-import axios from "axios"
+import axios from "axios";
 
-const GET_USER = "GET_USER"
-const GET_FAVORITES = "GET_FAVORITES"
-const PROFILE_CHANGE = "PROFILE_CHANGE"
+const GET_USER = "GET_USER";
+const GET_FAVORITES = "GET_FAVORITES";
+const PROFILE_CHANGE = "PROFILE_CHANGE";
 
 export function getUser(id) {
   return {
     type: GET_USER,
     payload: axios.get(`/api/user/${id}`)
-  }
+  };
 }
 
 export function getFavorites(id) {
   return {
     type: GET_FAVORITES,
     payload: axios.get(`/api/favorites/${id}`)
-  }
+  };
 }
 
 export function profileChange(name, value) {
@@ -23,7 +23,7 @@ export function profileChange(name, value) {
     type: PROFILE_CHANGE,
     name: name,
     payload: value
-  }
+  };
 }
 
 const initialState = {
@@ -40,10 +40,10 @@ const initialState = {
   loggedIn: false,
   isLoading: false,
   favorites: []
-}
+};
 
 export default function reducer(state = initialState, action) {
-  console.log("state, action", state, action)
+  // console.log("state, action", state, action)
   switch (action.type) {
     case `${GET_USER}_FULFILLED`:
       return {
@@ -51,38 +51,37 @@ export default function reducer(state = initialState, action) {
         isLoading: false,
         loggedIn: true,
         user: { ...state.user, ...action.payload.data[0] }
-      }
+      };
     case `${GET_USER}_PENDING`:
       return {
         ...state,
         isLoading: true
-      }
+      };
 
     case `${GET_FAVORITES}_FULFILLED`:
       return {
         ...state,
         isLoading: false,
         favorites: action.payload.data[0].array
-      }
+      };
 
     case `${GET_FAVORITES}_PENDING`:
       return {
         ...state,
         isLoading: true
-      }
+      };
 
     case PROFILE_CHANGE:
-      console.log("state.user", state.user)
-      console.log("")
+      // console.log("state.user", state.user);
       return {
         ...state,
         user: {
           ...state.user,
           [action.name]: action.payload
         }
-      }
+      };
     default:
-      console.log("state", state)
-      return state
+      // console.log("state", state);
+      return state;
   }
 }

@@ -1,28 +1,28 @@
-import React, { Component } from "react"
-import axios from "axios"
-import NumberFormat from "react-number-format"
+import React, { Component } from "react";
+import axios from "axios";
+import NumberFormat from "react-number-format";
 
-import Select from "react-select"
+import Select from "react-select";
 
 const nbOptions = [
   // { name: "nb_inclusive", label: "Unsure", value: "" },
   { name: "nb_inclusive", label: "Yes", value: true },
   { name: "nb_inclusive", label: "No or Unsure", value: false }
-]
+];
 
 const metroplexOptions = [
   { name: "metroplex", label: "Dallas Ft.Worth", value: "Dallas" },
   { name: "metroplex", label: "Other", value: "other" }
-]
+];
 
 const categoryOptions = [
   { name: "category", label: "Medical", value: "Medical" },
   { name: "category", label: "Mental Health", value: "Mental Health" }
-]
+];
 
 class UserSubmissionForm extends Component {
   constructor() {
-    super()
+    super();
 
     this.state = {
       doctor_name: "",
@@ -42,24 +42,21 @@ class UserSubmissionForm extends Component {
       nb_inclusiveSelected: null,
       metroplexSelected: null,
       categorySelected: null
-    }
-    this.changeInput = this.changeInput.bind(this)
-    this.changeSelect = this.changeSelect.bind(this)
-    this.clickSubmit = this.clickSubmit.bind(this)
-    this.clearInput = this.clearInput.bind(this)
+    };
+    this.changeInput = this.changeInput.bind(this);
+    this.changeSelect = this.changeSelect.bind(this);
+    this.clickSubmit = this.clickSubmit.bind(this);
+    this.clearInput = this.clearInput.bind(this);
   }
 
   changeInput(e) {
-    console.log("e", e)
-    this.setState({ [e.target.name]: e.target.value })
-    console.log(this.state)
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   changeSelect(e) {
     // console.log("e", e)
-    let selected = `${e.name}Selected`
-    this.setState({ [e.name]: e.value, [selected]: e })
-    console.log("this.state", this.state)
+    let selected = `${e.name}Selected`;
+    this.setState({ [e.name]: e.value, [selected]: e });
   }
 
   clearInput() {
@@ -81,17 +78,15 @@ class UserSubmissionForm extends Component {
       nb_inclusiveSelected: null,
       metroplexSelected: null,
       categorySelected: null
-    }
-    this.setState(initialState)
+    };
+    this.setState(initialState);
   }
 
   clickSubmit() {
     axios.post("/api/submission", { data: this.state }).then((res) => {
-      console.log("hi")
-      console.log(res)
-      this.clearInput()
-      alert("Thank you for your submission!")
-    })
+      this.clearInput();
+      alert("Thank you for your submission!");
+    });
   }
 
   render() {
@@ -299,8 +294,8 @@ class UserSubmissionForm extends Component {
           </button>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default UserSubmissionForm
+export default UserSubmissionForm;

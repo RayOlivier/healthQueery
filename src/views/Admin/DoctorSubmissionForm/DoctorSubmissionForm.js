@@ -1,27 +1,27 @@
-import React, { Component } from "react"
-import axios from "axios"
-import NumberFormat from "react-number-format"
+import React, { Component } from "react";
+import axios from "axios";
+import NumberFormat from "react-number-format";
 
-import Select from "react-select"
+import Select from "react-select";
 
 const nbOptions = [
   { name: "nb_inclusive", label: "Yes", value: true },
   { name: "nb_inclusive", label: "No or Unsure", value: false }
-]
+];
 
 const metroplexOptions = [
   { name: "metroplex", label: "Dallas Ft.Worth", value: "Dallas" },
   { name: "metroplex", label: "Other", value: "other" }
-]
+];
 
 const categoryOptions = [
   { name: "category", label: "Medical", value: "Medical" },
   { name: "category", label: "Mental Health", value: "Mental Health" }
-]
+];
 
 class DoctorSubmissionForm extends Component {
   constructor() {
-    super()
+    super();
 
     this.state = {
       doctor_name: "",
@@ -41,34 +41,32 @@ class DoctorSubmissionForm extends Component {
       nb_inclusiveSelected: null,
       metroplexSelected: null,
       categorySelected: null
-    }
-    this.changeInput = this.changeInput.bind(this)
-    this.changeSelect = this.changeSelect.bind(this)
-    this.clickSubmit = this.clickSubmit.bind(this)
-    this.clearInput = this.clearInput.bind(this)
+    };
+    this.changeInput = this.changeInput.bind(this);
+    this.changeSelect = this.changeSelect.bind(this);
+    this.clickSubmit = this.clickSubmit.bind(this);
+    this.clearInput = this.clearInput.bind(this);
 
-    this.changeMultiSelect = this.changeMultiSelect.bind(this)
+    this.changeMultiSelect = this.changeMultiSelect.bind(this);
   }
 
   changeMultiSelect(e) {
-    console.log("e", e)
+    // console.log("e", e)
     // console.log("e[0].name", e[0].name)
-    let selected = `${e[0].name}Selected`
-    this.setState({ [selected]: e })
+    let selected = `${e[0].name}Selected`;
+    this.setState({ [selected]: e });
     //only changing selected at the moment
-    console.log("this.state", this.state)
+    // console.log("this.state", this.state);
   }
 
   changeInput(e) {
-    this.setState({ [e.target.name]: e.target.value })
-    console.log(this.state)
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   changeSelect(e) {
     // console.log("e", e)
-    let selected = `${e.name}Selected`
-    this.setState({ [e.name]: e.value, [selected]: e })
-    console.log("this.state", this.state)
+    let selected = `${e.name}Selected`;
+    this.setState({ [e.name]: e.value, [selected]: e });
   }
 
   clearInput() {
@@ -90,70 +88,62 @@ class DoctorSubmissionForm extends Component {
       nb_inclusiveSelected: null,
       metroplexSelected: null,
       categorySelected: null
-    }
-    this.setState(initialState)
+    };
+    this.setState(initialState);
   }
 
   clickSubmit() {
     axios.post("/api/doctor", { data: this.state }).then((res) => {
-      console.log("hi")
-      console.log(res)
-      this.clearInput()
-      axios.delete(`/api/clearDocSpecialties/${res.data[0].max}`)
-      axios.delete(`/api/clearDocDemographics/${res.data[0].max}`)
+      this.clearInput();
+      axios.delete(`/api/clearDocSpecialties/${res.data[0].max}`);
+      axios.delete(`/api/clearDocDemographics/${res.data[0].max}`);
       this.state.specialtiesSelected.forEach((e, i, arr) => {
-        console.log("e in forEach spec", e)
         axios.post(`/api/addSpecialty/${res.data[0].max}`, {
           specialty_id: e.value
-        })
-      })
+        });
+      });
       this.state.demographicsSelected.forEach((e, i, arr) => {
-        console.log("e in forEach dem", e)
         axios.post(`/api/addDemographic/${res.data[0].max}`, {
           demographic_id: e.value
-        })
-      })
-    })
+        });
+      });
+    });
   }
 
   componentDidMount() {
     axios.get("/api/allSpecialties").then((res) => {
-      console.log("res from all specs", res)
-      let optionsMapped = []
-      let selectedMapped = []
+      let optionsMapped = [];
+      let selectedMapped = [];
 
       res.data.forEach((e, i, arr) => {
-        console.log("e in spec map", e)
         optionsMapped.push({
           name: "specialties",
           label: e.specialty_name,
           value: e.specialty_id
-        })
-      })
+        });
+      });
       this.setState({
         specialtyOptions: optionsMapped,
         specialtiesSelected: selectedMapped
-      })
-    })
+      });
+    });
 
     axios.get("/api/allDemographics").then((res) => {
-      console.log("res from all dems", res)
-      let optionsMapped = []
-      let selectedMapped = []
+      let optionsMapped = [];
+      let selectedMapped = [];
 
       res.data.forEach((e, i, arr) => {
-        console.log("e in dem map", e)
         optionsMapped.push({
           name: "demographics",
           label: e.demographic_name,
           value: e.demographic_id
-        })
-      })
+        });
+      });
       this.setState({
         demographicOptions: optionsMapped,
         demographicsSelected: selectedMapped
-      })
-    })
+      });
+    });
   }
 
   render() {
@@ -389,8 +379,8 @@ class DoctorSubmissionForm extends Component {
 
         <button onClick={this.clickSubmit}> Submit</button>
       </div>
-    )
+    );
   }
 }
 
-export default DoctorSubmissionForm
+export default DoctorSubmissionForm;

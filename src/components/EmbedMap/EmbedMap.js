@@ -1,34 +1,34 @@
-import React, { Component } from "react"
-import axios from "axios"
+import React, { Component } from "react";
+import axios from "axios";
 
 class EmbedMap extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       fullAddress: "",
       showMap: false
-    }
+    };
 
-    this.renderMap = this.renderMap.bind(this)
+    this.renderMap = this.renderMap.bind(this);
   }
 
   componentDidMount() {
     axios.get(`/api/doctor/${this.props.id}`).then((res) => {
-      console.log("res", res)
+      // console.log("res", res)
       //   let { doctor } = res.data[0]
       let newAddress = `${res.data[0].street_address}, ${res.data[0].city}, ${
         res.data[0].state
-      }`
+      }`;
 
       if (
         res.data[0].city !== null &&
         res.data[0].state !== null &&
         res.data[0].street_address !== null
       ) {
-        this.setState({ fullAddress: newAddress, showMap: true })
+        this.setState({ fullAddress: newAddress, showMap: true });
       }
-    })
+    });
   }
 
   renderMap() {
@@ -43,11 +43,11 @@ class EmbedMap extends Component {
           />
           <div className="address-text">{this.state.fullAddress}</div>
         </>
-      )
+      );
     } else {
       return (
         <div className="no-map">There was an error displaying the map. </div>
-      )
+      );
     }
   }
 
@@ -57,8 +57,8 @@ class EmbedMap extends Component {
         {/* <h1>Embed Map</h1> */}
         {this.renderMap()}
       </div>
-    )
+    );
   }
 }
 
-export default EmbedMap
+export default EmbedMap;

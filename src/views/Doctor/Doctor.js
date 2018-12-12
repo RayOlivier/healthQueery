@@ -72,9 +72,8 @@ class Doctor extends Component {
 
   getDocInfo() {
     axios.get(`/api/doctor/${this.props.match.params.id}`).then((res) => {
-      console.log("res from get doc", res);
       if (res.data.length < 1) {
-        console.log("doctor doesnt exist");
+        // console.log("doctor doesnt exist");
         this.setState({ redirect: true });
       }
       this.setState({ doctor: res.data[0] });

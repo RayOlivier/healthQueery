@@ -1,36 +1,34 @@
-import React, { Component } from "react"
-import { Link } from "react-router-dom"
-import "./Home.scss"
-import Select from "react-select"
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import "./Home.scss";
+import Select from "react-select";
 
 const metroplexOptions = [
   { name: "metroplex", label: "Dallas Ft.Worth", value: "Dallas" }
   //,{ name: "metroplex", label: "Other", value: "other" }
-]
+];
 
 class Home extends Component {
   constructor() {
-    super()
+    super();
 
     this.state = {
       metroplex: null,
       metroplexSelected: null
-    }
+    };
 
-    this.changeInput = this.changeInput.bind(this)
-    this.changeSelect = this.changeSelect.bind(this)
+    this.changeInput = this.changeInput.bind(this);
+    this.changeSelect = this.changeSelect.bind(this);
   }
 
   changeInput(e) {
-    console.log("this.state", this.state)
-    this.setState({ [e.target.name]: e.target.value })
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   changeSelect(e) {
     // console.log("e", e)
-    let selected = `${e.name}Selected`
-    this.setState({ [e.name]: e.value, [selected]: e })
-    console.log("this.state", this.state)
+    let selected = `${e.name}Selected`;
+    this.setState({ [e.name]: e.value, [selected]: e });
   }
 
   render() {
@@ -84,8 +82,8 @@ class Home extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Home
+export default Home;

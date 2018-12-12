@@ -34,7 +34,7 @@ class Nav extends Component {
 
   changeSearch(e) {
     //
-    console.log("e", e);
+    // console.log("e", e);
     this.setState({ [e.name]: e.value, redirect: true });
   }
 

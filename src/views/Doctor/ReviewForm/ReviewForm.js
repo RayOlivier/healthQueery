@@ -1,25 +1,25 @@
-import React, { Component } from "react"
-import axios from "axios"
-import { connect } from "react-redux"
-import StarRatingComponent from "react-star-rating-component"
+import React, { Component } from "react";
+import axios from "axios";
+import { connect } from "react-redux";
+import StarRatingComponent from "react-star-rating-component";
 
 //look into npm react-modal
 
 class ReviewForm extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       title: "",
       body: "",
       rating: 3
-    }
-    this.handleChange = this.handleChange.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value })
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   onSubmit() {
@@ -30,15 +30,14 @@ class ReviewForm extends Component {
         rating: this.state.rating,
         body: this.state.body
       })
-      .then(this.props.togglePosting())
+      .then(this.props.togglePosting());
   }
 
   onStarClick(nextValue, prevValue, name) {
-    this.setState({ rating: nextValue })
+    this.setState({ rating: nextValue });
   }
 
   render() {
-    console.log("this.state", this.state)
     return (
       <div className="review-form">
         <h1>Post your review</h1>
@@ -76,10 +75,10 @@ class ReviewForm extends Component {
         </div>
         <button onClick={this.onSubmit}>Submit Review</button>
       </div>
-    )
+    );
   }
 }
 
-const MSP = (state) => state
+const MSP = (state) => state;
 
-export default connect(MSP)(ReviewForm)
+export default connect(MSP)(ReviewForm);

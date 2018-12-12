@@ -35,16 +35,12 @@ class Favorites extends Component {
   }
 
   componentDidMount() {
-    console.log("this.props", this.props);
     this.props.getFavorites(this.props.user.user_id).then((res) => {
-      console.log("res", res);
       this.makeCards();
     });
   }
 
   render() {
-    console.log("this.props.favorites", this.props.favorites);
-    console.log("this.state.cards", this.state.cards);
     return (
       <div>
         <h1 className="profile-header">Your Favorites</h1>

@@ -1,14 +1,14 @@
-import React, { Component } from "react"
-import axios from "axios"
-import "./MapContainer.scss"
+import React, { Component } from "react";
+import axios from "axios";
+import "./MapContainer.scss";
 
-import { GoogleApiWrapper, Map, Marker, InfoWindow } from "google-maps-react"
+import { GoogleApiWrapper, Map, Marker, InfoWindow } from "google-maps-react";
 
 // import Map from "./Map/Map"
 
 export class MapContainer extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       cards: [],
@@ -17,37 +17,37 @@ export class MapContainer extends Component {
       activeMarker: {},
       selectedPlace: {},
       center: { lat: 32.7767, lng: -96.797 }
-    }
+    };
 
-    this.getCoords = this.getCoords.bind(this)
-    this.renderMarkers = this.renderMarkers.bind(this)
-    this.onMapClick = this.onMapClick.bind(this)
-    this.onMarkerClick = this.onMarkerClick.bind(this)
+    this.getCoords = this.getCoords.bind(this);
+    this.renderMarkers = this.renderMarkers.bind(this);
+    this.onMapClick = this.onMapClick.bind(this);
+    this.onMarkerClick = this.onMarkerClick.bind(this);
   }
 
   //pass down displayedCards in search, then map to make markers
 
   onMarkerClick(props, marker, e) {
-    console.log("this.state from marker click", this.state)
+    // console.log("this.state from marker click", this.state)
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true
-    })
+    });
   }
 
   onMapClick() {
-    console.log("this.state from map click", this.state)
+    // console.log("this.state from map click", this.state)
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
         activeMarker: null
-      })
+      });
     }
   }
 
   renderMarkers() {
-    return [...this.state.markers]
+    return [...this.state.markers];
   }
 
   getCoords() {
@@ -81,12 +81,12 @@ export class MapContainer extends Component {
               }}
               onClick={this.onMarkerClick}
             />
-          )
+          );
 
           // console.log("newMarker", newMarker)
-          this.setState({ markers: [...this.state.markers, newMarker] })
-        })
-    })
+          this.setState({ markers: [...this.state.markers, newMarker] });
+        });
+    });
 
     // this.setState({ markers: [newArr] })
     // console.log("this.state", this.state)
@@ -94,18 +94,18 @@ export class MapContainer extends Component {
 
   componentDidMount() {
     // console.log("this.props", this.props)
-    this.setState({ cards: this.props.cards })
+    this.setState({ cards: this.props.cards });
     if (this.props.cards.length > 0) {
       // console.log("in the length if statement")
-      this.getCoords()
+      this.getCoords();
     }
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.cards !== prevProps.cards) {
       // console.log("it updated")
-      this.setState({ cards: this.props.cards, markers: [] })
-      this.getCoords()
+      this.setState({ cards: this.props.cards, markers: [] });
+      this.getCoords();
     }
   }
 
@@ -143,12 +143,12 @@ export class MapContainer extends Component {
           </InfoWindow>
         </Map>
       </div>
-    )
+    );
   }
 }
 
 export default GoogleApiWrapper({
   apiKey: process.env.REACT_APP_MAPS_API_KEY
-})(MapContainer)
+})(MapContainer);
 
 // export default MapContainer
